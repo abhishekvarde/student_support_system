@@ -6,6 +6,8 @@ class Complaint(models.Model):
     user = models.ForeignKey(User, models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
+    liked = models.IntegerField()
+    disliked = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     solved = models.BooleanField(default=False)
     satisfied = models.BooleanField(default=False)

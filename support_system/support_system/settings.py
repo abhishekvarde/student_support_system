@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'complaint',
+    'complaint.apps.ComplaintConfig',
+    'users_student.apps.UsersStudentConfig',
 ]
 
 MIDDLEWARE = [
