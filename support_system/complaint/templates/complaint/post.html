@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+
+<form enctype="multipart/form-data"  action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ csrf_input }}
+
+        title : <tr></tr><input type="text" id="" name="title" ><br><br>
+        description : <input type="textField" id="description" name="description" ><br><br>
+        tags : <input type="text" id="tags" name="tags" ><br><br>
+        <input type="file" name="image" required id="id_image"><br><br>
+        <button type="submit" id="button" name="but" value="">submit or post now</button>
+</form>
+
+
 <h1>In post html</h1>
 </body>
 </html>

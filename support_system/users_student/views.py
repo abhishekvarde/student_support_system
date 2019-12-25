@@ -41,7 +41,6 @@ def register_student(request):
         # request['email'] = email
 
         if not User.objects.filter(username=email).exists():
-
             user_obj = User.objects.create_user(username=email, password=password, email=email)
             user_obj.first_name = first_name
             user_obj.last_name = last_name
@@ -52,12 +51,12 @@ def register_student(request):
             student_details = student(user=user, college_id=college_id, year=year, college_name=college_name,
                                       phone_no=phone_no)
             student_details.save()
-
-            if user is not None:
-                login(request, user)
-                print("Auth")
-            else:
-                print("NOT")
+            #
+            # if user is not None:
+            #     login(request, user)
+            #     print("Auth")
+            # else:
+            #     print("NOT")
 
         return redirect('/users_student/login')
     else:
@@ -65,4 +64,14 @@ def register_student(request):
 
 
 def login_student(request):
+    username = request.POST.get('email')
+    password = request.POST.get('password')
+    print(username)
+    print(password)
+    user = authenticate(request, username=username, password=password)
+    print("i am in loogin")
+    if user is not None:
+        login(request, user)
+        return redirect('/complaint/post/')
+
     return render(request, 'users_student/login_student.html')

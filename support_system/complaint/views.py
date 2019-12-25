@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from complaint.models import Complaint
 from users_student.models import student
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import User
+
+
 
 
 def post(request):
@@ -29,3 +33,22 @@ def like(request):
                     user_obj.save()
                     response = 'Success'
     return request
+
+
+def post(request):
+    if request.method == 'POST':
+        print("asdfkjhasdfkjhsakdjfaskjdhkjsahdfklhjsa")
+        user = User.objects.get(username = request.user.username)
+        print(user.username)
+        title = request.POST.get('title')
+        des = request.POST.get('description')
+        tags = request.POST.get('tags')
+        image = request.FILES['image']
+        fs = FileSystemStorage()
+        filename = fs.save(image.name, image)
+        url = fs.url(filename)
+        print(user.username)
+        print(url)
+        complain = Complaint(user=user, title=title, description=des, tags=tags, image=url)
+        complain.save()
+    return render(request, 'complaint/post.html')
