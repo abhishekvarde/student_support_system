@@ -6,13 +6,11 @@ from django.db import models
 
 class student(models.Model):
     user = models.OneToOneField(User,models.CASCADE)
-    college_id = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    year = models.CharField(max_length=20)
-    college_name = models.CharField(max_length=100)
-    phone_no = models.CharField(max_length=10)
-    liked_complaint = models.CharField(max_length=1000)
+    college_id = models.CharField(max_length=100, default="")
+    year = models.CharField(max_length=20, default=0)
+    college_name = models.CharField(max_length=100, default="")
+    phone_no = models.CharField(max_length=10, default="")
+    liked_complaint = models.CharField(max_length=1000, default="")
 
 
 

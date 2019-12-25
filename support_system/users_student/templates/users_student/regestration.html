@@ -64,13 +64,40 @@
 	<img src="{% static 'users_student/image/complaint.png' %}" width="700" height="500">
 	<div class="card" style="width: 40rem; height: 50rem;">
 		<div class="card-body">
-			<h2 class="card-title">Login to your account</h2>
+			<h2 class="card-title">Create your Account</h2>
 			<p class="card-text">It's quick and easy</p>
 			<hr>
 			<form id="form" class="form-vertical" action="/users_student/register/" method="post">
 				{% csrf_token %}
 				<div class="form-group">
+					<label class="control-label col-sm-8" >First Name:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-8" >Last Name:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name">
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="form-group">
+						<label class="control-label" style="margin-left: 12px;" for="sel1">Select College (select one):</label>
+						<div class="col-sm-15">
+							<select class="form-control col-sm-10" name="college_name" style="margin-left: 12px; margin-bottom: 4px;" id="sel1">
+							<option>SKNCOE</option>
+							<option>SCOE</option>
+							<option>NBN</option>
+							<option>PICT</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-8" >College ID:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="college_id" id="college_id" placeholder="College ID">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" >Email:</label>
 							<div class="col-sm-10">
@@ -84,14 +111,17 @@
 							</div>
 						</div>
 						<div class="text-center">
-							<button id="submit" type="button" class="btn register">Login</button>
+							<button id="submit" type="button" class="btn register">Register</button>
 						</div>
 						<br>
+						<div class="text-center" style="color: #707070; ">
+							Already Registered?<b>Login</b>
+						</div>
 					</div>
 				</div>
 			</form>
 			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-			<script type="text/javascript" src="{% static 'users_student/js/login.js' %}"></script>
+			<script type="text/javascript" src="{% static 'users_student/js/registration.js' %}"></script>
 <!--			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

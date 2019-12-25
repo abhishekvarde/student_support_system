@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
+from django.http import JsonResponse
 
 from .models import student
 
@@ -11,8 +13,18 @@ def validator(college_id, first_name, last_name, year, college_name, email, phon
     return error_code
 
 
+def username_avaliable(request):
+    username = request.GET.get('username', None)
+    print(username)
+    data = {
+        "is_valid": User.objects.filter(email=username).exists()
+    }
+    return JsonResponse(data)
+
+
 def register_student(request):
     if request.method == 'POST':
+        print(request)
         college_id = request.POST.get('college_id')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -23,37 +35,34 @@ def register_student(request):
         password = request.POST.get('password')
         cnf_password = request.POST.get('cnf_password')
 
-        #request['email'] = email
+        year = 2000
+        phone_no = "9999999999"
 
-        error_code = validator(college_id, first_name, last_name, year, college_name, email, phone_no, password,
-                               cnf_password)
+        # request['email'] = email
 
-        if error_code != "0000000":
-            return render(request, 'register_student.html', {"college_id": college_id, "first_name": first_name,
-                                                             "last_name": last_name, "year": year,
-                                                             "college_name": college_name, "email": email,
-                                                             "phone_no": phone_no, "password": password,
-                                                             "cnf_password": cnf_password})
-        else:
+        if not User.objects.filter(username=email).exists():
 
-            User.objects.create_user(username=email, password=password,email=email)
+            user_obj = User.objects.create_user(username=email, password=password, email=email)
+            user_obj.first_name = first_name
+            user_obj.last_name = last_name
+            user_obj.save()
 
-            user = authenticate(request,username = email,password = password)
+            user = authenticate(request, username=email, password=password)
+
+            student_details = student(user=user, college_id=college_id, year=year, college_name=college_name,
+                                      phone_no=phone_no)
+            student_details.save()
 
             if user is not None:
-                login(request,user)
+                login(request, user)
                 print("Auth")
             else:
                 print("NOT")
 
-            student_details = student(college_id=college_id, first_name=first_name, last_name=last_name,
-                                      year=year, college_name=college_name, phone_no=phone_no)
-            student_details.save()
-            return render(request, 'users_.html')
+        return redirect('/users_student/login')
     else:
-        return render(request, 'users_student/register_student.html')
+        return render(request, 'users_student/regestration.html')
 
 
 def login_student(request):
-
     return render(request, 'users_student/login_student.html')
