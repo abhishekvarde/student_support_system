@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
+from complaint.models import Complaint
 
 from .models import student
 
@@ -64,14 +65,55 @@ def register_student(request):
 
 
 def login_student(request):
-    username = request.POST.get('email')
-    password = request.POST.get('password')
-    print(username)
-    print(password)
-    user = authenticate(request, username=username, password=password)
-    print("i am in loogin")
-    if user is not None:
-        login(request, user)
-        return redirect('/complaint/post/')
+    if request.method == 'POST':
+        username = request.POST.get('email')
+        password = request.POST.get('password')
+        print(username)
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        print("i am in loogin")
+        if user is not None:
+            login(request, user)
+            return redirect('/complaint/post/')
 
     return render(request, 'users_student/login_student.html')
+
+
+def student_profile(request):
+    requested_data = request.GET.get('requesteddata')
+    print(requested_data)
+    posts = []
+    if request.user.is_authenticated:
+
+        userdata = student.objects.get(user=request.user)
+
+        if requested_data is None or requested_data == "all":
+            postsobj = Complaint.objects.filter(user=request.user)
+            for post in postsobj:
+                posts.append(post)
+            print(posts)
+        if requested_data == "pending":
+            posts = Complaint.objects.filter(user=request.user).filter(status="pending")
+        if requested_data == "ongoing":
+            posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
+        if requested_data == "upvoted":
+            posts = []
+            likedpostids = userdata.liked_complaint
+            likedpostids = likedpostids.split(",")
+            likedpostids.remove("")
+            for likedpostid in likedpostids:
+                if Complaint.objects.filter(id=likedpostid).exists():
+                    print(Complaint.objects.get(id=likedpostid))
+                    # print((Complaint.objects.get(id=likedpostid))[0])
+                    posts.append((Complaint.objects.get(id=likedpostid)))
+                else:
+                    likedpostids.remove(likedpostid)
+        if requested_data == "rejected":
+            posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
+        return render(request, 'users_student/student_profile.html', {"userdata": userdata, "posts": posts,
+                                                                      'requested_data': requested_data})
+
+
+    else:
+        #display a separate page for visitors
+        return render(request, 'users_student/login.html')

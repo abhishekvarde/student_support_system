@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+	{% load static %}
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" user-scalable="no" maximum-scale="1.0">
+	<title>Registration_Portal</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+	body,
+	html {
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);
+	}
+
+	img {
+		position: absolute;
+		margin-top: 14%;
+		margin-left: 10%;
+	}
+
+	.card {
+
+		/*position: relative;*/
+		float: right;
+		margin-right: 7%;
+		margin-top: 7%;
+		border-radius: 60px;
+
+	}
+
+	.card-title {
+
+		text-align: center;
+		color: #2B2B2B;
+		margin-top: 2%;
+	}
+
+	.card-text {
+
+		text-align: center;
+		color: #707070;
+	}
+
+	.btn.register {
+
+		background-color: #FA9C2C;
+		color: #fff;
+		height: 50px;
+		width: 250px;
+		font-size: 20px;
+		border-radius: 25px;
+		margin-top: 6%;
+	}
+
+	</style>
+
+</head>
+
+<body>
+	<img src="{% static 'users_student/image/complaint.png' %}" width="700" height="500">
+	<div class="card" style="width: 40rem; height: 50rem;">
+		<div class="card-body">
+			<h2 class="card-title">Admin Login to your account</h2>
+			<p class="card-text">It's quick and easy</p>
+			<hr>
+			<form id="form" class="form-vertical" action="/users_admin/login_admin/" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<div class="form-group">
+
+						<div class="form-group">
+                          <label class="control-label col-sm-2" >Usernam</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="password">Password:</label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button id="submit" type="submit" class="btn register">Login</button>
+						</div>
+						<br>
+
+					</div>
+				</div>
+			</form>
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+			<!--script type="text/javascript" src="{% static 'users_student/js/login.js' %}"></script>-->
+<!--			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		</div>
+	</div>
+</body>
+
+</html>

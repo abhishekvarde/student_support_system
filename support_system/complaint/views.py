@@ -1,11 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from complaint.models import Complaint
+from complaint.models import Complaint, cat
 from users_student.models import student
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
-
-
+from django.shortcuts import redirect
 
 
 def post(request):
@@ -37,7 +36,10 @@ def like(request):
 
 def post(request):
     if request.method == 'POST':
-        print("asdfkjhasdfkjhsakdjfaskjdhkjsahdfklhjsa")
+
+        if not request.user.is_authenticated:
+            return redirect('/users_student/login/')
+
         user = User.objects.get(username = request.user.username)
         print(user.username)
         title = request.POST.get('title')
@@ -51,4 +53,18 @@ def post(request):
         print(url)
         complain = Complaint(user=user, title=title, description=des, tags=tags, image=url)
         complain.save()
-    return render(request, 'complaint/post.html')
+        student_obj = student.objects.get(user=user)
+        ids = student_obj.post_ids
+        ids = ids.split(",")
+        ids.append(str(complain.id))
+        if "" in ids:
+            ids.remove("")
+        student_obj.post_ids = ",".join(ids)
+        student_obj.save()
+        redirect("/")
+    else:
+        cats = cat.objects.all()
+        return render(request, 'complaint/post.html', {'cats': cats})
+
+
+# def display(request):

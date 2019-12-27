@@ -3,29 +3,6 @@
 
 $(document).ready(function() {
 
-    $('#submit').on('click', function(){
-
-        var f_name = document.getElementById("first_name").value;
-        var l_name = document.getElementById("last_name").value;
-        var college_id = document.getElementById("college_id").value;
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("pwd").value;
-
-        if(f_name.length != 0 && l_name.length != 0 && college_id != 0 && email != 0 && password != 0){
-
-            var but = document.getElementById('submit');
-            but.type = "submit";
-            document.getElementById('form').submit();
-        }
-        else{
-
-            alert("All fields are required");
-
-        }
-
-    }
-    )
-
     $('#email').change( function (){
         var username = $(this).val();
 
@@ -39,6 +16,12 @@ $(document).ready(function() {
             success: function(data){
                 if(data.is_valid){
                     alert("Username or email is already resister");
+                    var but = document.getElementById('submit');
+                    but.type = "button";
+                }
+                else{
+                    var but = document.getElementById('submit');
+                    but.type = "submit";
                 }
             }
 

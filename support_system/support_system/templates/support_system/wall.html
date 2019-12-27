@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <input type="text" name="name" value="{{ complies.0 }}">
+
+    {{ ok }}
+
+    {% for c in compiles %}
+        <br>
+        added by : {{ c.user.username }}<br>
+        level : {{ c.level }}<br>
+        title : {{ c.title }}<br>
+        description : {{ c.description }}<br>
+        likes : {{ c.liked }}<br>
+        date : {{ c.date }}<br>
+        satisfied : {{ c.satisfied }}<br>
+        status : {{ c.status }}<br>
+        tages : {{ c.tages }}<br>
+
+        <br><br><br>
+    {% endfor %}
+
+</body>
+</html>

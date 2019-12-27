@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'complaint.apps.ComplaintConfig',
     'users_student.apps.UsersStudentConfig',
     'jquery',
+    'support_system',
+    'users_admin',
+
 ]
 
 MIDDLEWARE = [

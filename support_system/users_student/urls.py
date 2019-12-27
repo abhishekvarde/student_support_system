@@ -8,6 +8,7 @@ urlpatterns = [
     path('register/', views.register_student, name='register_student'),
     path('username_avaliable/', views.username_avaliable, name='username_avaliable'),
     path('login/', views.login_student, name='login_student'),
+    path('profile/', views.student_profile, name='student_profile'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

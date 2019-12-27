@@ -22,4 +22,5 @@ urlpatterns = [
     path('complaint/',include('complaint.urls')),
     path('users_student/',include('users_student.urls')),
     path('', views.wall, name='wall'),
+    path('users_admin/',include('users_admin.urls')),
 ]

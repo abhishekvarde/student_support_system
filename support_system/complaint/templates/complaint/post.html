@@ -14,6 +14,11 @@
         description : <input type="textField" id="description" name="description" ><br><br>
         tags : <input type="text" id="tags" name="tags" ><br><br>
         <input type="file" name="image" required id="id_image"><br><br>
+        <select class="form-control col-sm-10" name="college_name" style="margin-left: 12px; margin-bottom: 4px;" id="sel1">
+            {% for i in cats %}
+                <option>{{ i.name }}</option>
+            {% endfor %}
+        </select><br><br>
         <button type="submit" id="button" name="but" value="">submit or post now</button>
 </form>
 

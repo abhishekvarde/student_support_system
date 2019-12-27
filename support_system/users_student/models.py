@@ -11,7 +11,7 @@ class student(models.Model):
     college_name = models.CharField(max_length=100, default="")
     phone_no = models.CharField(max_length=10, default="")
     liked_complaint = models.CharField(max_length=1000, default="")
-
+    post_ids = models.CharField(max_length=1000, default="")
 
 
 
