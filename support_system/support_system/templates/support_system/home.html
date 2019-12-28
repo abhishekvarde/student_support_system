@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="HandheldFriendly" content="true">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Home</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
@@ -204,12 +206,17 @@
 
 	}
 
+	.bookmark {
+	    background: red;
+	    color: black;
+	}
+
 	</style>
 </head>
 
 <body>
 	<div class="container" style="margin-left: 15%;">
-			{% for c in compiles %}
+			{% for c in complaints %}
 				<div class="sub_category">
 					{{ c.0 }}
 				</div>
@@ -218,23 +225,34 @@
 				{% for cin in c.1 %}
 				<div class="card" style="width: 45%; height: 420px; margin-left: 4%; margin-bottom: 5%;">
 					<div class="card-body text-center">
-						<img src="complaint.png" class="circle" align="left" alt="profile image" width="60" height="60">
+						{% if cin.0.url == "" %}
+						<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+						{% else %}
+						<img src="/media/{{ cin.0.url }}" class="circle" align="left" width="60" height="60">
+						{% endif %}
 						<div class="text-left name">
-							<b>{{ cin.user.username }}</b>
+							<b>{{ cin.0.user.username }}</b>
 						</div>
 						<div class="text-left date">
-							{{ cin.date }}
+							{{ cin.0.date }}
 						</div>
 						<hr class="hori">
-						<h5 class="card-title">{{ cin.title }}</h5>
+						<h5 class="card-title">{{ cin.0.title }}</h5>
 						<hr>
-						<p class="card-text">{{ cin.description }}</p>
+						<p class="card-text">{{ cin.0.description }}</p>
 						<hr style="width: 10px;" class="hor">		
 						<div class="more">
 							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
 						</div>
 						<div class="vote">
-							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Upvote</a>
+							<i style="font-size:48px;color: #4ced69;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.0.liked }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
+							{% if cin.0.liked == 1 %}
+                            <script>
+                                document.getElementById("post_id_{{ cin.0.id }}").style.color = '#3578E5';
+                                console.log("------------------------------------");
+                                // document.getElementById("post_id_{{ cin.0.id }}").removeClass();
+                            </script>
+                            {% endif %}
 						</div>
 					</div>
 				</div>
@@ -242,26 +260,8 @@
 				<div class="card" style="width: 45%; height: 420px; margin-left: 4%; margin-bottom: 5%;">
 					<div class="card-body text-center">
 						<form action="" method="get">
-							<button type="submit" name="category" value={{ c.0 }}> More {{ c.0 }} type complains </button>
+							<button type="submit" name="category" value="{{ c.0 }}"> More {{ c.0 }} type complains </button>
 						</form>
-						<!-- <img src="complaint.png" class="circle" align="left" alt="profile image" width="60" height="60">
-						<div class="text-left name">
-							<b>{{ cin.user.username }}</b>
-						</div>
-						<div class="text-left date">
-							{{ cin.date }}
-						</div>
-						<hr class="hori">
-						<h5 class="card-title">{{ cin.title }}</h5>
-						<hr>
-						<p class="card-text">{{ cin.description }}</p>
-						<hr style="width: 10px;" class="hor">		
-						<div class="more">
-							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
-						</div>
-						<div class="vote">
-							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Upvote</a>
-						</div> -->
 					</div>
 				</div>
 			{% endfor %}
@@ -317,16 +317,89 @@
 			</div>
 		</div>
 		<script>
+
 		$(document).ready(function() {
 
 					$("#sidebar").mCustomScrollbar({
 						theme: "minimal"
 					});
+				})
+
+		function like_post0(post_id, ids){
+
+			$.ajax({
+				type: "GET",
+				url: "/complaint/like",
+				data:{
+					post_id: post_id
+				},
+				dataType: "json",
+				success: function(data){
+					if(data.success=="True"){
+						// alert("Post liked");
+					}
+					else{
+						// alert("Post not liked");
+					}
+
+				}
+			})
+
+			// ids.onclick = like_post1();
+
+			// var clickfun = ids.getAttribute("onclick");   
+			// ids.classList.toggle('bookmark');
+			ids.style.color = '#3578E5';
+		    ids.setAttribute("onclick",'like_post1(' + post_id + ',' + ids.id + ')');
+		    console.log("changing to " + 'like_post1(' + post_id + ',' + ids.id + ')');
+
+		}
+
+		function like_post1(post_id, ids){
+
+			// alert("Mil gya" + post_id + " and " + ids);
+
+			$.ajax({
+				type: "GET",
+				url: "/complaint/dislike",
+				data:{
+					post_id: post_id
+				},
+				dataType: "json",
+				success: function(data){
+					if(data.success=="True"){
+						// alert("Post disliked");
+					}
+					else{
+						// alert("Post not disliked");
+					}
+
+				}
+			})
+
+			// ids.onclick = like_post0();
+
+			// var clickfun = ids.getAttribute("onclick");
+		 //    var funname = clickfun.substring(0,clickfun.indexOf("("));
+			// ids.classList.toggle('bookmark'); 
+			ids.style.color = '#4ced69';
+		    ids.setAttribute("onclick",'like_post0(' + post_id + ',' + ids.id + ')');
+		    console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
+
+		}
 
 		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<!-- 
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		 --><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 

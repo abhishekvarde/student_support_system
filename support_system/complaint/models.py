@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Complaint(models.Model):
     user = models.ForeignKey(User, models.CASCADE)
+    url = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     liked = models.IntegerField(default=0)

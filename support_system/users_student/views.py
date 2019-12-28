@@ -101,9 +101,9 @@ def student_profile(request):
             posts = Complaint.objects.filter(user=request.user).filter(status="pending")
         if requested_data == "ongoing":
             posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
-        if requested_data == "upvoted":
-            posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
         if requested_data == "solved":
+            posts = Complaint.objects.filter(user=request.user).filter(status="solved")
+        if requested_data == "upvoted":
             posts = []
             likedpostids = userdata.liked_complaint
             likedpostids = likedpostids.split(",")
@@ -111,14 +111,15 @@ def student_profile(request):
                 likedpostids.remove("")
             for likedpostid in likedpostids:
                 if Complaint.objects.filter(id=likedpostid).exists():
-                    print(Complaint.objects.get(id=likedpostid))
+                    # print(Complaint.objects.get(id=likedpostid))
                     # print((Complaint.objects.get(id=likedpostid))[0])
                     posts.append((Complaint.objects.get(id=likedpostid)))
                 else:
                     likedpostids.remove(likedpostid)
         if requested_data == "rejected":
             posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
-        return render(request, 'users_student/student_profile1.html',
+        print(posts)
+        return render(request, 'users_student/student_profile2.html',
                       {"usernmae": request.user.username, "userdata": userdata, "posts": posts,
                        'requested_data': requested_data})
     else:
