@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<title>Student Profile</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<!-- <script src="js/registration.js"></script> -->
+	<style type="text/css">
+	body,
+	html {
+		width: 100%;
+		/*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+	}
+
+	#sidebar {
+		width: 250px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		z-index: 999;
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	a[data-toggle="collapse"] {
+		position: relative;
+	}
+
+	.dropdown-toggle::after {
+		display: block;
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		transform: translateY(-50%);
+	}
+
+	.wrapper {
+		display: flex;
+		align-items: stretch;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;*/
+	}
+
+	#sidebar.active {
+		margin-left: -250px;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;
+		min-height: 100vh;*/
+		width: 15%;
+		height: 100%;
+	}
+
+	p {
+		font-family: 'Poppins', sans-serif;
+		font-size: 1.1em;
+		font-weight: 300;
+		line-height: 1.7em;
+		color: #999;
+	}
+
+	a,
+	a:hover,
+	a:focus {
+		color: inherit;
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+
+	#sidebar {
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	#sidebar .sidebar-header {
+		padding: 20px;
+		background: #278EFE;
+	}
+
+	#sidebar ul.components {
+		padding: 20px 0;
+		border-bottom: 1px solid #278EFE;
+	}
+
+	#sidebar ul p {
+		color: #fff;
+		padding: 10px;
+	}
+
+	#sidebar ul li a {
+		padding: 10px;
+		font-size: 1.1em;
+		display: block;
+	}
+
+	#sidebar ul li a:hover {
+		color: #7386D5;
+		background: #fff;
+	}
+
+	#sidebar ul li.active>a,
+	a[aria-expanded="true"] {
+		color: #fff;
+		background: #278EFE;
+	}
+
+	ul ul a {
+		font-size: 0.9em !important;
+		padding-left: 30px !important;
+		background: #278EFE;
+	}
+
+	.card.student {
+		top: 0;
+		width: 83%;
+		margin-left: 16%;
+		margin-right: 1%;
+		border-radius: 25px;
+		z-index: 999;
+		background-color: #F3F9FF;
+	}
+
+	.circular {
+		/*float: left;*/
+		display: block;
+		margin: 1em auto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		border: 5px solid #eee;
+		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	img {}
+
+	.card-title.student {
+
+		margin-top: 9%;
+		color: #000;
+
+	}
+
+	.card-text.student {
+		margin-top: auto;
+	}
+
+	.circle {
+		/*float: left;*/
+		display: block;
+		margin: 1em auto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		/*border: 5px solid #eee;*/
+		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.hori {
+
+		margin-top: 14px;
+	}
+
+	.name {
+
+		margin-top: 20px;
+		margin-left: 80px;
+		font-size: 18px;
+	}
+
+	.date {
+
+		margin-top: 4px;
+		margin-left: 80px;
+		font-size: 12px;
+	}
+
+	.vote {
+
+		float: left;
+	}
+
+	.more {
+
+		float: right;
+	}
+
+	.card-body {}
+
+	.card.complaint {
+		position: relative;
+		margin-top: 5%;
+		border-radius: 35px;
+		margin-left: 16%;
+		/*max-width: 600px;
+		max-height: 450px;
+		min-width: 600px;
+		min-height: 450px;*/
+	}
+
+	.hor {
+
+		margin-top: 150px;
+	}
+
+	/*.describe {
+		position: fi;
+		margin-top: 25%;
+	}
+*/
+	
+
+	.avatar {
+		display: block;
+		margin: 1em auto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		border: 5px solid #eee;
+		box-shadow: 0 7px 5px rgba(0, 0, 0, 0.3);
+	}
+	.card.edit {
+		position: absolute;
+		top: 0;
+		width: 83%;
+		margin-left: 16%;
+		margin-right: 1%;
+		border-radius: 25px;
+		z-index: 999;
+		background-color: #F3F9FF;
+	}
+
+
+
+	.circular {
+		/*float: left;*/
+		display: block;
+		margin: 1em auto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		border: 5px solid #eee;
+		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.container {
+
+		color: #000;
+	}
+
+	.card.edit {
+
+		display: none;
+	}
+
+	.comp {
+
+		/*position: relative;*/
+		margin-top: 25%;
+	}
+
+
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#{{ requested_data }}").removeClass();
+			$("#{{ requested_data }}").addClass("nav-link active");
+		})
+	</script>
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3>Student Suppport</h3>
+			</div>
+			<ul class="list-unstyled components">
+				<p>We are here for you!</p>
+				<li class="active">
+					<a href="#">All Complaints</a>
+				</li>
+				<li>
+					<a href="#">Profile</a>
+				</li>
+				<li>
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu">
+						<li>
+							<a href="#">University Level</a>
+						</li>
+						<li>
+							<a href="#">college Level</a>
+						</li>
+						<li>
+							<a href="#">Department Level</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Track Complaint</a>
+				</li>
+				<li>
+					<a href="#">Logout</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="describe">
+	<div class="card student" style="color: #fff; position: fixed;">
+		<div class="card-header" style="background-color: #7EBCFF;">
+			<ul class="nav nav-pills card-header-pills">
+				<li class="nav-item">
+					<a id="all" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=all">Your Complaints</a>
+				</li>
+				<li class="nav-item">
+					<a id="pending" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=pending">Pending complaints</a>
+				</li>
+				<li class="nav-item">
+					<a id="ongoing" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=ongoing">Ongoing Complaints</a>
+				</li>
+				<li class="nav-item">
+					<a id="rejected" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=rejected">Rejected Complaints</a>
+				</li>
+				<li class="nav-item">
+					<a id="solved" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=solved">Solved Complaints</a>
+				</li>
+				<li class="nav-item">
+					<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
+				</li>
+			</ul>
+		</div>
+		<div class="card-body student">
+			<img src="{{ userdata.profile_picture.url }}" class="circular" align="left" alt="profile image" width="100" height="100">
+			<h3 class="card-title student"><b>Welcome,</b><p id="user_email">{{userdata.user.email}}</p></h3>
+			
+			<p id="user_phone_no">{{userdata.phone_no}}</p>
+			<p id="user_college">{{userdata.college_name}}</p>
+			<p id="user_college_id">{{userdata.college_id}}</p>			<a href="#" class="btn btn-primary" id="edit">Edit</a>
+		</div>
+	</div>
+</div>
+		<div class="comp">
+		{% for post in posts %}
+		 <div class="card complaint" style="width: 45%; height: 420px;">
+			<div class="card-body text-center complaint">
+				<img src="complaint.png" class="circle" align="left" alt="profile image" width="60" height="60">
+				<div class="text-left name">
+				<b>{{ post.user.email }}</b>
+			</div>
+			<div class="text-left date">
+				{{ post.date }}
+			</div>
+			<hr class="hori">
+			<h5 class="card-title complaint">{{ post.title }}</h5>
+			<hr>
+			<p class="card-text complaint">{{ post.description }}</p>
+			<div class="hor">
+				<hr>
+			</div>
+			<div class="more">
+				<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
+			</div>
+			{% if requesteddata == "solved" %}
+				<div class="vote">
+					<a href="#" class="btn btn-primary">Satisfied</a>
+					<a href="#" class="btn btn-primary">Unsatisfied</a>
+				</div>
+			{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+		 </div>
+
+	<div class="card edit">
+	<div class="container">
+		<h1>Edit Profile</h1>
+		<hr>
+		<form enctype="multipart/form-data" class="form-horizontal" role="form" novalidate>
+			<div class="col-md-3">
+				<div class="text-center">
+					<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah" alt="profile image" width="150" height="150">
+					<h6>Upload a different photo...</h6>
+					<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
+				</div>
+			</div>
+			<div class="col-md-9 personal-info">
+				<br>
+				<h3>Personal info</h3>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">First name:</label>
+					<div class="col-lg-8">
+						<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Last name:</label>
+					<div class="col-lg-8">
+						<input class="form-control" type="text" disabled="disabled" value="Kumar">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">College Name:</label>
+					<div class="col-lg-8">
+						<select class="custom-select" id="updated_college" required>
+							<option selected disabled value="{{userdata.college_name}}">Choose...</option>
+							<option>...</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
+						<div class="col-lg-8">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroupPrepend3">@</span>
+								</div>
+								<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">Phone Number:</label>
+						<div class="col-lg-8">
+							<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10}  placeholder="000000000" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Collge ID:</label>
+						<div class="col-md-8">
+							<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Password:</label>
+						<div class="col-md-8">
+							<input class="form-control"  id="updated_password" type="password" placeholder="**********" required>
+						</div>
+					</div>
+					<!-- <div class="form-group">
+						<label class="col-md-3 control-label">Confirm password:</label>
+						<div class="col-md-8">
+							<input class="form-control"  id="updated_re_password" type="password" placeholder="**********" required>
+						</div>
+					</div> -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"></label>
+						<div class="col-md-8">
+							<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
+							<span></span>
+							<input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
+							<span></span>
+							<input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>
+
+	<!-- {% csrf_token %} -->
+
+	<script>
+
+	$(function() {
+		$('#edit').on('click', function(e) {
+
+    	document.getElementById("updated_password").innerHTML = "";
+    	// document.getElementById("updated_re_password").innerHTML = "";
+
+			$(".card.edit").show("slow");
+			$(".describe").hide("slow");
+			$('.describe').removeClass(".card.complaint")
+			e.preventDefault();
+		});
+	});
+	$(function() {
+		$('#changes').on('click', function(e) {
+			console.log("faskdjfhasldfk;j");
+			//var csrftoken = Cookies.get('csrftoken');
+			// var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+			var email = document.getElementById("updated_email").value;
+			var phone_no = document.getElementById("updated_phone_no").value;
+			var college_name = document.getElementById("updated_college").value;
+			var college_id= document.getElementById("updated_college_id").value;
+        	var password =  document.getElementById("updated_password").value;
+        	// var re_password =  document.getElementById("updated_re_password").value;
+        	var profile_pic =  document.getElementById("updated_profile_pic").value;
+        					
+        	console.log(email);
+         if (true){
+        	$.ajax({
+	            type: "get",
+	            url : "/users_student/update_profile/",
+	            data: {
+	            	email:email,
+	            	phone_no:phone_no,
+	            	college_name:college_name,
+	            	college_id:college_id,
+	            	password:password,
+	            	profile_pic:profile_pic
+	            	// CSRF: document.getElementById('csrfmiddlewaretoken').value
+	     
+	            },
+	            dataType: "json",
+	            success: function(data){
+	                if(data.is_updated == 'true'){
+
+	                    alert("data updated");
+	                    document.getElementById("user_email").innerHTML = email;
+        					document.getElementById("user_phone_no").innerHTML = phone_no;
+        					document.getElementById("user_college").innerHTML = college_name;
+        					document.getElementById("user_college_id").innerHTML = college_id;
+
+	             
+	                }
+	                else{
+	             		alert("data not updated");
+	                }
+	            }
+
+	        })
+        	 }
+
+        	 document.getElementById("updated_password").innerHTML = "";
+        	 // document.getElementById("updated_re_password").innerHTML = "";
+
+			$(".describe").show("slow");
+			$('.card.edit').hide("slow");
+
+			e.preventDefault();
+		});
+
+
+	});
+
+	 $(function() {
+		$('#cancel_data').on('click', function(e) {
+			console.log("faskdjfhasldfk;j");
+			$(".describe").show("slow");
+			$('.card.edit').hide("slow");
+			});
+	})
+
+
+	</script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<!-- //integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" -->
+</body>
+
+</html>

@@ -14,6 +14,10 @@
         description : <input type="textField" id="description" name="description" ><br><br>
         tags : <input type="text" id="tags" name="tags" ><br><br>
         <input type="file" name="image" required id="id_image"><br><br>
+        <select id="level" class="form-control col-sm-10" name="level"  style="margin-left: 12px; margin-bottom: 4px;" id="sel1">
+            <option id="University" >University Level</option>
+            <option id="College">College Level</option>
+            <option id="Department" >Department Level</option>
         <select class="form-control col-sm-10" name="college_name" style="margin-left: 12px; margin-bottom: 4px;" id="sel1">
             {% for i in cats %}
                 <option>{{ i.name }}</option>
@@ -24,5 +28,16 @@
 
 
 <h1>In post html</h1>
+<script type="text/javascript">
+
+        document.getElementById("{{ level }}").selected = true;
+        console.log("i am trying to select");
+        console.log("{{ level }} Level");
+        console.log(document.getElementById("level").value);
+
+        $(document).ready(function(){
+            
+        })
+    </script>
 </body>
 </html>

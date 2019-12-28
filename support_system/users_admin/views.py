@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import CommitteeMember
+from .models import CommitteeMember, Otp
 
 
 def register_admin(request):
@@ -53,72 +53,67 @@ def login_admin(request):
     return render(request, "users_admin/login_admin.html")
 
 
-
 def profile_admin(request):
-
     print("i am here")
     username = None
     if request.user.is_authenticated:
         username = request.user.username
         print(username)
 
-        return render(request,"users_admin/profile_admin.html")
+        return render(request, "users_admin/profile_admin.html")
+
 
 def phone_no_available(request):
-
     phone_no = request.GET.get('phone_no', None)
     print(phone_no)
 
     data = {
-        "is_valid": CommitteeMember.objects.filter(phone_no = phone_no).exists()
+        "is_valid": CommitteeMember.objects.filter(phone_no=phone_no).exists()
     }
 
     return JsonResponse(data)
 
-def username_available(request):
 
-    username = request.GET.get('username',None)
+def username_available(request):
+    username = request.GET.get('username', None)
     print(username)
 
     data = {
-        "is_valid":User.objects.filter(username = username).exists()
+        "is_valid": User.objects.filter(username=username).exists()
     }
 
     return JsonResponse(data)
 
 
 def teacher_id_available(request):
-
-    teacher_id = request.GET.get('teacher_id',None)
+    teacher_id = request.GET.get('teacher_id', None)
     print(teacher_id)
 
     data = {
-        "is_valid":CommitteeMember.objects.filter(teacher_id = teacher_id).exists()
+        "is_valid": CommitteeMember.objects.filter(teacher_id=teacher_id).exists()
     }
 
     return JsonResponse(data)
 
 
 def email_available(request):
-
-    email = request.GET.get('email',None)
+    email = request.GET.get('email', None)
     print(email)
 
     data = {
-        "is_valid":User.objects.filter(email = email).exists()
+        "is_valid": User.objects.filter(email=email).exists()
     }
 
     return JsonResponse(data)
 
 
 def phone_no_char(request):
-
-    phone_no = request.GET.get('phone_no',None)
+    phone_no = request.GET.get('phone_no', None)
     print(phone_no)
     send = "False"
 
     for no in phone_no:
-        if no not in('1','2','3','4','5','6','7','8','9'):
+        if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9'):
             send = "True"
             break
 
@@ -126,3 +121,59 @@ def phone_no_char(request):
         "is_valid": send
     }
     return JsonResponse(data)
+
+
+def generate_otp(request):
+    phone_no = request.GET.get('phone_no', None)
+    print(phone_no)
+    email = request.GET.get('email', None)
+    print(email)
+
+    otp_phone_no = "123456"
+    otp_email = "123456"
+
+    otp_details = Otp(phone_no = phone_no,otp_phone_no = otp_phone_no,
+                      email = email,otp_email = otp_email)
+    otp_details.save()
+
+    data = {
+        "is_valid": "Sent successfully"
+    }
+
+    return JsonResponse(data)
+
+
+def check_otp(request):
+    flag = 0
+
+    phone_no = request.GET.get('phone_no', None)
+    print(phone_no)
+    email = request.GET.get('email', None)
+    print(email)
+
+    otp_phone_no = request.GET.get('otp_phone_no', None)
+    print(otp_phone_no)
+    otp_email = request.GET.get('otp_email', None)
+    print(otp_email)
+
+    # check
+
+    check_otp = Otp.objects.filter(phone_no=phone_no).filter(email=email).first()
+
+    if check_otp:
+        if otp_phone_no == check_otp.otp_phone_no and otp_email == check_otp.otp_email:
+            flag = 1
+
+    if flag == 1:
+        data = {
+            "correct_otp": "true"
+        }
+        return JsonResponse(data)
+    else:
+        data = {
+            "correct_otp": "false"
+        }
+        return JsonResponse(data)
+
+
+

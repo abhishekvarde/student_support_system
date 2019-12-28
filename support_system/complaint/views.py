@@ -35,11 +35,11 @@ def like(request):
 
 
 def post(request):
+
+    if not request.user.is_authenticated:
+        return redirect('/users_student/login/')
+
     if request.method == 'POST':
-
-        if not request.user.is_authenticated:
-            return redirect('/users_student/login/')
-
         user = User.objects.get(username = request.user.username)
         print(user.username)
         title = request.POST.get('title')
@@ -63,8 +63,10 @@ def post(request):
         student_obj.save()
         redirect("/")
     else:
-        cats = cat.objects.all()
-        return render(request, 'complaint/post.html', {'cats': cats})
+        level = request.GET.get('level')
+        if level is None or level == "":
+            level = "department"
+        return render(request, 'complaint/post.html', {'level': level})
 
 
 # def display(request):

@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
@@ -74,33 +74,41 @@ def login_student(request):
         print("i am in loogin")
         if user is not None:
             login(request, user)
-            return redirect('/complaint/post/')
-
+            return redirect('/users_student/profile?user_name='+request.user.username)
+    logout(request)
     return render(request, 'users_student/login_student.html')
 
 
 def student_profile(request):
     requested_data = request.GET.get('requesteddata')
+    user_name = request.GET.get('user_name')
     print(requested_data)
-    posts = []
-    if request.user.is_authenticated:
+    print(user_name)
 
+    if user_name is None:
+        user_name = request.user.username
+    print(user_name)
+
+    if request.user.is_authenticated and user_name == request.user.username:
+        posts = []
         userdata = student.objects.get(user=request.user)
 
         if requested_data is None or requested_data == "all":
             postsobj = Complaint.objects.filter(user=request.user)
             for post in postsobj:
                 posts.append(post)
-            print(posts)
         if requested_data == "pending":
             posts = Complaint.objects.filter(user=request.user).filter(status="pending")
         if requested_data == "ongoing":
             posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
         if requested_data == "upvoted":
+            posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
+        if requested_data == "solved":
             posts = []
             likedpostids = userdata.liked_complaint
             likedpostids = likedpostids.split(",")
-            likedpostids.remove("")
+            if "" in likedpostids:
+                likedpostids.remove("")
             for likedpostid in likedpostids:
                 if Complaint.objects.filter(id=likedpostid).exists():
                     print(Complaint.objects.get(id=likedpostid))
@@ -110,10 +118,75 @@ def student_profile(request):
                     likedpostids.remove(likedpostid)
         if requested_data == "rejected":
             posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
-        return render(request, 'users_student/student_profile.html', {"userdata": userdata, "posts": posts,
-                                                                      'requested_data': requested_data})
-
-
+        return render(request, 'users_student/student_profile1.html',
+                      {"usernmae": request.user.username, "userdata": userdata, "posts": posts,
+                       'requested_data': requested_data})
     else:
-        #display a separate page for visitors
-        return render(request, 'users_student/login.html')
+        if User.objects.filter(username=user_name).exists():
+            user = User.objects.get(username=user_name)
+            userdata = student.objects.get(user=user)
+            posts = Complaint.objects.filter(user=User.objects.get(username=user_name))
+            return render(request, 'users_student/student_profile_another.html',
+                          {"usernmae": request.user.username, "userdata": userdata, "posts": posts})
+        return redirect('/user_student/login/')
+
+
+def update_profile(request):
+    if request.user.is_authenticated:
+        email = request.GET.get('email')
+        phone_no = request.GET.get('phone_no')
+        college_id = request.GET.get('college_id ')
+        college_name = request.GET.get('college_name')
+        password = request.GET.get('password')
+        profile_pic = request.GET.get('profile_pic')
+
+        user = authenticate(request, username=request.user.email, password=password)
+        if user is None:
+            data = {
+                "is_updated": "false"
+            }
+            return JsonResponse(data)
+
+        if student.objects.filter(user=request.user).exists():
+            userobj = student.objects.get(user=request.user)
+            userobj.phone_no = phone_no
+            userobj.college_id = college_id
+            userobj.college_name = college_name
+            userobj.profile_pics = profile_pic
+            user = User.objects.get(email=request.user.email)
+            user.email = email
+            user.username = email
+
+            if not User.objects.filter(email=request.user.email).exists():
+                data = {
+                    "is_updated": "false"
+                }
+                return JsonResponse(data)
+
+            if User.objects.filter(email=email).exists() and request.user.email != email:
+                data = {
+                    "is_updated": "false"
+                }
+                return JsonResponse(data)
+
+            if user.username == email and user.email == email and userobj.college_name == college_name and \
+                    userobj.college_id == college_id and userobj.phone_no == phone_no:
+                data = {
+                    "is_updated": "false"
+                }
+                return JsonResponse(data)
+
+            user.save()
+            userobj.save()
+            logout(request)
+            user_auth = authenticate(request, username=email, password=password)
+            login(request, user_auth)
+            data = {
+                "is_updated": "true"
+            }
+            return JsonResponse(data)
+    else:
+        data = {
+            "is_updated": "false"
+        }
+        return JsonResponse(data)

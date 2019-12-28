@@ -3,6 +3,8 @@
 
 $(document).ready(function(){
 
+    $("#otp_div").hide()
+
     var flag_phone_no_len = 0;
     var flag_phone_no_neum = 0;
     var flag_phone_no_available = 0;
@@ -171,16 +173,73 @@ $(document).ready(function(){
 
         });
 
-       $("#submit").click(function(){
-               console.log("here");
-                if(flag_phone_no_len || flag_phone_no_neum || flag_phone_no_available
-                     || flag_username_available || flag_teacher_id || flag_email_available){
+       $("#submit1").click(function(){
 
-                     var but = document.getElementById('submit');
-                     but.type = 'button';
-                 }else{
-                    var but = document.getElementById('submit');
-                    but.type = 'submit';
-                 }
+            if(flag_phone_no_len || flag_phone_no_neum || flag_phone_no_available
+                 || flag_username_available || flag_teacher_id || flag_email_available){
+                 alert("Your details are not correct")
+                 var but = document.getElementById('submit1');
+                 but.type = 'button';
+             }else{
+                var but = document.getElementById('submit1');
+                but.type = 'button';
+                console.log("here");
+
+                $("#register_form").hide();
+
+                $("#otp_div").show();
+
+                $.ajax({
+                    type:"GET",
+                    url: "/users_admin/generate_otp/",
+                    data:
+                    {
+                         phone_no: $('#phone_no').val(),
+                         email : $('#email').val()
+                    },
+                    dataType : "json",
+                    success: function(data)
+                    {
+                        alert('OTP Sent');
+                    }
+                });
+
+                }
+
+        });
+
+
+        $("#submit2").click(function(){
+                console.log("here222");
+            $.ajax({
+                    type:"GET",
+                    url: "/users_admin/check_otp/",
+                    data:
+                    {
+                         phone_no: $('#phone_no').val(),
+                         email : $('#email').val(),
+                         otp_phone_no: $('#otp_phone_no').val(),
+                         otp_email : $('#otp_email').val()
+                    },
+                    dataType : "json",
+                    success: function(data)
+                    {
+                        if(data.correct_otp == "true"){
+                        console.log("otp matched");
+//                        alert("otp correct");
+                        var but = document.getElementById('submit2');
+                        but.type = 'submit'
+                        document.getElementById('form').submit();
+
+                     }else{
+                        console.log("otp unmatched");
+                        alert("otp incorrect");
+                        //var but = document.getElementById('submit2');
+                        //but.type = 'button'
+                    }
+                    }
+            });
+
+
         });
 })

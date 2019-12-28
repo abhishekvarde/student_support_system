@@ -10,7 +10,7 @@ class Complaint(models.Model):
     liked = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now_add=True)
     # solved = models.BooleanField(default=False)
-    level = models.CharField(max_length=20, default="Department Level")
+    level = models.CharField(max_length=20, default="department")
     satisfied = models.BooleanField(default=False)
     sub_cat = models.CharField(max_length=30, default="other")
     status = models.CharField(max_length=20, default="pending")# pending, ongoing, solved, rejected

@@ -22,6 +22,8 @@
 		margin-left: 10%;
 	}
 
+
+
 	.card {
 
 		/*position: relative;*/
@@ -67,8 +69,12 @@
 			<h2 class="card-title">Register to join grievances body</h2>
 			<p class="card-text">It's quick and easy</p>
 			<hr>
+
 			<form id="form" class="form-vertical" action="/users_admin/register_admin/" method="post">
-				{% csrf_token %}
+			{% csrf_token %}
+				<div id = "register_form" class="visible1">
+
+
 
 
 				<div class="form-group">
@@ -145,8 +151,10 @@
 					</div>
 				</div>
 
+
+
 				<div class="text-center">
-					<button id="submit" type="submit" class="btn register">Register</button>
+					<button id="submit1" type="submit" class="btn register">Register</button>
 				</div>
 
 				<br>
@@ -155,7 +163,31 @@
 					Already Registered?<b><a href="/users_admin/login" >Login</a></b>
 				</div>
 
+
+			</div>
+
+			<div id="otp_div">
+
+				<div class="form-group">
+					<label class="control-label col-sm-8" >OTP FOR PHONE NO:</label>
+					<div class="col-sm-10">
+						<input required type="text" class="form-control" name="otp_phone_no" id="otp_phone_no" placeholder="OTP FOR PHONE NO">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-sm-8" >OTP FOR EMAIL :</label>
+					<div class="col-sm-10">
+						<input required type="text" class="form-control" name="otp_email" id="otp_email" placeholder="OTP FOR EMAIL">
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button id="submit2" type="button" class="btn register">VERIFY</button>
+				</div>
+			</div>
 			</form>
+
 			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 			<script type="text/javascript" src="{% static 'users_admin/js/register_admin.js' %}"></script>
 <!--			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->

@@ -13,6 +13,8 @@ urlpatterns = [
     path('teacher_id_available/',views.teacher_id_available,name = 'teacher_id_available'),
     path('email_available/',views.email_available,name = 'email_available'),
     path('phone_no_char/',views.phone_no_char,name = 'phone_no_char'),
+    path('generate_otp/', views.generate_otp, name='generate_otp'),
+    path('check_otp/', views.check_otp, name='check_otp'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
