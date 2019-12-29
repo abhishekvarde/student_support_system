@@ -214,9 +214,9 @@
 <body>
 	<div class="container" style="margin-left: 15%; padding: 0%;">
 
-		<div class="sub_category">
+		<!-- <div class="sub_category">
 			All problems related to category : '{{ category }}'' is available here...
-		</div>
+		 </div> -->
 		
 		{% for cin in complaints %}									
 		
@@ -249,44 +249,53 @@
 				</div>
 			</div>
 		{% endfor %}
+
 		<div class="wrapper">
-			<nav id="sidebar">
-				<div class="sidebar-header">
-					<h3>Student Suppport</h3>
-				</div>
-				<ul class="list-unstyled components">
-					<p>We are here for you!</p>
-					<li class="active">
-						<a href="#">About</a>
-					</li>
-					<li>
-						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
-						<ul class="collapse list-unstyled" id="homeSubmenu">
-							<li>
-								<a href="#">University Level</a>
-							</li>
-							<li>
-								<a href="#">college Level</a>
-							</li>
-							<li>
-								<a href="#">Department Level</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#homeSubmenu_tracker" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Complaint</a>
-						<ul class="collapse list-unstyled" id="homeSubmenu_tracker">
-							<li>
-								<form action="/complaint/tracker/" method="get">
-									<input name="track_id" >
-									<button type="submit" >Track</button> 
-								</form>
-							</li>
-						</ul>
-					</li>
-					<li>
-			</nav>
-		</div>
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah1" alt="profile image" width="150" height="150">
+				<h3>Welcome, {{ userdata.user.email }}</h3>
+				<h3>Student Suppport</h3>
+			</div>
+			<ul class="list-unstyled components">
+				<p>We are here for you!</p>
+				<li class="active">
+					<a href="/">All Complaints</a>
+				</li>
+				<li>
+					<a href="/users_student/profile?requesteddata=all">Profile</a>
+				</li>
+				<li>
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu">
+						<li>
+							<a href="/complaint/post?level=University">University Level</a>
+						</li>
+						<li>
+							<a href="/complaint/post?level=College">college Level</a>
+						</li>
+						<li>
+							<a href="/complaint/post?level=Department">Department Level</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#homeSubmenu_tracker" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Complaint</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu_tracker">
+						<li>
+							<form action="/complaint/tracker/" method="get">
+								<input name="track_id" >
+								<button type="submit" >Track</button> 
+							</form>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Logout</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">

@@ -68,7 +68,7 @@ def login_student(request):
         print("i am in loogin")
         if user is not None:
             login(request, user)
-            return redirect('/users_student/profile?user_name='+request.user.username)
+            return redirect('/')
     logout(request)
     return render(request, 'users_student/login_student.html')
 

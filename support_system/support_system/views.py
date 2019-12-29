@@ -12,6 +12,8 @@ def wall(request):
     liked_post = []
     complaint = []
     userdata = []
+    if request.user.is_authenticated:
+        userdata = student.objects.get(user=request.user)
     if category is not None:
         complaints = Complaint.objects.all().filter(sub_cat=category)
         return render(request, 'support_system/home_single.html', {'complaints': complaints})

@@ -130,10 +130,13 @@ def post(request):
 # tracker is used to track post and shown in different page which is to be designed
 
 def tracker(request):
+    userdata = []
     post_id = request.GET.get('track_id')
     if post_id is not None:
         if post_id != "":
             complaints = Complaint.objects.filter(id=post_id)
-            return render(request, 'support_system/home_single.html', {'complaints': complaints})
+            if request.user.is_authenticated:
+                userdata = student.objects.get(user=request.user)
+            return render(request, 'support_system/home_single.html', {'complaints': complaints, 'userdata': userdata})
         return redirect("/")
     return redirect("/")
