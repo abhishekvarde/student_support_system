@@ -223,7 +223,7 @@
 		<div class="my">
 
 				{% for cin in c.1 %}
-				<div class="card" style="width: 45%; height: 420px; margin-left: 4%; margin-bottom: 5%;">
+				<div class="card" style=" height: 420px; margin-left: 4%; margin-right: 4%; margin-bottom: 5%;">
 					<div class="card-body text-center">
 						{% if cin.0.url == "" %}
 						<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
@@ -245,7 +245,7 @@
 							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
 						</div>
 						<div class="vote">
-							<i style="font-size:48px;color: #4ced69;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.1 }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
+							<i style="font-size:40px;color: #D3D3D3;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.1 }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
 							{% if cin.1 == "1" %}
                             <script>
                                 document.getElementById("post_id_{{ cin.0.id }}").style.color = '#3578E5';
@@ -390,7 +390,7 @@
 			// var clickfun = ids.getAttribute("onclick");
 		 //    var funname = clickfun.substring(0,clickfun.indexOf("("));
 			// ids.classList.toggle('bookmark'); 
-			ids.style.color = '#4ced69';
+			ids.style.color = '#D3D3D3';
 		    ids.setAttribute("onclick",'like_post0(' + post_id + ',' + ids.id + ')');
 		    console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
 

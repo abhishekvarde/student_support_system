@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from complaint.models import Complaint
 from support_system.views import append_likes
 from .models import student
+from django.core.files.storage import FileSystemStorage
 
 
 def validator(college_id, first_name, last_name, year, college_name, email, phone_no):
@@ -132,6 +133,12 @@ def update_profile(request):
         college_name = request.GET.get('college_name')
         password = request.GET.get('password')
         profile_pic = request.GET.get('profile_pic')
+
+        image = request.FILES['profile_pic']
+        fs = FileSystemStorage()
+        filename = fs.save(image.name, image)
+        uploaded_file_url = fs.url(filename)
+
         print("Profile picture")
         print(profile_pic)
         print("Profile picture")
@@ -149,6 +156,7 @@ def update_profile(request):
             userobj.college_id = college_id
             userobj.college_name = college_name
             userobj.profile_pics = profile_pic
+            userobj.url = uploaded_file_url
             user = User.objects.get(email=request.user.email)
             user.email = email
             user.username = email
@@ -166,7 +174,8 @@ def update_profile(request):
                 return JsonResponse(data)
 
             if user.username == email and user.email == email and userobj.college_name == college_name and \
-                    userobj.college_id == college_id and userobj.phone_no == phone_no:
+                    userobj.college_id == college_id and userobj.phone_no == phone_no and \
+                    userobj.url == uploaded_file_url :
                 data = {
                     "is_updated": "false"
                 }

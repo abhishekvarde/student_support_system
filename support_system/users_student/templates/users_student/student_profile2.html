@@ -342,7 +342,7 @@
 	<div class="wrapper">
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah" alt="profile image" width="150" height="150">
+				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah1" alt="profile image" width="150" height="150">
 				<h3>Welcome, {{ userdata.user.email }}
 				<h3>Student Suppport</h3>
 			</div>
@@ -405,40 +405,40 @@
 		</div>
 	</div>
 	<div class="describe">
-	<div class="card student" style="color: #fff; position: fixed;">
-		<div class="card-header" style="background-color: #7EBCFF;">
-			<ul class="nav nav-pills card-header-pills">
-				<li class="nav-item">
-					<a id="all" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=all">Your Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a id="pending" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=pending">Pending complaints</a>
-				</li>
-				<li class="nav-item">
-					<a id="ongoing" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=ongoing">Ongoing Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a id="rejected" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=rejected">Rejected Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a id="solved" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=solved">Solved Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
-				</li>
-			</ul>
-		</div>
-		<div class="card-body student">
-			<img src="{{ userdata.profile_picture.url }}" class="circular" align="left" alt="profile image" width="100" height="100">
-			<h3 class="card-title student"><b>Welcome,</b><p id="user_email">{{userdata.user.email}}</p></h3>
-			
-			<p id="user_phone_no">{{userdata.phone_no}}</p>
-			<p id="user_college">{{userdata.college_name}}</p>
-			<p id="user_college_id">{{userdata.college_id}}</p>			<a href="#" class="btn btn-primary" id="edit">Edit</a>
+		<div class="card student" style="color: #fff; position: fixed;">
+			<div class="card-header" style="background-color: #7EBCFF;">
+				<ul class="nav nav-pills card-header-pills">
+					<li class="nav-item">
+						<a id="all" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=all">Your Complaints</a>
+					</li>
+					<li class="nav-item">
+						<a id="pending" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=pending">Pending complaints</a>
+					</li>
+					<li class="nav-item">
+						<a id="ongoing" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=ongoing">Ongoing Complaints</a>
+					</li>
+					<li class="nav-item">
+						<a id="rejected" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=rejected">Rejected Complaints</a>
+					</li>
+					<li class="nav-item">
+						<a id="solved" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=solved">Solved Complaints</a>
+					</li>
+					<li class="nav-item">
+						<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-body student">
+				<img src="{{ userdata.profile_picture.url }}" class="circular" align="left" id="blah3" alt="profile image" width="100" height="100">
+				<h3 class="card-title student"><b>Welcome,</b><p id="user_email">{{userdata.user.email}}</p></h3>
+				
+				<p id="user_phone_no">{{userdata.phone_no}}</p>
+				<p id="user_college">{{userdata.college_name}}</p>
+				<p id="user_college_id">{{userdata.college_id}}</p>			<a href="#" class="btn btn-primary" id="edit">Edit</a>
+			</div>
 		</div>
 	</div>
-</div>
-		<div class="comp">
+	<div class="comp">
 		{% for post in posts %}
 		 <div class="card complaint" style="width: 45%; height: 420px;">
 			<div class="card-body text-center complaint">
@@ -448,56 +448,54 @@
 						<img src="/media/{{ post.0.url }}" class="circle" align="left" width="60" height="60">
 						{% endif %}
 				<div class="text-left name">
-				<b>{{ post.0.user.email }}</b>
-			</div>
-
-			<div class="text-left date">
-				{{ post.0.date }}
-			</div>
-
-
-			<div class="check">
-			{% if post.0.status == 'pending' %} 
-					<b id="pending" class="status_toggle">Pending  </b>
-					<b id="ongoing" >Ongoing  </b> 
-					<b id="solved" >Solved  </b> 
-			{% elif post.0.status == 'ongoing' %}
-					<b id="pending" class="status_toggle">Pending  </b>
-					<b id="ongoing" class="status_toggle">Ongoing  </b> 
-					<b id="solved" >Solved  </b> 
-			{% elif post.0.status == 'solved' %}
-					<b id="pending" class="status_toggle">Pending  </b> 
-					<b id="ongoing" class="status_toggle">Ongoing  </b> 
-					<b id="solved" class="status_toggle">Solved  </b> 
-			{% elif post.0.status == 'rejected' %}
-				<div id="status_pending" style="color: red;" >
-					<b id="pending" >Rejected</b> 					 
+					<b>{{ post.0.user.email }}</b>
 				</div>
-			{% endif %}
 
-			</div>
+				<div class="text-left date">
+					{{ post.0.date }}
+				</div>
+
+
+				<div class="check">
+				{% if post.0.status == 'pending' %} 
+						<b id="pending" class="status_toggle">Pending  </b>
+						<b id="ongoing" >Ongoing  </b> 
+						<b id="solved" >Solved  </b> 
+				{% elif post.0.status == 'ongoing' %}
+						<b id="pending" class="status_toggle">Pending  </b>
+						<b id="ongoing" class="status_toggle">Ongoing  </b> 
+						<b id="solved" >Solved  </b> 
+				{% elif post.0.status == 'solved' %}
+						<b id="pending" class="status_toggle">Pending  </b> 
+						<b id="ongoing" class="status_toggle">Ongoing  </b> 
+						<b id="solved" class="status_toggle">Solved  </b> 
+				{% elif post.0.status == 'rejected' %}
+					<div id="status_pending" style="color: red;" >
+						<b id="pending" >Rejected</b> 					 
+					</div>
+				{% endif %}
+
+				</div>
 
 <!-- 
 			<div class="demo">
 			<button type="submit" id="pending1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="ongoing1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="solved1" class="btn btn-secondary btn-circle btn-sm">click</button>
 		</div> -->
-			<hr class="hori">
-			<h5 class="card-title complaint">{{ post.0.title }}</h5>
-			<hr>
-			<p class="card-text complaint">{{ post.0.description }}</p>
-			<div class="hor">
+				<hr class="hori">
+				<h5 class="card-title complaint">{{ post.0.title }}</h5>
 				<hr>
-			</div>
-			<div class="more">
-				<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
-			</div>
+				<p class="card-text complaint">{{ post.0.description }}</p>
+				<div class="hor">
+					<hr>
+				</div>
+				<div class="more">
+					<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
+				</div>
 				<div class="vote">
-					<i style="font-size:48px;color: #4ced69;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up" ></i>
+					<i style="font-size:40px;color: #D3D3D3;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up" ></i>
 					{% if post.1 == "1" %}
                     <script>
                         document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
-                        console.log("------------------------------------");
-                        // document.getElementById("post_id_{{ cin.0.id }}").removeClass();
                     </script>
                     {% endif %}
 				</div>
@@ -510,94 +508,94 @@
 			</div>
 		</div>
 		{% endfor %}
-		 </div>
+	</div>
 
 	<div class="card edit">
-	<div class="container">
-		<h1>Edit Profile</h1>
-		<hr>
-		<form class="form-horizontal" role="form">
-			<div class="col-md-3">
-				<div class="text-center">
-					<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah" alt="profile image" width="150" height="150">
-					<h6>Upload a different photo...</h6>
-					<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
-				</div>
-			</div>
-			<div class="col-md-9 personal-info">
-				<br>
-				<h3>Personal info</h3>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">First name:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+		<div class="container">
+			<h1>Edit Profile</h1>
+			<hr>
+			<form class="form-horizontal" role="form">
+				<div class="col-md-3">
+					<div class="text-center">
+						<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah2" alt="profile image" width="150" height="150">
+						<h6>Upload a different photo...</h6>
+						<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">Last name:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Kumar">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">College Name:</label>
-					<div class="col-lg-8">
-						<select class="custom-select" id="updated_college" required>
-							<option selected disabled value="{{userdata.college_name}}">Choose...</option>
-							<option>...</option>
-						</select>
+				<div class="col-md-9 personal-info">
+					<br>
+					<h3>Personal info</h3>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">First name:</label>
+						<div class="col-lg-8">
+							<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
+						<label class="col-lg-3 control-label">Last name:</label>
 						<div class="col-lg-8">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroupPrepend3">@</span>
+							<input class="form-control" type="text" disabled="disabled" value="Kumar">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">College Name:</label>
+						<div class="col-lg-8">
+							<select class="custom-select" id="updated_college" required>
+								<option selected disabled value="{{userdata.college_name}}">Choose...</option>
+								<option>...</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
+							<div class="col-lg-8">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="inputGroupPrepend3">@</span>
+									</div>
+									<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
 								</div>
-								<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 control-label">Phone Number:</label>
+							<div class="col-lg-8">
+								<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10}  placeholder="000000000" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Collge ID:</label>
+							<div class="col-md-8">
+								<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Password:</label>
+							<div class="col-md-8">
+								<input class="form-control"  id="updated_password" type="password" placeholder="**********" required>
+							</div>
+						</div>
+						<!-- <div class="form-group">
+							<label class="col-md-3 control-label">Confirm password:</label>
+							<div class="col-md-8">
+								<input class="form-control"  id="updated_re_password" type="password" placeholder="**********" required>
+							</div>
+						</div> -->
+						<div class="form-group">
+							<label class="col-md-3 control-label"></label>
+							<div class="col-md-8">
+								<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
+								<span></span>
+								<input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
+								<span></span>
+								<input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Phone Number:</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10}  placeholder="000000000" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Collge ID:</label>
-						<div class="col-md-8">
-							<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Password:</label>
-						<div class="col-md-8">
-							<input class="form-control"  id="updated_password" type="password" placeholder="**********" required>
-						</div>
-					</div>
-					<!-- <div class="form-group">
-						<label class="col-md-3 control-label">Confirm password:</label>
-						<div class="col-md-8">
-							<input class="form-control"  id="updated_re_password" type="password" placeholder="**********" required>
-						</div>
-					</div> -->
-					<div class="form-group">
-						<label class="col-md-3 control-label"></label>
-						<div class="col-md-8">
-							<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
-							<span></span>
-							<input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
-							<span></span>
-							<input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
-						</div>
-					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
-	</div>
-	</div>
+<!-- </div> -->
 
 	<!-- {% csrf_token %} -->
 
@@ -628,13 +626,16 @@ $("button#pending1").click(function() {
 			var college_id= document.getElementById("updated_college_id").value;
         	var password =  document.getElementById("updated_password").value;
         	// var re_password =  document.getElementById("updated_re_password").value;
-        	var profile_pic =  document.getElementById("updated_profile_pic").value;
+        	// var profile_pic =  document.getElementById("updated_profile_pic").value;
+        	var profile_pic = $('#updated_profile_pic').prop('files')[0];
+        	// form_data.append('file', file_data);
         					
         	console.log(email);
          if (true){
         	$.ajax({
 	            type: "get",
 	            url : "/users_student/update_profile/",
+	            enctype: 'multipart/form-data',
 	            data: {
 	            	email:email,
 	            	phone_no:phone_no,
@@ -642,7 +643,6 @@ $("button#pending1").click(function() {
 	            	college_id:college_id,
 	            	password:password,
 	            	profile_pic:profile_pic
-	            	// CSRF: document.getElementById('csrfmiddlewaretoken').value
 	     
 	            },
 	            dataType: "json",
@@ -690,6 +690,7 @@ $("button#pending1").click(function() {
 			$.ajax({
 				type: "GET",
 				url: "/complaint/like",
+				enctype: 'multipart/form-data',
 				data:{
 					post_id: post_id
 				},
@@ -742,13 +743,34 @@ $("button#pending1").click(function() {
 			// var clickfun = ids.getAttribute("onclick");
 		 //    var funname = clickfun.substring(0,clickfun.indexOf("("));
 			// ids.classList.toggle('bookmark'); 
-			ids.style.color = '#4ced69';
+			ids.style.color = '#D3D3D3';
 		    ids.setAttribute("onclick",'like_post0(' + post_id + ',' + ids.id + ')');
 		    console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
 
 		}
 
+		function readURL(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    
+		    reader.onload = function(e) {
 
+		      $('#blah1').attr('src', e.target.result);
+		      
+		      $('#blah2').attr('src', e.target.result);
+		      
+		      $('#blah3').attr('src', e.target.result);
+		    
+		    }
+		    
+		    reader.readAsDataURL(input.files[0]);
+
+		  }
+		}
+
+		$("#updated_profile_pic").change(function() {
+		  readURL(this);
+		});
 
 
 	</script>
