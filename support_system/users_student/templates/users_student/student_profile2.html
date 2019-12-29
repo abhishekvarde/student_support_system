@@ -6,6 +6,12 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="HandheldFriendly" content="true">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
 	<title>Student Profile</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
@@ -336,6 +342,8 @@
 	<div class="wrapper">
 		<nav id="sidebar">
 			<div class="sidebar-header">
+				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah" alt="profile image" width="150" height="150">
+				<h3>Welcome, {{ userdata.user.email }}
 				<h3>Student Suppport</h3>
 			</div>
 			<ul class="list-unstyled components">
@@ -361,7 +369,15 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#">Track Complaint</a>
+					<a href="#homeSubmenu_tracker" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Complaint</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu_tracker">
+						<li>
+							<form action="/complaint/tracker/" method="get">
+								<input name="track_id" >
+								<button type="submit" >Track</button> 
+							</form>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<a href="#">Logout</a>
@@ -426,51 +442,65 @@
 		{% for post in posts %}
 		 <div class="card complaint" style="width: 45%; height: 420px;">
 			<div class="card-body text-center complaint">
-				<img src="/media/{{ post.url }}" class="circle" align="left" alt="profile image" width="60" height="60">
+						{% if post.0.url == "" %}
+						<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+						{% else %}
+						<img src="/media/{{ post.0.url }}" class="circle" align="left" width="60" height="60">
+						{% endif %}
 				<div class="text-left name">
-				<b>{{ post.user.email }}</b>
+				<b>{{ post.0.user.email }}</b>
 			</div>
 
 			<div class="text-left date">
-				{{ post.date }}
+				{{ post.0.date }}
 			</div>
 
 
 			<div class="check">
-			{% if post.status == 'pending' %} 
+			{% if post.0.status == 'pending' %} 
 					<b id="pending" class="status_toggle">Pending  </b>
 					<b id="ongoing" >Ongoing  </b> 
 					<b id="solved" >Solved  </b> 
-			{% elif post.status == 'ongoing' %}
+			{% elif post.0.status == 'ongoing' %}
 					<b id="pending" class="status_toggle">Pending  </b>
 					<b id="ongoing" class="status_toggle">Ongoing  </b> 
 					<b id="solved" >Solved  </b> 
-			{% elif post.status == 'solved' %}
+			{% elif post.0.status == 'solved' %}
 					<b id="pending" class="status_toggle">Pending  </b> 
 					<b id="ongoing" class="status_toggle">Ongoing  </b> 
 					<b id="solved" class="status_toggle">Solved  </b> 
-			{% elif post.status == 'rejected' %}
+			{% elif post.0.status == 'rejected' %}
 				<div id="status_pending" style="color: red;" >
-					<b id="pending" >Pending</b> 					 
+					<b id="pending" >Rejected</b> 					 
 				</div>
 			{% endif %}
 
 			</div>
 
-
+<!-- 
 			<div class="demo">
 			<button type="submit" id="pending1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="ongoing1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="solved1" class="btn btn-secondary btn-circle btn-sm">click</button>
-		</div>
+		</div> -->
 			<hr class="hori">
-			<h5 class="card-title complaint">{{ post.title }}h5>
+			<h5 class="card-title complaint">{{ post.0.title }}</h5>
 			<hr>
-			<p class="card-text complaint">{{ post.description }}</p>
+			<p class="card-text complaint">{{ post.0.description }}</p>
 			<div class="hor">
 				<hr>
 			</div>
 			<div class="more">
 				<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
 			</div>
+				<div class="vote">
+					<i style="font-size:48px;color: #4ced69;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up" ></i>
+					{% if post.1 == "1" %}
+                    <script>
+                        document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
+                        console.log("------------------------------------");
+                        // document.getElementById("post_id_{{ cin.0.id }}").removeClass();
+                    </script>
+                    {% endif %}
+				</div>
 			{% if requesteddata == "solved" %}
 				<div class="vote">
 					<a href="#" class="btn btn-primary">Satisfied</a>
@@ -654,6 +684,69 @@ $("button#pending1").click(function() {
 			$('.card.edit').hide("slow");
 			});
 	})
+
+	 function like_post0(post_id, ids){
+
+			$.ajax({
+				type: "GET",
+				url: "/complaint/like",
+				data:{
+					post_id: post_id
+				},
+				dataType: "json",
+				success: function(data){
+					if(data.success=="True"){
+						// alert("Post liked");
+					}
+					else{
+						// alert("Post not liked");
+					}
+
+				}
+			})
+
+			// ids.onclick = like_post1();
+
+			// var clickfun = ids.getAttribute("onclick");   
+			// ids.classList.toggle('bookmark');
+			ids.style.color = '#3578E5';
+		    ids.setAttribute("onclick",'like_post1(' + post_id + ',' + ids.id + ')');
+		    console.log("changing to " + 'like_post1(' + post_id + ',' + ids.id + ')');
+
+		}
+
+		function like_post1(post_id, ids){
+
+			// alert("Mil gya" + post_id + " and " + ids);
+
+			$.ajax({
+				type: "GET",
+				url: "/complaint/dislike",
+				data:{
+					post_id: post_id
+				},
+				dataType: "json",
+				success: function(data){
+					if(data.success=="True"){
+						// alert("Post disliked");
+					}
+					else{
+						// alert("Post not disliked");
+					}
+
+				}
+			})
+
+			// ids.onclick = like_post0();
+
+			// var clickfun = ids.getAttribute("onclick");
+		 //    var funname = clickfun.substring(0,clickfun.indexOf("("));
+			// ids.classList.toggle('bookmark'); 
+			ids.style.color = '#4ced69';
+		    ids.setAttribute("onclick",'like_post0(' + post_id + ',' + ids.id + ')');
+		    console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
+
+		}
 
 
 

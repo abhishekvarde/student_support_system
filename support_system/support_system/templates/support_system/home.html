@@ -245,8 +245,8 @@
 							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
 						</div>
 						<div class="vote">
-							<i style="font-size:48px;color: #4ced69;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.0.liked }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
-							{% if cin.0.liked == 1 %}
+							<i style="font-size:48px;color: #4ced69;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.1 }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
+							{% if cin.1 == "1" %}
                             <script>
                                 document.getElementById("post_id_{{ cin.0.id }}").style.color = '#3578E5';
                                 console.log("------------------------------------");
@@ -280,20 +280,28 @@
 						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
 						<ul class="collapse list-unstyled" id="homeSubmenu">
 							<li>
-								<a href="#">University Level</a>
+								<a href="/complaint/post?level=University">University Level</a>
 							</li>
 							<li>
-								<a href="#">college Level</a>
+								<a href="/complaint/post?level=College">college Level</a>
 							</li>
 							<li>
-								<a href="#">Department Level</a>
+								<a href="/complaint/post?level=Department">Department Level</a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="#">Track Complaint</a>
+						<a href="#homeSubmenu_tracker" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Complaint</a>
+						<ul class="collapse list-unstyled" id="homeSubmenu_tracker">
+							<li>
+								<form action="/complaint/tracker/" method="get">
+									<input name="track_id" >
+									<button type="submit" >Track</button> 
+								</form>
+							</li>
+						</ul>
 					</li>
-					<li>
+					<!-- <li> -->
 			</nav>
 		</div>
 		<!-- Modal -->

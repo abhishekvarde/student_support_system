@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
 from complaint.models import Complaint
-
+from support_system.views import append_likes
 from .models import student
 
 
@@ -52,13 +52,6 @@ def register_student(request):
             student_details = student(user=user, college_id=college_id, year=year, college_name=college_name,
                                       phone_no=phone_no)
             student_details.save()
-            #
-            # if user is not None:
-            #     login(request, user)
-            #     print("Auth")
-            # else:
-            #     print("NOT")
-
         return redirect('/users_student/login')
     else:
         return render(request, 'users_student/regestration.html')
@@ -111,14 +104,13 @@ def student_profile(request):
                 likedpostids.remove("")
             for likedpostid in likedpostids:
                 if Complaint.objects.filter(id=likedpostid).exists():
-                    # print(Complaint.objects.get(id=likedpostid))
-                    # print((Complaint.objects.get(id=likedpostid))[0])
                     posts.append((Complaint.objects.get(id=likedpostid)))
                 else:
                     likedpostids.remove(likedpostid)
         if requested_data == "rejected":
             posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
         print(posts)
+        posts = append_likes(request, posts)
         return render(request, 'users_student/student_profile2.html',
                       {"usernmae": request.user.username, "userdata": userdata, "posts": posts,
                        'requested_data': requested_data})
@@ -140,6 +132,9 @@ def update_profile(request):
         college_name = request.GET.get('college_name')
         password = request.GET.get('password')
         profile_pic = request.GET.get('profile_pic')
+        print("Profile picture")
+        print(profile_pic)
+        print("Profile picture")
 
         user = authenticate(request, username=request.user.email, password=password)
         if user is None:
