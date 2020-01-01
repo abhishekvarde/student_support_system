@@ -84,6 +84,7 @@ def student_profile(request):
     print(user_name)
 
     if request.user.is_authenticated and user_name == request.user.username:
+        print("---------------------------utkarsh---------------------------------------")
         posts = []
         userdata = student.objects.get(user=request.user)
 
@@ -122,7 +123,8 @@ def student_profile(request):
             posts = Complaint.objects.filter(user=User.objects.get(username=user_name))
             return render(request, 'users_student/student_profile_another.html',
                           {"usernmae": request.user.username, "userdata": userdata, "posts": posts})
-        return redirect('/user_student/login/')
+        print("user doesn't exists")
+        return redirect('/users_student/login/')
 
 
 def update_profile(request):
