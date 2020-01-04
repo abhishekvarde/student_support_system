@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-# from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
@@ -88,7 +87,10 @@ def student_profile(request):
         posts = []
         userdata = student.objects.get(user=request.user)
 
-        if requested_data is None or requested_data == "all":
+        if requested_data is None:
+            requested_data = "all"
+
+        if requested_data == "all":
             postsobj = Complaint.objects.filter(user=request.user)
             for post in postsobj:
                 posts.append(post)
