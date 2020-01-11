@@ -122,7 +122,10 @@ def post(request):
             print(i.profile_picture)
         if level is None or level == "":
             level = "department"
-        return render(request, 'complaint/post.html', {'level': level})
+        userdata = student.objects.get(user=request.user)
+        print (userdata)
+        return render(request, 'complaint/add_complaint.html', {'level': level, 'userdata': userdata})
+
 
 # def display(request):
 

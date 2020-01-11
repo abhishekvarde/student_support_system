@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<title>Student Profile</title>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
+	<style type="text/css">
+	body,
+	html {
+		width: 100%;
+		/*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
+		background-image: linear-gradient(to top, #7ebcff, #6ab1ff, #56a5ff, #419aff, #278efe);
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+
+	.avatar {
+
+		display: block;
+		margin: 1em auto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		border: 5px solid #eee;
+		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	#sidebar {
+		width: 250px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		z-index: 999;
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	a[data-toggle="collapse"] {
+		position: relative;
+	}
+
+	.dropdown-toggle::after {
+		display: block;
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		transform: translateY(-50%);
+	}
+
+	.wrapper {
+		display: flex;
+		align-items: stretch;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;*/
+	}
+
+	#sidebar.active {
+		margin-left: -250px;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;
+		min-height: 100vh;*/
+		width: 15%;
+		height: 100%;
+	}
+
+	p {
+		font-family: 'Poppins', sans-serif;
+		font-size: 1.1em;
+		font-weight: 300;
+		line-height: 1.7em;
+		color: #999;
+	}
+
+	a,
+	a:hover,
+	a:focus {
+		color: inherit;
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+
+	#sidebar {
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	#sidebar .sidebar-header {
+		padding: 20px;
+		background: #278EFE;
+	}
+
+	/*#sidebar ul.components {
+		padding: 20px 0;
+		border-bottom: 1px solid #278EFE;
+	}*/
+
+	#sidebar ul p {
+		color: #fff;
+		padding: 10px;
+	}
+
+	#sidebar ul li a {
+		padding: 10px;
+		font-size: 1.1em;
+		display: block;
+	}
+
+	#sidebar ul li a:hover {
+		color: #7386D5;
+		background: #fff;
+	}
+
+	#sidebar ul li.active>a,
+	a[aria-expanded="true"] {
+		color: #fff;
+		background: #278EFE;
+	}
+
+	ul ul a {
+		font-size: 0.9em !important;
+		padding-left: 30px !important;
+		background: #278EFE;
+	}
+
+	.card.home {
+
+		position: relative;
+		height: 928px;
+		
+		background-color: #FAF9F6;
+		border-radius: 35px;
+		margin-left: 15%;
+		margin-top: 1%;
+		/*margin-bottom: 1%;*/
+		margin-right: 1%;
+		z-index: 999;
+		overflow: hidden;
+	}
+
+	.detail {
+
+		color: grey;
+		font-size: 40px;
+		/*margin-left: 10%;*/
+		background-color: #666666;
+		font-weight: 1000;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
+	}
+
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah1" alt="profile image" width="150" height="150">
+				<h4 class="welcome">Welcome, <h5>{{ userdata.user.email }}</h5>
+				</h4>
+				<hr>
+			</div>
+			<ul class="list-unstyled components">
+				<li class="active">
+					<a href="/">All Complaints</a>
+				</li>
+				<li>
+					<a href="/users_student/profile?requesteddata=all">Profile</a>
+				</li>
+				<li>
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu">
+						<li>
+							<a href="#">University Level</a>
+						</li>
+						<li>
+							<a href="#">college Level</a>
+						</li>
+						<li>
+							<a href="#">Department Level</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Track Complaint</a>
+				</li>
+				<li>
+					<a href="#">Logout</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<form enctype="multipart/form-data" action="" method="post" novalidate>
+		{% csrf_token %}
+		{{ csrf_input }}
+		<div class="card home">
+			<div id="scroller">
+				<div class="scrollbar" id="style-7">
+					<div class="force-overflow">
+						<h1 class="detail text-center" style="margin-top: 2%;">Please Write your Complaint here!</h1>
+						<hr style="width:80%;">
+						<br>
+						<div class="level col-xs-6 col-sm-6 col-md-6" style="font-family: 'Alegreya', serif;">
+							<strong style="font-size: 20px;">Level</strong>
+							<select id="level" class="form-control" name="level" id="sel1">
+								<option id="University">University Level</option>
+								<option id="College">College Level</option>
+								<option id="Department">Department Level</option>
+								<select class="form-control col-sm-6" name="college_name" style="margin-left: 12px; margin-bottom: 4px;" id="sel1">
+									{% for i in cats %}
+									<option>{{ i.name }}</option>
+									{% endfor %}
+								</select>
+							</select>
+						</div>
+						
+						<div class="tiltle col-xs-6 col-sm-6 col-md-6" style="font-family: 'Alegreya', serif; margin-top: 2%;">
+							<strong style="font-size: 20px;">Title</strong>
+							<input type="text" name="title" placeholder="Title" class="form-control tm-input tm-input-info" />
+						</div>
+						<br>
+						<div class="description col-xs-10 col-sm-10 col-md-10" style="font-family: 'Alegreya', serif;">
+							<strong style="font-size: 20px;">Description</strong>
+							<textarea type="text" name="description" placeholder="Description (in 200 words)" class="form-control" style="height: 200px;"></textarea>
+						</div>
+						<br>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group" style="font-family: 'Alegreya', serif;">
+								<strong style="font-size: 20px;">Tags:</strong>
+								<input type="text" name="tags" placeholder="Tags" class="form-control tm-input tm-input-info" />
+							</div>
+							<br>
+							<div class="image" style="font-family: 'Alegreya', serif;">
+								<strong style="font-size: 20px;">Add image(if any)</strong>
+								<div class="col-md-3" style="margin-top: 2%;">
+									<div class="text-center">
+										<img src="" class="add_icon fa fa-camera-retro fa-3x" id="blah">
+										<h6>Upload Image</h6>
+										<input type="file" onchange="readURL(this);">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button type="submit" id="button" name="but" value="">submit or post now</button>
+	</form>
+	<script type="text/javascript">
+	$(".tm-input").tagsManager();
+
+	document.getElementById("{{ level }}").selected = true;
+	console.log("i am trying to select");
+	console.log("{{ level }} Level");
+	console.log(document.getElementById("level").value);
+
+	$(document).ready(function() {
+
+	})
+
+	</script>
+	</script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

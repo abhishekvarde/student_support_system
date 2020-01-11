@@ -8,23 +8,89 @@
 	<meta name="HandheldFriendly" content="true">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="HandheldFriendly" content="true">
 	<title>Student Profile</title>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<!-- <script src="js/registration.js"></script> -->
 	<style type="text/css">
 	body,
 	html {
 		width: 100%;
 		/*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
-		background-attachment: fixed;
+		background-image: linear-gradient(to top, #7ebcff, #6ab1ff, #56a5ff, #419aff, #278efe);
 		background-repeat: no-repeat;
+		background-attachment: fixed;
 	}
+
+	.card.home {
+
+		position: relative;
+		height: 928px;
+
+		background-color: #FAF9F6;
+		border-radius: 35px;
+		margin-left: 15%;
+		margin-top: 1%;
+		/*margin-bottom: 1%;*/
+		margin-right: 1%;
+		z-index: 999;
+		overflow: hidden;
+	}
+
+	.scrollbar.edit {
+		margin-top: 10px;
+		margin-right: 10px;
+		float: right;
+		height: 700px;
+		width: 99%;
+		/*background-color: #000;*/
+		overflow-y: scroll;
+		margin-bottom: 25px;
+	}
+
+	.scrollbar {
+		margin-top: 10px;
+		margin-right: 10px;
+		float: right;
+		height: 900px;
+		width: 99%;
+		/*background-color: #000;*/
+		overflow-y: scroll;
+		margin-bottom: 25px;
+	}
+
+	.force-overflow {
+		/*min-height: 450px;*/
+	}
+
+	#scroller {
+		text-align: left;
+		width: 100%;
+		color: #000;
+		margin: auto;
+	}
+
+	#style-7::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+		background-color: #F5F5F5;
+		border-radius: 10px;
+	}
+
+	#style-7::-webkit-scrollbar {
+		width: 10px;
+		background-color: #F5F5F5;
+	}
+
+	#style-7::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-image: -webkit-gradient(linear,
+			left bottom,
+			left top,
+			color-stop(0.44, rgb(122, 153, 217)),
+			color-stop(0.72, rgb(73, 125, 189)),
+			color-stop(0.86, rgb(28, 58, 148)));
+	}
+
 
 	#sidebar {
 		width: 250px;
@@ -79,7 +145,7 @@
 		font-size: 1.1em;
 		font-weight: 300;
 		line-height: 1.7em;
-		color: #999;
+		color: #fff;
 	}
 
 	a,
@@ -101,10 +167,10 @@
 		background: #278EFE;
 	}
 
-	#sidebar ul.components {
+	/*#sidebar ul.components {
 		padding: 20px 0;
 		border-bottom: 1px solid #278EFE;
-	}
+	}*/
 
 	#sidebar ul p {
 		color: #fff;
@@ -136,9 +202,7 @@
 
 	.card.student {
 		top: 0;
-		width: 83%;
-		margin-left: 16%;
-		margin-right: 1%;
+		width: 100%;
 		border-radius: 25px;
 		z-index: 999;
 		background-color: #F3F9FF;
@@ -214,17 +278,28 @@
 		float: right;
 	}
 
-	.card-body {}
+	.card-body.student {}
 
 	.card.complaint {
-		position: relative;
+		/*position: relative;*/
 		margin-top: 5%;
 		border-radius: 35px;
 		margin-left: 16%;
+
+		box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.2);
+		/*flex: 1;*/
+		transition: all 0.2s ease;
 		/*max-width: 600px;
 		max-height: 450px;
 		min-width: 600px;
 		min-height: 450px;*/
+	}
+
+	.card.complaint:hover {
+
+		box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.3);
+		cursor: pointer;
+		transform: translatey(-4px);
 	}
 
 	.hor {
@@ -237,7 +312,7 @@
 		margin-top: 25%;
 	}
 */
-	
+
 
 	.avatar {
 		display: block;
@@ -251,15 +326,22 @@
 		border: 5px solid #eee;
 		box-shadow: 0 7px 5px rgba(0, 0, 0, 0.3);
 	}
+
 	.card.edit {
 		position: absolute;
 		top: 0;
-		width: 83%;
-		margin-left: 16%;
+
+		margin-top: 2.5%;
+		width: 85%;
+		height: 90%;
+		margin-left: 7%;
 		margin-right: 1%;
 		border-radius: 25px;
-		z-index: 999;
-		background-color: #F3F9FF;
+		background-color: #FAF9F6;
+		overflow: hidden;
+		-webkit-box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
+		-moz-box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
+		box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
 	}
 
 
@@ -288,66 +370,116 @@
 		display: none;
 	}
 
-	.comp {
+	.comp {}
 
-		/*position: relative;*/
-		margin-top: 25%;
-	}
-	 .check {
+	.check {
 
 		float: left;
 		margin-left: 18px;
-    }
+	}
 
-    .btn.btn-secondary.btn-circle.btn-sm {
-        /*position: relative;*/
-        width: 2px;
-        height: 2px;
-        /*padding: 6px 0px;*/
-        border-radius: 50%;
-        text-align: center;
-       /* margin-top: 3px;*/
-    }
+	.btn.btn-secondary.btn-circle.btn-sm {
+		/*position: relative;*/
+		width: 2px;
+		height: 2px;
+		/*padding: 6px 0px;*/
+		border-radius: 50%;
+		text-align: center;
+		/* margin-top: 3px;*/
+	}
 
-    .answered {
-        background: green;
-    }
+	.answered {
+		background: green;
+	}
 
-    .demo{
+	.demo {
 
-    	float: right;
-    }
+		float: right;
+	}
 
-    .status_toggle{
-    	color: green;
+	.status_toggle {
+		color: green;
 
 	}
 
-	.check h5{
+	.check h5 {
 		position: absolute;
 	}
 
+	.detail {
+
+		float: right;
+		margin-right: 68%;
+	}
+
+	.vote:hover {
+
+		text-shadow: 2px 3px 6px grey;
+		cursor: pointer;
+		transform: translatey(-4px);
+		transition: all 0.2s ease;
+	}
+
+	.more:hover {
+
+		box-shadow: 2px 3px 6px grey;
+		cursor: pointer;
+		transform: translatey(-4px);
+		transition: all 0.3s ease;
+	}
+
+	.feedback:hover {
+
+		box-shadow: 2px 3px 6px grey;
+		cursor: pointer;
+		transform: translatey(-4px);
+		transition: all 0.3s ease;
+	}
+
+	.card.edit h1 {
+
+		color: grey;
+		font-size: 40px;
+		/*margin-left: 10%;*/
+		background-color: #666666;
+		font-weight: 1000;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
+	}
+
+	/*.nav-link {
+
+		border-radius: 100px;
+	}
+	*/
+
 	</style>
-
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#{{ requested_data }}").removeClass();
-			$("#{{ requested_data }}").addClass("nav-link active");
-		})
-	</script>
+	$(document).ready(function() {
+		$("#{{ requested_data }}").removeClass();
+		$("#{{ requested_data }}").addClass("nav-link active");
+	})
 
+	</script>
 </head>
 
 <body>
 	<div class="wrapper">
 		<nav id="sidebar">
-			<div class="sidebar-header">
+			<div class="sidebar-header" style="text-align: center;">
 				<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah1" alt="profile image" width="150" height="150">
-				<h3>Welcome, {{ userdata.user.email }}
-				<h3>Student Suppport</h3>
+				<h4>Welcome,</h4>
+				<h5>{{ userdata.user.email }}</h5>
+				<p id="user_phone_no">{{userdata.phone_no}}</p>
+				<p id="user_college">{{userdata.college_name}}</p>
+				<p id="user_college_id">{{userdata.college_id}}</p>
+				<a href="#" class="card-title btn btn-secondary" type="reset" style="width: 150px; border-radius: 60px;" id="edit">Edit</a>
+				<hr>
 			</div>
 			<ul class="list-unstyled components">
-				<p>We are here for you!</p>
 				<li class="active">
 					<a href="/">All Complaints</a>
 				</li>
@@ -373,8 +505,8 @@
 					<ul class="collapse list-unstyled" id="homeSubmenu_tracker">
 						<li>
 							<form action="/complaint/tracker/" method="get">
-								<input name="track_id" >
-								<button type="submit" >Track</button> 
+								<input name="track_id">
+								<button type="submit">Track</button>
 							</form>
 						</li>
 					</ul>
@@ -404,381 +536,382 @@
 			</div>
 		</div>
 	</div>
-	<div class="describe">
-		<div class="card student" style="color: #fff; position: fixed;">
-			<div class="card-header" style="background-color: #7EBCFF;">
-				<ul class="nav nav-pills card-header-pills">
-					<li class="nav-item">
-						<a id="all" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=all">Your Complaints</a>
-					</li>
-					<li class="nav-item">
-						<a id="pending" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=pending">Pending complaints</a>
-					</li>
-					<li class="nav-item">
-						<a id="ongoing" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=ongoing">Ongoing Complaints</a>
-					</li>
-					<li class="nav-item">
-						<a id="rejected" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=rejected">Rejected Complaints</a>
-					</li>
-					<li class="nav-item">
-						<a id="solved" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=solved">Solved Complaints</a>
-					</li>
-					<li class="nav-item">
-						<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
-					</li>
-				</ul>
-			</div>
-			<div class="card-body student">
+	<div class="card home">
+		<div id="scroller">
+			<div class="scrollbar" id="style-7">
+				<div class="force-overflow">
+					<div class="describe">
+						<div class="card student" style="color: #fff;">
+							<div class="card-header" style="background-color: #7EBCFF; position: fixed; width: 83%; border-radius: 25px;">
+								<ul class="nav nav-pills card-header-pills">
+									<li class="nav-item">
+										<a id="all" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=all">Your Complaints</a>
+									</li>
+									<li class="nav-item">
+										<a id="pending" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=pending">Pending complaints</a>
+									</li>
+									<li class="nav-item">
+										<a id="ongoing" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=ongoing">Ongoing Complaints</a>
+									</li>
+									<li class="nav-item">
+										<a id="rejected" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=rejected">Rejected Complaints</a>
+									</li>
+									<li class="nav-item">
+										<a id="solved" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=solved">Solved Complaints</a>
+									</li>
+									<li class="nav-item">
+										<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
+									</li>
+								</ul>
+							</div>
+							<!-- <div class="card-body student">
 				<img src="{{ userdata.profile_picture.url }}" class="circular" align="left" id="blah3" alt="profile image" width="100" height="100">
-				<h3 class="card-title student"><b>Welcome,</b><p id="user_email">{{userdata.user.email}}</p></h3>
-				
+				<div class="detail">
+				<h4 class="card-title student">Welcome,</h4><h5><p id="user_email">{{userdata.user.email}}</p></h5>
 				<p id="user_phone_no">{{userdata.phone_no}}</p>
 				<p id="user_college">{{userdata.college_name}}</p>
-				<p id="user_college_id">{{userdata.college_id}}</p>			<a href="#" class="btn btn-primary" id="edit">Edit</a>
-			</div>
-		</div>
-	</div>
-	<div class="comp">
-		{% for post in posts %}
-		 <div class="card complaint" style="width: 45%; height: 420px;">
-			<div class="card-body text-center complaint">
-						{% if post.0.url == "" %}
-						<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
-						{% else %}
-						<img src="/media/{{ post.0.url }}" class="circle" align="left" width="60" height="60">
-						{% endif %}
-				<div class="text-left name">
-					<b>{{ post.0.user.email }}</b>
-				</div>
-
-				<div class="text-left date">
-					{{ post.0.date }}
-				</div>
-
-
-				<div class="check">
-				{% if post.0.status == 'pending' %} 
-						<b id="pending" class="status_toggle">Pending  </b>
-						<b id="ongoing" >Ongoing  </b> 
-						<b id="solved" >Solved  </b> 
-				{% elif post.0.status == 'ongoing' %}
-						<b id="pending" class="status_toggle">Pending  </b>
-						<b id="ongoing" class="status_toggle">Ongoing  </b> 
-						<b id="solved" >Solved  </b> 
-				{% elif post.0.status == 'solved' %}
-						<b id="pending" class="status_toggle">Pending  </b> 
-						<b id="ongoing" class="status_toggle">Ongoing  </b> 
-						<b id="solved" class="status_toggle">Solved  </b> 
-				{% elif post.0.status == 'rejected' %}
-					<div id="status_pending" style="color: red;" >
-						<b id="pending" >Rejected</b> 					 
+				<p id="user_college_id">{{userdata.college_id}}</p>
+				<a href="#" class="card-title btn btn-primary" id="edit">Edit</a>
+			</div> -->
+						</div>
 					</div>
-				{% endif %}
-
 				</div>
-
-<!-- 
+				<div class="comp" style="margin-top: 7%;">
+					{% for post in posts %}
+					<div class="card complaint" style="width: 45%; height: 420px;">
+						<div class="card-body text-center complaint" style="">
+							{% if post.0.url == "" %}
+							<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+							{% else %}
+							<img src="/media/{{ post.0.url }}" class="circle" align="left" width="60" height="60">
+							{% endif %}
+							<div class="text-left name">
+								<b>{{ post.0.user.email }}</b>
+							</div>
+							<div class="text-left date">
+								{{ post.0.date }}
+							</div>
+							<div class="check">
+								{% if post.0.status == 'pending' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing">Ongoing </b>
+								<b id="solved">Solved </b>
+								{% elif post.0.status == 'ongoing' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing" class="status_toggle">Ongoing </b>
+								<b id="solved">Solved </b>
+								{% elif post.0.status == 'solved' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing" class="status_toggle">Ongoing </b>
+								<b id="solved" class="status_toggle">Solved </b>
+								{% elif post.0.status == 'rejected' %}
+								<div id="status_pending" style="color: red;">
+									<b id="pending">Rejected</b>
+								</div>
+								{% endif %}
+							</div>
+							<!-- 
 			<div class="demo">
 			<button type="submit" id="pending1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="ongoing1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="solved1" class="btn btn-secondary btn-circle btn-sm">click</button>
 		</div> -->
-				<hr class="hori">
-				<h5 class="card-title complaint">{{ post.0.title }}</h5>
-				<hr>
-				<p class="card-text complaint">{{ post.0.description }}</p>
-				<div class="hor">
-					<hr>
-				</div>
-				<div class="more">
-					<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
-				</div>
-				<div class="vote">
-					<i style="font-size:40px;color: #D3D3D3;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up" ></i>
-					{% if post.1 == "1" %}
-                    <script>
-                        document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
-                    </script>
-                    {% endif %}
-				</div>
-			{% if requesteddata == "solved" %}
-				<div class="vote">
-					<a href="#" class="btn btn-primary">Satisfied</a>
-					<a href="#" class="btn btn-primary">Unsatisfied</a>
-				</div>
-			{% endif %}
-			</div>
-		</div>
-		{% endfor %}
-	</div>
+							<hr class="hori">
+							<div class="content" style="height: 70px;">
+								<h5 class="card-title complaint">{{ post.0.title }}</h5>
+								<hr>
+								<p class="card-text complaint">{{ post.0.description }}</p>
+							</div>
+							<div class="hor">
+								<hr>
+							</div>
+							<div class="more">
+								<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
+							</div>
+							<div class="vote">
+								<i style="font-size:40px;color: #D3D3D3;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up"></i>
+								{% if post.1 == "1" %}
+								<script>
+									document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
 
-	<div class="card edit">
-		<div class="container">
-			<h1>Edit Profile</h1>
-			<hr>
-			<form class="form-horizontal" role="form">
-				<div class="col-md-3">
-					<div class="text-center">
-						<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah2" alt="profile image" width="150" height="150">
-						<h6>Upload a different photo...</h6>
-						<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
+								</script>
+								{% endif %}
+							</div>
+							{% if requesteddata == "solved" %}
+							<div class="feedback">
+								<a href="#" class="btn btn-primary">Satisfied</a>
+								<a href="#" class="btn btn-primary">Unsatisfied</a>
+							</div>
+							{% endif %}
+						</div>
 					</div>
+					{% endfor %}
 				</div>
-				<div class="col-md-9 personal-info">
-					<br>
-					<h3>Personal info</h3>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">First name:</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Last name:</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="text" disabled="disabled" value="Kumar">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">College Name:</label>
-						<div class="col-lg-8">
-							<select class="custom-select" id="updated_college" required>
-								<option selected disabled value="{{userdata.college_name}}">Choose...</option>
-								<option>...</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
-							<div class="col-lg-8">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="inputGroupPrepend3">@</span>
-									</div>
-									<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Phone Number:</label>
-							<div class="col-lg-8">
-								<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10}  placeholder="000000000" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Collge ID:</label>
-							<div class="col-md-8">
-								<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Password:</label>
-							<div class="col-md-8">
-								<input class="form-control"  id="updated_password" type="password" placeholder="**********" required>
-							</div>
-						</div>
-						<!-- <div class="form-group">
+				<div class="card edit">
+					<div class="container">
+						<h1 style="margin-top:3%;">Edit Profile</h1>
+						<hr>
+						<div id="scroller">
+							<div class="scrollbar edit" id="style-7">
+								<div class="force-overflow edit">
+									<form class="form-horizontal" role="form" style="font-family: 'Alegreya', serif; font-weight: 100;">
+										<div class="col-md-3">
+											<div class="text-center">
+												<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah2" alt="profile image" width="150" height="150">
+												<h6>Upload a different photo...</h6>
+												<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-9 personal-info">
+											<br>
+											<h3>Personal info</h3>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">First name:</label>
+												<div class="col-lg-8">
+													<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Last name:</label>
+												<div class="col-lg-8">
+													<input class="form-control" type="text" disabled="disabled" value="Kumar">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">College Name:</label>
+												<div class="col-lg-8">
+													<select class="custom-select" id="updated_college" required>
+														<option selected disabled value="{{userdata.college_name}}">Choose...</option>
+														<option>...</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
+													<div class="col-lg-8">
+														<div class="input-group">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="inputGroupPrepend3">@</span>
+															</div>
+															<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-lg-3 control-label">Phone Number:</label>
+													<div class="col-lg-8">
+														<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10} placeholder="000000000" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label">Collge ID:</label>
+													<div class="col-md-8">
+														<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label">Password:</label>
+													<div class="col-md-8">
+														<input class="form-control" id="updated_password" type="password" placeholder="**********" required>
+													</div>
+												</div>
+												<!-- <div class="form-group">
 							<label class="col-md-3 control-label">Confirm password:</label>
 							<div class="col-md-8">
 								<input class="form-control"  id="updated_re_password" type="password" placeholder="**********" required>
 							</div>
 						</div> -->
-						<div class="form-group">
-							<label class="col-md-3 control-label"></label>
-							<div class="col-md-8">
-								<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
-								<span></span>
-								<input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
-								<span></span>
-								<input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
+												<div class="form-group">
+													<label class="col-md-3 control-label"></label>
+													<div class="col-md-8">
+														<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
+														<span></span>
+														<input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
+														<span></span>
+														<input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
-	</div>
-<!-- </div> -->
+				<script>
+				$("button#pending1").click(function() {
+					$("#pending}").toggleClass("answered");
+				});
+				$(function() {
+					$('#edit').on('click', function(e) {
 
-	<!-- {% csrf_token %} -->
+						document.getElementById("updated_password").innerHTML = "";
+						// document.getElementById("updated_re_password").innerHTML = "";
 
-	<script>
-$("button#pending1").click(function() {
-            $("#pending}").toggleClass("answered");
-        });
-	$(function() {
-		$('#edit').on('click', function(e) {
+						$(".card.edit").show("slow");
+						$(".describe").hide("slow");
+						// $('.describe').removeClass(".card.complaint")
+						e.preventDefault();
+					});
+				});
+				$(function() {
+					$('#changes').on('click', function(e) {
+						console.log("faskdjfhasldfk;j");
+						//var csrftoken = Cookies.get('csrftoken');
+						// var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+						var email = document.getElementById("updated_email").value;
+						var phone_no = document.getElementById("updated_phone_no").value;
+						var college_name = document.getElementById("updated_college").value;
+						var college_id = document.getElementById("updated_college_id").value;
+						var password = document.getElementById("updated_password").value;
+						// var re_password =  document.getElementById("updated_re_password").value;
+						// var profile_pic =  document.getElementById("updated_profile_pic").value;
+						var profile_pic = $('#updated_profile_pic').prop('files')[0];
+						// form_data.append('file', file_data);
 
-    	document.getElementById("updated_password").innerHTML = "";
-    	// document.getElementById("updated_re_password").innerHTML = "";
+						console.log(email);
+						if (true) {
+							$.ajax({
+								type: "get",
+								url: "/users_student/update_profile/",
+								enctype: 'multipart/form-data',
+								data: {
+									email: email,
+									phone_no: phone_no,
+									college_name: college_name,
+									college_id: college_id,
+									password: password,
+									profile_pic: profile_pic
 
-			$(".card.edit").show("slow");
-			$(".describe").hide("slow");
-			$('.describe').removeClass(".card.complaint")
-			e.preventDefault();
-		});
-	});
-	$(function() {
-		$('#changes').on('click', function(e) {
-			console.log("faskdjfhasldfk;j");
-			//var csrftoken = Cookies.get('csrftoken');
-			// var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-			var email = document.getElementById("updated_email").value;
-			var phone_no = document.getElementById("updated_phone_no").value;
-			var college_name = document.getElementById("updated_college").value;
-			var college_id= document.getElementById("updated_college_id").value;
-        	var password =  document.getElementById("updated_password").value;
-        	// var re_password =  document.getElementById("updated_re_password").value;
-        	// var profile_pic =  document.getElementById("updated_profile_pic").value;
-        	var profile_pic = $('#updated_profile_pic').prop('files')[0];
-        	// form_data.append('file', file_data);
-        					
-        	console.log(email);
-         if (true){
-        	$.ajax({
-	            type: "get",
-	            url : "/users_student/update_profile/",
-	            enctype: 'multipart/form-data',
-	            data: {
-	            	email:email,
-	            	phone_no:phone_no,
-	            	college_name:college_name,
-	            	college_id:college_id,
-	            	password:password,
-	            	profile_pic:profile_pic
-	     
-	            },
-	            dataType: "json",
-	            success: function(data){
-	                if(data.is_updated == 'true'){
+								},
+								dataType: "json",
+								success: function(data) {
+									if (data.is_updated == 'true') {
 
-	                    alert("data updated");
-	                    document.getElementById("user_email").innerHTML = email;
-        					document.getElementById("user_phone_no").innerHTML = phone_no;
-        					document.getElementById("user_college").innerHTML = college_name;
-        					document.getElementById("user_college_id").innerHTML = college_id;
-
-	             
-	                }
-	                else{
-	             		alert("data not updated");
-	                }
-	            }
-
-	        })
-        	 }
-
-        	 document.getElementById("updated_password").innerHTML = "";
-        	 // document.getElementById("updated_re_password").innerHTML = "";
-
-			$(".describe").show("slow");
-			$('.card.edit').hide("slow");
-
-			e.preventDefault();
-		});
+										alert("data updated");
+										document.getElementById("user_email").innerHTML = email;
+										document.getElementById("user_phone_no").innerHTML = phone_no;
+										document.getElementById("user_college").innerHTML = college_name;
+										document.getElementById("user_college_id").innerHTML = college_id;
 
 
-	});
+									} else {
+										alert("data not updated");
+									}
+								}
 
-	 $(function() {
-		$('#cancel_data').on('click', function(e) {
-			console.log("faskdjfhasldfk;j");
-			$(".describe").show("slow");
-			$('.card.edit').hide("slow");
-			});
-	})
+							})
+						}
 
-	 function like_post0(post_id, ids){
+						document.getElementById("updated_password").innerHTML = "";
+						// document.getElementById("updated_re_password").innerHTML = "";
 
-			$.ajax({
-				type: "GET",
-				url: "/complaint/like",
-				enctype: 'multipart/form-data',
-				data:{
-					post_id: post_id
-				},
-				dataType: "json",
-				success: function(data){
-					if(data.success=="True"){
-						// alert("Post liked");
-					}
-					else{
-						// alert("Post not liked");
-					}
+						$(".describe").show("slow");
+						$('.card.edit').hide("slow");
 
-				}
-			})
+						e.preventDefault();
+					});
 
-			// ids.onclick = like_post1();
 
-			// var clickfun = ids.getAttribute("onclick");   
-			// ids.classList.toggle('bookmark');
-			ids.style.color = '#3578E5';
-		    ids.setAttribute("onclick",'like_post1(' + post_id + ',' + ids.id + ')');
-		    console.log("changing to " + 'like_post1(' + post_id + ',' + ids.id + ')');
+				});
 
-		}
+				$(function() {
+					$('#cancel_data').on('click', function(e) {
+						console.log("faskdjfhasldfk;j");
+						$(".describe").show("slow");
+						$('.card.edit').hide("slow");
+					});
+				})
 
-		function like_post1(post_id, ids){
+				function like_post0(post_id, ids) {
 
-			// alert("Mil gya" + post_id + " and " + ids);
+					$.ajax({
+						type: "GET",
+						url: "/complaint/like",
+						enctype: 'multipart/form-data',
+						data: {
+							post_id: post_id
+						},
+						dataType: "json",
+						success: function(data) {
+							if (data.success == "True") {
+								// alert("Post liked");
+							} else {
+								// alert("Post not liked");
+							}
 
-			$.ajax({
-				type: "GET",
-				url: "/complaint/dislike",
-				data:{
-					post_id: post_id
-				},
-				dataType: "json",
-				success: function(data){
-					if(data.success=="True"){
-						// alert("Post disliked");
-					}
-					else{
-						// alert("Post not disliked");
-					}
+						}
+					})
+
+					// ids.onclick = like_post1();
+
+					// var clickfun = ids.getAttribute("onclick");   
+					// ids.classList.toggle('bookmark');
+					ids.style.color = '#3578E5';
+					ids.setAttribute("onclick", 'like_post1(' + post_id + ',' + ids.id + ')');
+					console.log("changing to " + 'like_post1(' + post_id + ',' + ids.id + ')');
 
 				}
-			})
 
-			// ids.onclick = like_post0();
+				function like_post1(post_id, ids) {
 
-			// var clickfun = ids.getAttribute("onclick");
-		 //    var funname = clickfun.substring(0,clickfun.indexOf("("));
-			// ids.classList.toggle('bookmark'); 
-			ids.style.color = '#D3D3D3';
-		    ids.setAttribute("onclick",'like_post0(' + post_id + ',' + ids.id + ')');
-		    console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
+					// alert("Mil gya" + post_id + " and " + ids);
 
-		}
+					$.ajax({
+						type: "GET",
+						url: "/complaint/dislike",
+						data: {
+							post_id: post_id
+						},
+						dataType: "json",
+						success: function(data) {
+							if (data.success == "True") {
+								// alert("Post disliked");
+							} else {
+								// alert("Post not disliked");
+							}
 
-		function readURL(input) {
-		  if (input.files && input.files[0]) {
-		    var reader = new FileReader();
-		    
-		    reader.onload = function(e) {
+						}
+					})
 
-		      $('#blah1').attr('src', e.target.result);
-		      
-		      $('#blah2').attr('src', e.target.result);
-		      
-		      $('#blah3').attr('src', e.target.result);
-		    
-		    }
-		    
-		    reader.readAsDataURL(input.files[0]);
+					// ids.onclick = like_post0();
 
-		  }
-		}
+					// var clickfun = ids.getAttribute("onclick");
+					//    var funname = clickfun.substring(0,clickfun.indexOf("("));
+					// ids.classList.toggle('bookmark'); 
+					ids.style.color = '#D3D3D3';
+					ids.setAttribute("onclick", 'like_post0(' + post_id + ',' + ids.id + ')');
+					console.log("changing to " + 'like_post0(' + post_id + ',' + ids.id + ')');
 
-		$("#updated_profile_pic").change(function() {
-		  readURL(this);
-		});
+				}
 
+				function readURL(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
 
-	</script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<!-- //integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" -->
+						reader.onload = function(e) {
+
+							$('#blah1').attr('src', e.target.result);
+
+							$('#blah2').attr('src', e.target.result);
+
+							$('#blah3').attr('src', e.target.result);
+
+						}
+
+						reader.readAsDataURL(input.files[0]);
+
+					}
+				}
+
+				$("#updated_profile_pic").change(function() {
+					readURL(this);
+				});
+
+				</script>
+				<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+				<!-- //integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" -->
 </body>
 
 </html>

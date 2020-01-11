@@ -53,7 +53,7 @@
 		left: 0;
 		height: 100vh;
 		z-index: 999;
-		background: #ff8903;
+		background: #7EBCFF;
 		color: #fff;
 		transition: all 0.3s;
 	}
@@ -75,7 +75,8 @@
 		align-items: stretch;
 	}
 
-	#sidebar {/*
+	#sidebar {
+		/*
 		min-width: 250px;
 		max-width: 250px;*/
 	}
@@ -84,7 +85,8 @@
 		margin-left: -250px;
 	}
 
-	#sidebar {/*
+	#sidebar {
+		/*
 		min-width: 250px;
 		max-width: 250px;
 		min-height: 100vh;*/
@@ -108,19 +110,18 @@
 	}
 
 	#sidebar {
-		background: #ff8903;
+		background: #7EBCFF;
 		color: #fff;
 		transition: all 0.3s;
 	}
 
 	#sidebar .sidebar-header {
 		padding: 20px;
-		background: #FF6904;
+		background: #278EFE;
 	}
 
 	#sidebar ul.components {
-		padding: 20px 0;
-		border-bottom: 1px solid #FF6904;
+		border-bottom: 1px solid #278EFE;
 	}
 
 	#sidebar ul p {
@@ -142,13 +143,13 @@
 	#sidebar ul li.active>a,
 	a[aria-expanded="true"] {
 		color: #fff;
-		background: #FF6904;
+		background: #278EFE;
 	}
 
 	ul ul a {
 		font-size: 0.9em !important;
 		padding-left: 30px !important;
-		background: #FF6904;
+		background: #278EFE;
 	}
 
 	.circle {
@@ -195,18 +196,6 @@
 		float: right;
 		margin-bottom: 20px;
 	}
-	.my {/*
-		width: 30em;
-		overflow-x: auto;
-		white-space: nowrap;*/
-		width: 1000px;
-		overflow: auto;
-		overflow-y: hidden;
-		margin: 0 auto;
-		white-space: nowrap;
-		scroll-direction: horizontal;
-
-	}
 
 	</style>
 </head>
@@ -220,7 +209,7 @@
 		
 		{% for cin in complaints %}									
 		
-			<div class="my">
+			
 				<div class="card" style="width: 90%; height: 600px; margin-left: 4%; margin-bottom: 5%;">
 					<div class="card-body text-center">
 						{% if cin.url == "" %}
@@ -247,7 +236,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			
 		{% endfor %}
 
 		<div class="wrapper">
