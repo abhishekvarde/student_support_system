@@ -10,14 +10,12 @@
 	<meta name="HandheldFriendly" content="true">
 	<title>Home</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="js/registration.js"></script>
 	<style type="text/css">
 	body,
 	html {
 		width: 100%;
-		background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);
+		background-image: linear-gradient(to top, #7ebcff, #6ab1ff, #56a5ff, #419aff, #278efe);
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 	}
@@ -29,17 +27,12 @@
 		font-size: 30px;
 	}
 
-	.card-body {}
 
-	.card {
+	/*.card {
 
 		margin-top: 5%;
 		border-radius:5%;
-		/*max-width: 600px;
-		max-height: 450px;
-		min-width: 600px;
-		min-height: 450px;*/
-	}
+	}*/
 
 	.hor {
 
@@ -197,15 +190,74 @@
 		margin-bottom: 20px;
 	}
 
+	.scrollbar {
+		margin-top: 10px;
+		float: left;
+		height: 900px;
+		width: 100%;
+		/*background-color: #000;*/
+		overflow-y: scroll;
+		margin-bottom: 25px;
+	}
+
+	.force-overflow {
+		min-height: 450px;
+	}
+
+	#scroller {
+		text-align: left;
+		width: 90%;
+		margin: auto;
+	}
+
+	#style-7::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+		background-color: #F5F5F5;
+		border-radius: 10px;
+	}
+
+	#style-7::-webkit-scrollbar {
+		width: 10px;
+		background-color: #F5F5F5;
+	}
+
+	#style-7::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-image: -webkit-gradient(linear,
+			left bottom,
+			left top,
+			color-stop(0.44, rgb(122, 153, 217)),
+			color-stop(0.72, rgb(73, 125, 189)),
+			color-stop(0.86, rgb(28, 58, 148)));
+	}
+
+	.card.home {
+
+		position: relative;
+		height: 95%;
+		max-height: 95%;
+		background-color: #FAF9F6;
+		border-radius: 35px;
+		margin-left: 15%;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: 1%;
+		z-index: 999;
+		overflow: hidden;
+	}
+
 	</style>
 </head>
 
 <body>
-	<div class="container" style="margin-left: 15%; padding: 0%;">
 
-		<!-- <div class="sub_category">
-			All problems related to category : '{{ category }}'' is available here...
-		 </div> -->
+
+<div class="card home">
+		<div id="scroller">
+			<div class="scrollbar" id="style-7">
+				<div class="force-overflow">
+					All problems related to category : '{{ category }}'' is available here...
+		 </div>
 		
 		{% for cin in complaints %}									
 		
@@ -238,6 +290,70 @@
 				</div>
 			
 		{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div class="container" style="margin-left: 15%; padding: 0%;"> -->
+
+		<!-- <div class="sub_category">
+			All problems related to category : '{{ category }}'' is available here...
+		 </div> -->
+		
+		<!-- {% for cin in complaints %}									
+		
+			
+				<div class="card" style="width: 90%; height: 600px; margin-left: 4%; margin-bottom: 5%;">
+					<div class="card-body text-center">
+						{% if cin.url == "" %}
+						<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+						{% else %}
+						<img src="/media/{{ cin.url }}" class="circle" align="left" width="60" height="60">
+						{% endif %}
+						<div class="text-left name">
+							<b>{{ cin.user.username }}</b>
+						</div>
+						<div class="text-left date">
+							{{ cin.date }}
+						</div>
+						<hr class="hori">
+						<h5 class="card-title">{{ cin.title }}</h5>
+						<hr>
+						<p class="card-text" style="height: 200px">{{ cin.description }}</p>
+						<hr style="width: 10px;" class="hor">
+						<div class="more">
+							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
+						</div>
+						<div class="vote">
+							<i style="font-size:48px;color: #4ced69;" id="post_id_{{ cin.0.id }}" onclick="like_post{{ cin.0.liked }}({{ cin.0.id }}, post_id_{{ cin.0.id }})" class="fa fa-thumbs-up" ></i>
+						</div>
+					</div>
+				</div>
+			
+		{% endfor %} -->
 
 		<div class="wrapper">
 		<nav id="sidebar">
