@@ -211,4 +211,5 @@ def allow(request):
                     temp_comp.tags = ",".join(pending)
                     temp_comp.approved_tags = ",".join(approved)
                     temp_comp.save()
-    return redirect('/users_student/profile/')
+    return redirect('/users_student/profile?requesteddata=requested_tag')
+#  http://127.0.0.1:8000/users_student/profile/?username=abhishek.varde@gmail.com&requesteddata=requested_tag

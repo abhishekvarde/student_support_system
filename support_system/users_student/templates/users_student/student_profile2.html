@@ -457,10 +457,20 @@
 	*/
 
 	</style>
+
 	<script type="text/javascript">
+
 	$(document).ready(function() {
-		$("#{{ requested_data }}").removeClass();
-		$("#{{ requested_data }}").addClass("nav-link active");
+
+		console.log("addinggggg{{ requesteddata }}");
+		console.log("addinggggg{{ requesteddata }}");
+		console.log("addinggggg{{ requesteddata }}");
+		console.log("addinggggg{{ requesteddata }}");
+		console.log("addinggggg{{ requesteddata }}");
+		console.log({{requesteddata}})
+
+		$("#{{ requesteddata }}").removeClass();
+		$("#{{ requesteddata }}").addClass("nav-link active");
 	})
 
 	</script>
@@ -566,7 +576,7 @@
 										<a id="approved_tags" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=approved_tags">Approved Tags</a>
 									</li>
 									<li class="nav-item">
-										<a id="tag_requested" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=requested_tag">Requested Tags</a>
+										<a id="requested_tag" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=requested_tag">Requested Tags</a>
 									</li>
 								</ul>
 							</div>
@@ -828,13 +838,11 @@
 
 						$(".card.edit").show("slow");
 						$(".describe").hide("slow");
-						// $('.describe').removeClass(".card.complaint")
 						e.preventDefault();
 					});
 				});
 				$(function() {
 					$('#changes').on('click', function(e) {
-						console.log("faskdjfhasldfk;j");
 						//var csrftoken = Cookies.get('csrftoken');
 						// var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 						var email = document.getElementById("updated_email").value;
