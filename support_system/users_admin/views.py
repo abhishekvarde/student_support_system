@@ -22,6 +22,7 @@ def register_admin(request):
             user_obj = User.objects.create_user(username=username, password=password, email=email)
             user_obj.first_name = first_name
             user_obj.last_name = last_name
+            print("object is user is going to save here with username" + str(username) + " " + str(password))
             user_obj.save()
 
         user = authenticate(request, username=username, password=password)
@@ -42,12 +43,15 @@ def login_admin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(str(username) + " " + str(password))
 
         user = authenticate(request, username=username, password=password)
         print("i am in loogin")
         if user is not None:
             print("i am in loogin")
             login(request, user)
+            print(user)
+            print('user is printed above')
             return redirect("/users_admin/profile_admin")
 
     return render(request, "users_admin/login_admin.html")
@@ -59,8 +63,11 @@ def profile_admin(request):
     if request.user.is_authenticated:
         username = request.user.username
         print(username)
-
-        return render(request, "users_admin/profile_admin.html")
+        if CommitteeMember.objects.filter(user=request.user).exists():
+            user = CommitteeMember.objects.get(user=request.user)
+            print("user")
+            print(user)
+            return render(request, "users_admin/profile_admin.html", {'user': user})
 
 
 def phone_no_available(request):

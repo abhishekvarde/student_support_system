@@ -562,6 +562,12 @@
 									<li class="nav-item">
 										<a id="upvoted" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=upvoted">Upvoted Complaints</a>
 									</li>
+									<li class="nav-item">
+										<a id="approved_tags" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=approved_tags">Approved Tags</a>
+									</li>
+									<li class="nav-item">
+										<a id="tag_requested" class="nav-link" href="/users_student/profile?username={{userdata.user.email}}&requesteddata=requested_tag">Requested Tags</a>
+									</li>
 								</ul>
 							</div>
 							<!-- <div class="card-body student">
@@ -631,6 +637,78 @@
 								{% if post.1 == "1" %}
 								<script>
 									document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
+								</script>
+								{% endif %}
+							</div>
+							{% if requesteddata == "solved" %}
+							<div class="feedback">
+								<a href="#" class="btn btn-primary">Satisfied</a>
+								<a href="#" class="btn btn-primary">Unsatisfied</a>
+							</div>
+							{% elif requesteddata == "requested_tag" %}
+							<div class="feedback">
+								<a href="/complaint/allow?id={{ post.0.id }}&allow=1" class="btn btn-primary">Accept</a>
+								<a href="/complaint/allow?id={{ post.0.id }}&allow=0" class="btn btn-primary">Reject</a>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+					{% endfor %}
+
+					{% for tag in tags %}
+					<div class="card complaint" style="width: 45%; height: 420px;">
+						<div class="card-body text-center complaint" style="">
+							{% if post.0.url == "" %}
+							<img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+							{% else %}
+							<img src="/media/{{ post.0.url }}" class="circle" align="left" width="60" height="60">
+							{% endif %}
+							<div class="text-left name">
+								<b>{{ post.0.user.email }}</b>
+							</div>
+							<div class="text-left date">
+								{{ post.0.date }}
+							</div>
+							<div class="check">
+								{% if post.0.status == 'pending' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing">Ongoing </b>
+								<b id="solved">Solved </b>
+								{% elif post.0.status == 'ongoing' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing" class="status_toggle">Ongoing </b>
+								<b id="solved">Solved </b>
+								{% elif post.0.status == 'solved' %}
+								<b id="pending" class="status_toggle">Pending </b>
+								<b id="ongoing" class="status_toggle">Ongoing </b>
+								<b id="solved" class="status_toggle">Solved </b>
+								{% elif post.0.status == 'rejected' %}
+								<div id="status_pending" style="color: red;">
+									<b id="pending">Rejected</b>
+								</div>
+								{% endif %}
+							</div>
+							<!--
+			<div class="demo">
+			<button type="submit" id="pending1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="ongoing1" class="btn btn-secondary btn-circle btn-sm">click</button><button type="submit" id="solved1" class="btn btn-secondary btn-circle btn-sm">click</button>
+		</div> -->
+							<hr class="hori">
+							<div class="content" style="height: 70px;">
+								<h5 class="card-title complaint">{{ post.0.title }}</h5>
+								<hr>
+								<p class="card-text complaint">{{ post.0.description }}</p>
+							</div>
+							<div class="hor">
+								<hr>
+							</div>
+							<div class="more">
+								<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
+							</div>
+							<div class="vote">
+								<i style="font-size:40px;color: #D3D3D3;" id="post_id_{{ post.0.id }}" onclick="like_post{{ post.1 }}({{ post.0.id }}, post_id_{{ post.0.id }})" class="fa fa-thumbs-up"></i>
+								{% if post.1 == "1" %}
+								<script>
+									document.getElementById("post_id_{{ post.0.id }}").style.color = '#3578E5';
 
 								</script>
 								{% endif %}
@@ -644,6 +722,8 @@
 						</div>
 					</div>
 					{% endfor %}
+
+
 				</div>
 				<div class="card edit">
 					<div class="container">

@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.shortcuts import redirect
 from django.http import JsonResponse
 from complaint.models import Complaint
@@ -94,13 +94,35 @@ def student_profile(request):
             postsobj = Complaint.objects.filter(user=request.user)
             for post in postsobj:
                 posts.append(post)
-        if requested_data == "pending":
+        elif requested_data == "pending":
             posts = Complaint.objects.filter(user=request.user).filter(status="pending")
-        if requested_data == "ongoing":
+        elif requested_data == "ongoing":
             posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
-        if requested_data == "solved":
+        elif requested_data == "solved":
             posts = Complaint.objects.filter(user=request.user).filter(status="solved")
-        if requested_data == "upvoted":
+        elif requested_data == "approved_tags":
+            appoved_ids = userdata.requested_approved_tag
+            appoved_ids = appoved_ids.split(",")
+            for a_i in appoved_ids:
+                if a_i is not "" and " ":
+                    if Complaint.objects.filter(id=a_i).exists():
+                        posts.append(Complaint.objects.filter(id=a_i)[0])
+        elif requested_data == "requested_tag":
+            # temp_user = request.user
+            # if student.objects.filter(user=request.user):
+            #     temp_student = student.objects.get(user=request.user)
+            print('successful')
+            print('successful')
+            print('successful')
+            print('successful')
+            reqested_tags = userdata.requested_tag
+            reqested_tags = reqested_tags.split(",")
+            if "" in reqested_tags:
+                reqested_tags.remove("")
+            for tag_ids in reqested_tags:
+                if Complaint.objects.filter(id=tag_ids).exists:
+                    posts.append(Complaint.objects.filter(id=tag_ids)[0])
+        elif requested_data == "upvoted":
             posts = []
             likedpostids = userdata.liked_complaint
             likedpostids = likedpostids.split(",")
@@ -111,13 +133,13 @@ def student_profile(request):
                     posts.append((Complaint.objects.get(id=likedpostid)))
                 else:
                     likedpostids.remove(likedpostid)
-        if requested_data == "rejected":
+        elif requested_data == "rejected":
             posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
         print(posts)
         posts = append_likes(request, posts)
         return render(request, 'users_student/student_profile2.html',
                       {"usernmae": request.user.username, "userdata": userdata, "posts": posts,
-                       'requested_data': requested_data})
+                       'requesteddata': requested_data})
     else:
         if User.objects.filter(username=user_name).exists():
             user = User.objects.get(username=user_name)
@@ -179,7 +201,7 @@ def update_profile(request):
 
             if user.username == email and user.email == email and userobj.college_name == college_name and \
                     userobj.college_id == college_id and userobj.phone_no == phone_no and \
-                    userobj.url == uploaded_file_url :
+                    userobj.url == uploaded_file_url:
                 data = {
                     "is_updated": "false"
                 }
@@ -199,3 +221,30 @@ def update_profile(request):
             "is_updated": "false"
         }
         return JsonResponse(data)
+
+
+def search_user(request):
+    username = request.GET.get('username')
+    already_taged = request.GET.get('already_taged')
+    already_taged = already_taged.split(",")
+    if "" in already_taged:
+        already_taged.remove("")
+    lists = []
+    list_remove = []
+    if username is None:
+        username = '-'
+    if request.user.is_authenticated:
+        lists = []
+        if User.objects.filter(email__contains=username).exists():
+            lists = User.objects.filter(email__contains=username)
+            lists1 = [i.email for i in lists]
+            lists = lists1
+            for l in lists:
+                if l in already_taged:
+                    list_remove.append(l)
+    for l_r in list_remove:
+        if l_r in lists:
+            lists.remove(l_r)
+    if request.user.email in lists:
+        lists.remove(request.user.email)
+    return JsonResponse({'data': lists})

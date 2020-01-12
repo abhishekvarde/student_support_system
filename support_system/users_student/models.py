@@ -13,6 +13,9 @@ class student(models.Model):
     phone_no = models.CharField(max_length=10, default="")
     liked_complaint = models.CharField(max_length=1000, default="")
     post_ids = models.CharField(max_length=1000, default="")
+    requested_tag = models.CharField(max_length=1000, default="")
+    requested_approved_tag = models.CharField(max_length=1000, default="")
 
-
+    def __str__(self):
+        return self.user.email
 

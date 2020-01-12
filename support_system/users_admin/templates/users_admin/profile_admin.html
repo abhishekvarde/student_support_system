@@ -478,40 +478,40 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">First name:</label>
 					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.first_name }}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Last name:</label>
 					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Kumar">
+						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.last_name }}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">College Name:</label>
 					<div class="col-lg-8">
 						<select class="custom-select" id="validationServer04" required>
-							<option selected disabled value="Select your college">Choose your College</option>
+							<option selected disabled value="Select your college">{{ user.college }}</option>
 							<option>...</option>
 						</select>
 					</div>
 					<div class="form-group">
 					<label class="col-lg-3 control-label">Email:</label>
 					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Email@gmail.com">
+						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.email }}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Teacher ID:</label>
 					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="Teacher ID">
+						<input class="form-control" type="text" disabled="disabled" value="{{ user.teacher_id }}">
 					</div>
 				</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-3 control-label">Phone Number:</label>
 						<div class="col-lg-8">
-							<input class="form-control" type="tel" pattern=[0-9]{10}  placeholder="000000000" required>
+							<input class="form-control" type="tel" pattern=[0-9]{10}  placeholder="{{ user.phone_no }}" required>
 						</div>
 					</div>
 					<div class="form-group">
