@@ -742,12 +742,13 @@
 						<div id="scroller">
 							<div class="scrollbar edit" id="style-7">
 								<div class="force-overflow edit">
-									<form class="form-horizontal" role="form" style="font-family: 'Alegreya', serif; font-weight: 100;">
+									<form id="edit_profile" name="edit_profile" enctype="multipart/form-data" action="/users_student/update_profile/" method="POST" class="form-horizontal" role="form" style="font-family: 'Alegreya', serif; font-weight: 100;">
+										{% csrf_token %}
 										<div class="col-md-3">
 											<div class="text-center">
 												<img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah2" alt="profile image" width="150" height="150">
 												<h6>Upload a different photo...</h6>
-												<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control">
+												<input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control" name="updated_image">
 											</div>
 										</div>
 										<div class="col-md-9 personal-info">
@@ -768,8 +769,8 @@
 											<div class="form-group">
 												<label class="col-lg-3 control-label">College Name:</label>
 												<div class="col-lg-8">
-													<select class="custom-select" id="updated_college" required>
-														<option selected disabled value="{{userdata.college_name}}">Choose...</option>
+													<select class="custom-select" name="updated_college" required>
+														<option selected disabled >Choose...</option>
 														<option>...</option>
 													</select>
 												</div>
@@ -780,26 +781,26 @@
 															<div class="input-group-prepend">
 																<span class="input-group-text" id="inputGroupPrepend3">@</span>
 															</div>
-															<input type="text" class="form-control" value={{userdata.user.email}} id="updated_email" aria-describedby="inputGroupPrepend3" required>
+															<input type="text" class="form-control" value="{{userdata.user.email}}" id="updated_email" aria-describedby="inputGroupPrepend3" name="updated_email" required>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-lg-3 control-label">Phone Number:</label>
 													<div class="col-lg-8">
-														<input class="form-control" type="tel" id="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10} placeholder="000000000" required>
+														<input class="form-control" type="tel" name="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10} placeholder="000000000" required>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">Collge ID:</label>
+													<label class="col-md-3 control-label">College ID:</label>
 													<div class="col-md-8">
-														<input class="form-control" id="updated_college_id" value="{{userdata.college_id}}" type="text" placeholder="1234567890">
+														<input class="form-control"  type="text" name="updated_college_id" value="{{userdata.college_id}}">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label">Password:</label>
 													<div class="col-md-8">
-														<input class="form-control" id="updated_password" type="password" placeholder="**********" required>
+														<input class="form-control" id="updated_password" name="updated_password" type="password" placeholder="**********" required>
 													</div>
 												</div>
 												<!-- <div class="form-group">
@@ -842,64 +843,65 @@
 					});
 				});
 				$(function() {
-					$('#changes').on('click', function(e) {
-						//var csrftoken = Cookies.get('csrftoken');
-						// var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-						var email = document.getElementById("updated_email").value;
-						var phone_no = document.getElementById("updated_phone_no").value;
-						var college_name = document.getElementById("updated_college").value;
-						var college_id = document.getElementById("updated_college_id").value;
-						var password = document.getElementById("updated_password").value;
-						// var re_password =  document.getElementById("updated_re_password").value;
-						// var profile_pic =  document.getElementById("updated_profile_pic").value;
-						var profile_pic = $('#updated_profile_pic').prop('files')[0];
-						// form_data.append('file', file_data);
+					$('#changes').on('click', function(e){
+						console.log("faskdjfhasldfk;j");
+						var password = document.forms["edit_profile"]["updated_password"].value;
+						var email = document.forms["edit_profile"]["updated_email"].value;
+						var phone_no = document.forms["edit_profile"]["updated_phone_no"].value;
+						// var college_name = document.forms["edit_profile"]["updated_college"].value;
+						var college_id = document.forms["edit_profile"]["updated_college_id"].value;
+						console.log(password);
+						if(password == ""){
+							console.log("-----------------");
+							alert("Password is required");
 
-						console.log(email);
-						if (true) {
-							$.ajax({
+						}else if(email == ""){
+							alert("Email is required");
+						}else if(phone_no == ""){
+							alert("phone number is required");
+						}else if(college_id==""){
+							alert("college_id is required");
+						}else{
+								console.log("---else-----");
+								$.ajax({
 								type: "get",
 								url: "/users_student/update_profile/",
 								enctype: 'multipart/form-data',
 								data: {
 									email: email,
-									phone_no: phone_no,
-									college_name: college_name,
+									phone_no: phone_no,									
 									college_id: college_id,
-									password: password,
-									profile_pic: profile_pic
-
+									password: password								
 								},
 								dataType: "json",
 								success: function(data) {
-									if (data.is_updated == 'true') {
-
-										alert("data updated");
-										document.getElementById("user_email").innerHTML = email;
-										document.getElementById("user_phone_no").innerHTML = phone_no;
-										document.getElementById("user_college").innerHTML = college_name;
-										document.getElementById("user_college_id").innerHTML = college_id;
-
-
+									if(data.is_updated == "True"){
+										
+										$(".describe").show("slow");
+										$('.card.edit').hide("slow").fadeOut(function(){
+										$("#edit_profile").submit();
+										});
+										alert("Data updated");
 									} else {
-										alert("data not updated");
+
+										alert("incorrect password");
 									}
 								}
 
 							})
-						}
+						
+							}
+						
+						
 
-						document.getElementById("updated_password").innerHTML = "";
-						// document.getElementById("updated_re_password").innerHTML = "";
+						// $(".describe").show("slow");
+						// $('.card.edit').hide("slow");
 
-						$(".describe").show("slow");
-						$('.card.edit').hide("slow");
+						// e.preventDefault();
+					
+					})
 
-						e.preventDefault();
-					});
-
-
-				});
+			 	});
 
 				$(function() {
 					$('#cancel_data').on('click', function(e) {
