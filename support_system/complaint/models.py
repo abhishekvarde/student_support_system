@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from users_student.models import student
 
 
 # from complaint.models import cat
 
 
 class Complaint(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)
+    student = models.OneToOneField(student, on_delete=models.CASCADE, default=None)
     url = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
