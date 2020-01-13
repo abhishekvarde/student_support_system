@@ -15,6 +15,9 @@ class student(models.Model):
     post_ids = models.CharField(max_length=1000, default="")
     requested_tag = models.CharField(max_length=1000, default="")
     requested_approved_tag = models.CharField(max_length=1000, default="")
+    dob = models.CharField(max_length=20, default="")
+    address = models.CharField(max_length=100, default="")
+    gender = models.CharField(max_length=20, default="")
 
     def __str__(self):
         return self.user.email

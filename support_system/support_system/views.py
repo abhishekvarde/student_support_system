@@ -13,7 +13,8 @@ def wall(request):
     complaint = []
     userdata = []
     if request.user.is_authenticated:
-        userdata = student.objects.get(user=request.user)
+        if student.objects.filter(user=request.user).exists():
+            userdata = student.objects.get(user=request.user)
     if category is not None:
         complaints = Complaint.objects.all().filter(sub_cat=category)
         return render(request, 'support_system/home_single.html', {'complaints': complaints})
@@ -31,7 +32,7 @@ def wall(request):
             #     else:
             #         qset.append([i, '0'])
             qset = append_likes(request, complaint_objs)
-            complaint.append([c.name, qset[:]])
+            complaint.append([c.name, qset[:10]])
             print(complaint)
             print("----------------------------------------------------------")
     return render(request, 'support_system/home.html', {'complaints': complaint, 'userdata': userdata})
@@ -53,3 +54,11 @@ def append_likes(request, complaint_objs):
         for i in complaint_objs:
             qset.append([i, '0'])
     return qset
+
+
+def registeration(request):
+    return render(request,'support_system/registration_form.html')
+
+
+def login(request):
+    return render(request,'support_system/login.html')

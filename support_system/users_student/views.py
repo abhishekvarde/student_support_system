@@ -7,6 +7,7 @@ from complaint.models import Complaint
 from support_system.views import append_likes
 from .models import student
 import os
+from support_system.settings import BASE_DIR as project_path
 from django.core.files.storage import FileSystemStorage
 
 
@@ -25,20 +26,20 @@ def username_avaliable(request):
 
 
 def register_student(request):
-    if request.method == 'POST':
-        print(request)
-        college_id = request.POST.get('college_id')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        year = request.POST.get('year')
-        college_name = request.POST.get('college_name')
-        email = request.POST.get('email')
-        phone_no = request.POST.get('phone_no')
-        password = request.POST.get('password')
-        cnf_password = request.POST.get('cnf_password')
 
-        year = 2000
-        phone_no = "9999999999"
+    if request.method == 'POST':
+        first_name = request.POST.get('txtFirstname_student')
+        last_name = request.POST.get('txtLastname_student')
+        college_id = request.POST.get('txtCollegeID_student')
+        gender = request.POST.get('lstGender_student')
+        dob = request.POST.get('txtDob_student')
+        branch = request.POST.get('txtBranch_student')
+        college_name = request.POST.get('collage_student')
+        email = request.POST.get('txtEmail_student')
+        phone_no = request.POST.get('txtStudphone_student')
+        address = request.POST.get('txtResaddress_student')
+        password = request.POST.get('txtPasswd1_student')
+        cnf_password = request.POST.get('txtPasswd2_student')
 
         # request['email'] = email
 
@@ -50,27 +51,22 @@ def register_student(request):
 
             user = authenticate(request, username=email, password=password)
 
-            student_details = student(user=user, college_id=college_id, year=year, college_name=college_name,
-                                      phone_no=phone_no)
+            student_details = student(user=user, college_id=college_id,dob=dob,gender=gender, college_name=college_name,
+                                      phone_no=phone_no,address=address)
             student_details.save()
-        return redirect('/users_student/login')
-    else:
-        return render(request, 'users_student/regestration.html')
+
+        return redirect('/login')
+
 
 
 def login_student(request):
     if request.method == 'POST':
-        username = request.POST.get('email')
-        password = request.POST.get('password')
-        print(username)
-        print(password)
+        username = request.POST.get('txtEmail_student')
+        password = request.POST.get('txtPasswd1_student')
         user = authenticate(request, username=username, password=password)
-        print("i am in loogin")
         if user is not None:
             login(request, user)
             return redirect('/')
-    logout(request)
-    return render(request, 'users_student/login_student.html')
 
 
 def student_profile(request):
@@ -215,8 +211,9 @@ def update_profile(request):
             userobj.college_name = "SKN"
             print("****************************")
             print(userobj.profile_picture.name)
+            print(project_path)
             if request.FILES.get('updated_image'):
-                os.remove("F:/sss/student_support_system/support_system/media/" + userobj.profile_picture.name)
+                os.remove(project_path+"/media/" + userobj.profile_picture.name)
                 userobj.profile_picture = request.FILES.get('updated_image')
 
             user.email = email
@@ -226,7 +223,8 @@ def update_profile(request):
             logout(request)
             user_auth = authenticate(request, username=email, password=password)
             login(request, user_auth)
-            return student_profile(request)
+
+            return redirect('/users_student/profile')
     else:
         return render(request, "users_student/student_profile2.html")
 

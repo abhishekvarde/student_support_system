@@ -2,576 +2,869 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="HandheldFriendly" content="true">
-	<title>Student Profile</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="js/registration.js"></script>
-	<style type="text/css">
-	body,
-	html {
-		width: 100%;
-		/*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
-		background-attachment: fixed;
-		background-repeat: no-repeat;
-	}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7/css/font-awesome.min.css">
+    <title>Student Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style type="text/css">
+    body,
+    html {
+        width: 100%;
+        /*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
+        background-image: linear-gradient(to top, #7ebcff, #6ab1ff, #56a5ff, #419aff, #278efe);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 
-	#sidebar {
-		width: 250px;
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100vh;
-		z-index: 999;
-		background: #7EBCFF;
-		color: #fff;
-		transition: all 0.3s;
-	}
+    .card.home {
 
-	a[data-toggle="collapse"] {
-		position: relative;
-	}
+        position: relative;
+        height: 928px;
 
-	.dropdown-toggle::after {
-		display: block;
-		position: absolute;
-		top: 50%;
-		right: 20px;
-		transform: translateY(-50%);
-	}
+        background-color: #FAF9F6;
+        border-radius: 35px;
+        margin-left: 15%;
+        margin-top: 1%;
+        /*margin-bottom: 1%;*/
+        margin-right: 1%;
+        z-index: 999;
+        overflow: hidden;
+    }
 
-	.wrapper {
-		display: flex;
-		align-items: stretch;
-	}
+    .scrollbar.edit {
+        margin-top: 10px;
+        margin-right: 10px;
+        float: right;
+        height: 700px;
+        width: 99%;
+        /*background-color: #000;*/
+        overflow-y: scroll;
+        margin-bottom: 25px;
+    }
 
-	#sidebar {
-		/*
+    .scrollbar {
+        margin-top: 10px;
+        margin-right: 10px;
+        float: right;
+        height: 900px;
+        width: 99%;
+        /*background-color: #000;*/
+        overflow-y: scroll;
+        margin-bottom: 25px;
+    }
+
+    .force-overflow {
+        /*min-height: 450px;*/
+    }
+
+    #scroller {
+        text-align: left;
+        width: 100%;
+        color: #000;
+        margin: auto;
+    }
+
+    #style-7::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        background-color: #F5F5F5;
+        border-radius: 10px;
+    }
+
+    #style-7::-webkit-scrollbar {
+        width: 10px;
+        background-color: #F5F5F5;
+    }
+
+    #style-7::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.44, rgb(122, 153, 217)),
+            color-stop(0.72, rgb(73, 125, 189)),
+            color-stop(0.86, rgb(28, 58, 148)));
+    }
+
+
+    #sidebar {
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 999;
+        background: #7EBCFF;
+        color: #fff;
+        transition: all 0.3s;
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    #sidebar {
+        /*
 		min-width: 250px;
 		max-width: 250px;*/
-	}
+    }
 
-	#sidebar.active {
-		margin-left: -250px;
-	}
+    #sidebar.active {
+        margin-left: -250px;
+    }
 
-	#sidebar {
-		/*
+    #sidebar {
+        /*
 		min-width: 250px;
 		max-width: 250px;
 		min-height: 100vh;*/
-		width: 15%;
-		height: 100%;
-	}
+        width: 15%;
+        height: 100%;
+    }
 
-	p {
-		font-family: 'Poppins', sans-serif;
-		font-size: 1.1em;
-		font-weight: 300;
-		line-height: 1.7em;
-		color: #999;
-	}
+    p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: #fff;
+    }
 
-	a,
-	a:hover,
-	a:focus {
-		color: inherit;
-		text-decoration: none;
-		transition: all 0.3s;
-	}
+    a,
+    a:hover,
+    a:focus {
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
 
-	#sidebar {
-		background: #7EBCFF;
-		color: #fff;
-		transition: all 0.3s;
-	}
+    #sidebar {
+        background: #7EBCFF;
+        color: #fff;
+        transition: all 0.3s;
+    }
 
-	#sidebar .sidebar-header {
-		padding: 20px;
-		background: #278EFE;
-	}
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #278EFE;
+    }
 
-	#sidebar ul.components {
+    /*#sidebar ul.components {
 		padding: 20px 0;
 		border-bottom: 1px solid #278EFE;
-	}
+	}*/
 
-	#sidebar ul p {
-		color: #fff;
-		padding: 10px;
-	}
+    #sidebar ul p {
+        color: #fff;
+        padding: 10px;
+    }
 
-	#sidebar ul li a {
-		padding: 10px;
-		font-size: 1.1em;
-		display: block;
-	}
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+    }
 
-	#sidebar ul li a:hover {
-		color: #7386D5;
-		background: #fff;
-	}
+    #sidebar ul li a:hover {
+        color: #7386D5;
+        background: #fff;
+    }
 
-	#sidebar ul li.active>a,
-	a[aria-expanded="true"] {
-		color: #fff;
-		background: #278EFE;
-	}
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: #278EFE;
+    }
 
-	ul ul a {
-		font-size: 0.9em !important;
-		padding-left: 30px !important;
-		background: #278EFE;
-	}
+    ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: #278EFE;
+    }
 
-	.card.student {
-		top: 0;
-		width: 83%;
-		margin-left: 16%;
-		margin-right: 1%;
-		border-radius: 25px;
-		z-index: 999;
-		background-color: #F3F9FF;
-	}
+    .card.student {
+        top: 0;
+        width: 100%;
+        border-radius: 25px;
+        z-index: 999;
+        background-color: #F3F9FF;
+    }
 
-	.circular {
-		/*float: left;*/
-		display: block;
-		margin: 1em auto;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		-webkit-border-radius: 99em;
-		-moz-border-radius: 99em;
-		border-radius: 99em;
-		border: 5px solid #eee;
-		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
-	}
+    .circular {
+        /*float: left;*/
+        display: block;
+        margin: 1em auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-border-radius: 99em;
+        -moz-border-radius: 99em;
+        border-radius: 99em;
+        border: 5px solid #eee;
+        box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+    }
 
-	img {}
+    img {}
 
-	.card-title.student {
+    .card-title.student {
 
-		margin-top: 9%;
-		color: #000;
+        margin-top: 9%;
+        color: #000;
 
-	}
+    }
 
-	.card-text.student {
-		margin-top: auto;
-	}
+    .card-text.student {
+        margin-top: auto;
+    }
 
-	.circle {
-		/*float: left;*/
-		display: block;
-		margin: 1em auto;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		-webkit-border-radius: 99em;
-		-moz-border-radius: 99em;
-		border-radius: 99em;
-		/*border: 5px solid #eee;*/
-		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
-	}
+    .circle {
+        /*float: left;*/
+        display: block;
+        margin: 1em auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-border-radius: 99em;
+        -moz-border-radius: 99em;
+        border-radius: 99em;
+        /*border: 5px solid #eee;*/
+        box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+    }
 
-	.hori {
+    .hori {
 
-		margin-top: 14px;
-	}
+        margin-top: 24px;
+    }
 
-	.name {
+    .name {
 
-		margin-top: 20px;
-		margin-left: 80px;
-		font-size: 18px;
-	}
+        margin-top: 20px;
+        margin-left: 80px;
+        font-size: 18px;
+    }
 
-	.date {
+    .date {
 
-		margin-top: 4px;
-		margin-left: 80px;
-		font-size: 12px;
-	}
+        margin-top: 4px;
+        margin-left: 80px;
+        font-size: 12px;
+    }
 
-	.vote {
+    .vote {
 
-		float: left;
-	}
+        float: left;
+    }
 
-	.more {
+    .more {
 
-		float: right;
-	}
+        float: right;
+    }
 
-	.card-body {}
+    .card-body.student {}
 
-	.card.complaint {
-		position: relative;
-		margin-top: 5%;
-		border-radius: 35px;
-		margin-left: 16%;
-		/*max-width: 600px;
+    .card.complaint {
+        /*position: relative;*/
+        margin-top: 5%;
+        border-radius: 35px;
+        margin-left: 16%;
+
+        box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.2);
+        /*flex: 1;*/
+        transition: all 0.2s ease;
+        /*max-width: 600px;
 		max-height: 450px;
 		min-width: 600px;
 		min-height: 450px;*/
-	}
+    }
 
-	.hor {
+    .card.complaint:hover {
 
-		margin-top: 150px;
-	}
+        box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transform: translatey(-4px);
+    }
 
-	/*.describe {
+    .hor {
+
+        margin-top: 150px;
+    }
+
+    /*.describe {
 		position: fi;
 		margin-top: 25%;
 	}
 */
 
 
-	.avatar {
-		display: block;
-		margin: 1em auto;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		-webkit-border-radius: 99em;
-		-moz-border-radius: 99em;
-		border-radius: 99em;
-		border: 5px solid #eee;
-		box-shadow: 0 7px 5px rgba(0, 0, 0, 0.3);
+    .avatar {
+        display: block;
+        margin: 1em auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-border-radius: 99em;
+        -moz-border-radius: 99em;
+        border-radius: 99em;
+        border: 5px solid #eee;
+        box-shadow: 0 7px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .card.edit {
+        position: absolute;
+        top: 0;
+
+        margin-top: 2.5%;
+        width: 85%;
+        height: 90%;
+        margin-left: 7%;
+        margin-right: 1%;
+        border-radius: 25px;
+        background-color: #FAF9F6;
+        overflow: hidden;
+        -webkit-box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
+        -moz-box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
+        box-shadow: 17px 20px 79px -10px rgba(56, 56, 56, 0.7);
+    }
+
+
+
+    .circular {
+        /*float: left;*/
+        display: block;
+        margin: 1em auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-border-radius: 99em;
+        -moz-border-radius: 99em;
+        border-radius: 99em;
+        border: 5px solid #eee;
+        box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+
+        color: #000;
+    }
+
+    .card.edit {
+
+        display: none;
+    }
+
+    .comp {}
+
+    .check {
+
+        float: left;
+        margin-left: 18px;
+    }
+
+    .btn.btn-secondary.btn-circle.btn-sm {
+        /*position: relative;*/
+        width: 2px;
+        height: 2px;
+        /*padding: 6px 0px;*/
+        border-radius: 50%;
+        text-align: center;
+        /* margin-top: 3px;*/
+    }
+
+    .answered {
+        background: green;
+    }
+
+    .demo {
+
+        float: right;
+    }
+
+    .status_toggle {
+        color: green;
+
+    }
+
+    .check h5 {
+        position: absolute;
+    }
+
+    .detail {
+
+        float: right;
+        margin-right: 68%;
+    }
+
+    .vote:hover {
+
+        text-shadow: 2px 3px 6px grey;
+        cursor: pointer;
+        transform: translatey(-4px);
+        transition: all 0.2s ease;
+    }
+
+    .more:hover {
+
+        box-shadow: 2px 3px 6px grey;
+        cursor: pointer;
+        transform: translatey(-4px);
+        transition: all 0.3s ease;
+    }
+
+    .feedback:hover {
+
+        box-shadow: 2px 3px 6px grey;
+        cursor: pointer;
+        transform: translatey(-4px);
+        transition: all 0.3s ease;
+    }
+
+    .card.edit h1 {
+
+        color: grey;
+        font-size: 40px;
+        /*margin-left: 10%;*/
+        background-color: #666666;
+        font-weight: 1000;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
+    }
+
+    /*.nav-link {
+
+		border-radius: 100px;
 	}
-	.card.edit {
-		position: absolute;
-		top: 0;
-		width: 83%;
-		margin-left: 16%;
-		margin-right: 1%;
-		border-radius: 25px;
-		z-index: 999;
-		background-color: #F3F9FF;
-	}
+	*/
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        console.log("addinggggg{{ requesteddata }}");
+        console.log("addinggggg{{ requesteddata }}");
+        console.log("addinggggg{{ requesteddata }}");
+        console.log("addinggggg{{ requesteddata }}");
+        console.log("addinggggg{{ requesteddata }}");
 
 
-
-	.circular {
-		/*float: left;*/
-		display: block;
-		margin: 1em auto;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		-webkit-border-radius: 99em;
-		-moz-border-radius: 99em;
-		border-radius: 99em;
-		border: 5px solid #eee;
-		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
-	}
-
-	.container {
-
-		color: #000;
-	}
-
-	.card.edit {
-
-		display: none;
-	}
-
-	.comp {
-
-		/*position: relative;*/
-		margin-top: 25%;
-	}
-
-
-	</style>
+        $("#{{ requesteddata }}").removeClass();
+        $("#{{ requesteddata }}").addClass("nav-link active");
+    })
+    </script>
 </head>
 
 <body>
-	<div class="wrapper">
-		<nav id="sidebar">
-			<div class="sidebar-header">
-				<h3>Student Suppport</h3>
-			</div>
-			<ul class="list-unstyled components">
-				<p>We are here for you!</p>
-				<li class="active">
-					<a href="#">All Complaints</a>
-				</li>
-				<li>
-					<a href="#">Profile</a>
-				</li>
-				<li>
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
-					<ul class="collapse list-unstyled" id="homeSubmenu">
-						<li>
-							<a href="#">University Level</a>
-						</li>
-						<li>
-							<a href="#">college Level</a>
-						</li>
-						<li>
-							<a href="#">Department Level</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Track Complaint</a>
-				</li>
-				<li>
-					<a href="#">Logout</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					...
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="describe">
-	<div class="card student" style="color: #fff; position: fixed;">
-		<div class="card-header" style="background-color: #7EBCFF;">
-			<ul class="nav nav-pills card-header-pills">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">Your Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Pending complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Ongoing Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Rejected Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Solved Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Upvoted Complaints</a>
-				</li>
-			</ul>
-		</div>
-		<div class="card-body student">
-			<img src="complaint.png" class="circular" align="left" alt="profile image" width="100" height="100">
-			<h3 class="card-title student"><b>Welcome,</b>Utkarsh</h3>
-			<p>Email@gmail.com</p>
-			<p>9878767654</p>
-			<p>Post</p>
-			<p>Committe</p>
-			<a href="#" class="btn btn-primary" id="edit">Edit</a>
-		</div>
-	</div>
-</div>
-		<div class="comp">
-		 <div class="card complaint" style="width: 45%; height: 420px;">
-			<div class="card-body text-center complaint">
-				<img src="complaint.png" class="circle" align="left" alt="profile image" width="60" height="60">
-				<div class="text-left name">
-					<b>Utkarsh</b>
-				</div>
-				<div class="text-left date">
-					12 Aug 2019
-				</div>
-				<hr class="hori">
-				<h5 class="card-title complaint">Special title treatment</h5>
-				<hr>
-				<p class="card-text complaint">With supporting text below as a natural lead-in to additional content.</p>
-				<div class="hor">
-					<hr>
-				</div>
-				<div class="more">
-					<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
-				</div>
-				<div class="vote">
-					<a href="#" class="btn btn-primary">Pending</a>
-					<a href="#" class="btn btn-primary">Ongoing</a>
-					<a href="#" class="btn btn-primary">Solved</a>
-				</div>
-			</div>
-		</div>
-		 <div class="card complaint" style="width: 45%; height: 420px;">
-			<div class="card-body text-center complaint">
-				<img src="complaint.png" class="circle" align="left" alt="profile image" width="60" height="60">
-				<div class="text-left name">
-					<b>Utkarsh</b>
-				</div>
-				<div class="text-left date">
-					12 Aug 2019
-				</div>
-				<hr class="hori">
-				<h5 class="card-title complaint">Special title treatment</h5>
-				<hr>
-				<p class="card-text complaint">With supporting text below as a natural lead-in to additional content.</p>
-				<div class="hor">
-					<hr>
-				</div>
-				<div class="more">
-					<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</a>
-				</div>
-				<div class="vote">
-					<a href="#" class="btn btn-primary">Pending</a>
-					<a href="#" class="btn btn-primary">Ongoing</a>
-					<a href="#" class="btn btn-primary">Solved</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header" style="text-align: center;">
+                <img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah1" alt="profile image" width="150" height="150">
+                <h4>Welcome,</h4>
+                <h5>{{ userdata.user.email }}</h5>
+                <p id="user_phone_no">{{userdata.phone_no}}</p>
+                <p id="user_college">{{userdata.college_name}}</p>
+                <a href="#" class="card-title btn btn-secondary" type="reset" style="width: 150px; border-radius: 60px;" id="edit">Edit</a>
+                <hr>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="/users_admin/profile_admin?requesteddata=all">Profile</a>
+                </li>
+               <!--  <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/complaint/post?level=University">University Level</a>
+                        </li>
+                        <li>
+                            <a href="/complaint/post?level=College">college Level</a>
+                        </li>
+                        <li>
+                            <a href="/complaint/post?level=Department">Department Level</a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li>
+                    <a href="#">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<input type="hidden" id="solution_id" name="solution_id" value="">
+                    <p style="color:black" id="solution" ></p><br><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="responsemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/users_admin/mark_solved/">
+                    	{% csrf_token %}
 
-	<div class="card edit">
-		<div class="card-header" style="background-color: #7EBCFF">
-			<ul class="nav nav-pills card-header-pills">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">Your Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Pending complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Ongoing Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Rejected Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Solved Complaints</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Upvoted Complaints</a>
-				</li>
-			</ul>
-		</div>
-	<div class="container">
-		<h1>Edit Profile</h1>
-		<hr>
-		<form class="form-horizontal" role="form">
-			<div class="col-md-3">
-				<div class="text-center">
-					<img src="complaint.png" class="avatar add_icon fa fa-user-plus" id="blah" alt="profile image" width="150" height="150">
-					<h6>Upload a different photo...</h6>
-					<input type="file" onchange="readURL(this);" class="form-control">
-				</div>
-			</div>
-			<div class="col-md-9 personal-info">
-				<br>
-				<h3>Personal info</h3>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">First name:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.first_name }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">Last name:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.last_name }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">College Name:</label>
-					<div class="col-lg-8">
-						<select class="custom-select" id="validationServer04" required>
-							<option selected disabled value="Select your college">{{ user.college }}</option>
-							<option>...</option>
-						</select>
-					</div>
-					<div class="form-group">
-					<label class="col-lg-3 control-label">Email:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="{{ user.user.email }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-lg-3 control-label">Teacher ID:</label>
-					<div class="col-lg-8">
-						<input class="form-control" type="text" disabled="disabled" value="{{ user.teacher_id }}">
-					</div>
-				</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Phone Number:</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="tel" pattern=[0-9]{10}  placeholder="{{ user.phone_no }}" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Post:</label>
-						<div class="col-md-8">
-							<input class="form-control" type="text" placeholder="Post">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Committe:</label>
-						<div class="col-md-8">
-							<input class="form-control" type="text" placeholder="Committe">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Password:</label>
-						<div class="col-md-8">
-							<input class="form-control" id="password" type="password" placeholder="**********" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Confirm password:</label>
-						<div class="col-md-8">
-							<input class="form-control" id="confirm_password" type="password" placeholder="**********" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label"></label>
-						<div class="col-md-8">
-							<input type="button" id="changes" class="btn btn-primary" value="Save Changes">
-							<span></span>
-							<input type="reset" class="btn btn-default" value="Cancel">
-						</div>
-					</div>
-		</form>
-	</div>
-	</div>
-	</div>
-	<script type="text/javascript">
-	$(function() {
-		$('#edit').on('click', function(e) {
+                    	<input type="hidden" id="response_id" name="post_id" value="">
+                    	<p style="color:black" id="response_title" ></p><br><br>
+                    	<p style="color:black" id="response_description"></p><br><br>
+                    	<strong style="font-size: 20px;">Response</strong>
+						<textarea type="text" id="response" name="response" placeholder="Description (in 200 words)" class="form-control" style="height: 200px;" required></textarea>
 
-			$(".card.edit").show("slow");
-			$(".describe").hide("slow");
-			$('.describe').removeClass(".card.complaint")
-			e.preventDefault();
-		});
-	});
-	$(function() {
-		$('#changes').on('click', function(e) {
-			$(".describe").show("slow");
-			$('.card.edit').hide("slow");
-			e.preventDefault();
-		});
-	});
 
-	</script>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Save Response" class="btn btn-primary"></button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="card home">
+        <div id="scroller">
+            <div class="scrollbar" id="style-7">
+                <div class="force-overflow">
+                    <div class="describe">
+                        <div class="card student" style="color: #fff;">
+                            <div class="card-header" style="background-color: #7EBCFF; position: fixed; width: 83%; border-radius: 25px;">
+                                <ul class="nav nav-pills card-header-pills">
+                                    <li class="nav-item">
+                                        <a id="pending" class="nav-link" href="/users_admin/profile_admin?requesteddata=pending">Pending complaints</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="ongoing" class="nav-link" href="/users_admin/profile_admin?requesteddata=ongoing">Ongoing Complaints</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="rejected" class="nav-link" href="/users_admin/profile_admin?requesteddata=rejected">Rejected Complaints</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="solved" class="nav-link" href="/users_admin/profile_admin?requesteddata=solved">Solved Complaints</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="comp" style="margin-top: 7%;">
+                    {% for post in posts %}
+                    <div class="card complaint" style="width: 45%; height: 420px;">
+                        <div class="card-body text-center complaint" style="">
+                            {% if post.url == "" %}
+                            <img src="/media/profile_picture/demo.jpg" class="circle" align="left" width="60" height="60">
+                            {% else %}
+                            <img src="/media/{{ post.url }}" class="circle" align="left" width="60" height="60">
+                            {% endif %}
+                            <div class="text-left name">
+                                <b>{{ post.user.email }}</b>
+                            </div>
+                            <div class="text-left date">
+                                {{ post.date }}
+                            </div>
+                            <div class="check">
+                                {% if post.status == 'pending' %}
+                                <b id="pending" class="status_toggle">Pending </b>
+                                <b id="ongoing">Ongoing</b>
+                                <b id="solved">Solved </b>
+                                {% elif post.status == 'ongoing' %}
+                                <b id="pending" class="status_toggle">Pending </b>
+                                <b id="ongoing" class="status_toggle">Ongoing </b>
+                                <b id="solved">Solved </b>
+                                {% elif post.status == 'solved' %}
+                                <b id="pending" class="status_toggle">Pending </b>
+                                <b id="ongoing" class="status_toggle">Ongoing </b>
+                                <b id="solved" class="status_toggle">Solved </b>
+                                {% elif post.status == 'rejected' %}
+                                <div id="status_pending" style="color: red;">
+                                    <b id="pending">Rejected</b>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <hr class="hori">
+                            <div class="content" style="height: 70px;">
+                                <h5 class="card-title complaint">{{ post.title }}{{post.id}}</h5>
+                                <hr>
+                                <p class="card-text complaint">{{ post.description }}</p>
+                            </div>
+                            <div class="hor">
+                                <hr>
+                            </div>
+                            {% if post.status == 'pending' %}
+                            <a href="/users_admin/accept/?post_id={{post.id}}" class="btn btn-success">Accept{{post.id}}</a>
+                            {% endif%}
+
+                            {% if post.status == 'ongoing' %}
+                            <button onclick="pop_id({{post.id}},'{{post.title}}','{{post.description}}')" class="btn btn-success" data-toggle="modal" data-target="#responsemodal">Mark Solved{{post.id}}</button>
+                            {% endif %}
+
+                            <div class="more"> <button onclick="showsolution({{post.id}},'{{post.solution}}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="card edit">
+                    <div class="container">
+                        <h1 style="margin-top:3%;">Edit Profile</h1>
+                        <hr>
+                        <div id="scroller">
+                            <div class="scrollbar edit" id="style-7">
+                                <div class="force-overflow edit">
+                                    <form id="edit_profile" name="edit_profile" enctype="multipart/form-data" action="/users_student/update_profile/" method="POST" class="form-horizontal" role="form" style="font-family: 'Alegreya', serif; font-weight: 100;">
+                                        {% csrf_token %}
+                                        <div class="col-md-3">
+                                            <div class="text-center">
+                                                <img src="{{ userdata.profile_picture.url }}" class="avatar add_icon fa fa-user-plus" id="blah2" alt="profile image" width="150" height="150">
+                                                <h6>Upload a different photo...</h6>
+                                                <input type="file" id="updated_profile_pic" onchange="readURL(this);" class="form-control" name="updated_image">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 personal-info">
+                                            <br>
+                                            <h3>Personal info</h3>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">First name:</label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" type="text" disabled="disabled" value="Utkarsh">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">Last name:</label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" type="text" disabled="disabled" value="Kumar">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">College Name:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="custom-select" name="updated_college" required>
+                                                        <option selected disabled>Choose...</option>
+                                                        <option>...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label" for="validationServerUsername">Email</label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" value="{{userdata.user.email}}" id="updated_email" aria-describedby="inputGroupPrepend3" name="updated_email" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Phone Number:</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" type="tel" name="updated_phone_no" value="{{userdata.phone_no}}" pattern=[0-9]{10} placeholder="000000000" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">College ID:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" type="text" name="updated_college_id" value="{{userdata.college_id}}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Password:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" id="updated_password" name="updated_password" type="password" placeholder="**********" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label"></label>
+                                                    <div class="col-md-8">
+                                                        <input type="button" id="changes" class="btn btn-primary" value="Save Changes">
+                                                        <span></span>
+                                                        <input id="cancel_data" type="reset" class="btn btn-default" name="reset" value="cancel">
+                                                        <span></span>
+                                                        <input id="rest" type="reset" class="btn btn-default" name="reset" value="reset">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+
+                	function pop_id(id,title,description){
+
+                		console.log(title);
+                		console.log(description);
+                		if(id != document.getElementById('response_id').value){
+                			document.getElementById('response').value="";
+                		}
+                		document.getElementById('response_id').value=id;
+                		document.getElementById('response_title').innerHTML=title;
+                		document.getElementById('response_description').innerHTML=description;
+                		console.log("-----------------------------");
+                	}
+
+                	function showsolution(id,solution){
+	                	if(document.getElementById('solution_id').value != id){
+	                		document.getElementById('solution').value="";
+	                	}
+	                	document.getElementById('solution').innerHTML = solution;
+                	}
+
+                $("button#pending1").click(function() {
+                    $("#pending}").toggleClass("answered");
+                });
+                $(function() {
+                    $('#edit').on('click', function(e) {
+
+                        document.getElementById("updated_password").innerHTML = "";
+                        // document.getElementById("updated_re_password").innerHTML = "";
+
+                        $(".card.edit").show("slow");
+                        $(".describe").hide("slow");
+                        e.preventDefault();
+                    });
+                });
+                $(function() {
+                    $('#changes').on('click', function(e) {
+                        console.log("faskdjfhasldfk;j");
+                        var password = document.forms["edit_profile"]["updated_password"].value;
+                        var email = document.forms["edit_profile"]["updated_email"].value;
+                        var phone_no = document.forms["edit_profile"]["updated_phone_no"].value;
+                        // var college_name = document.forms["edit_profile"]["updated_college"].value;
+                        var college_id = document.forms["edit_profile"]["updated_college_id"].value;
+                        console.log(password);
+                        if (password == "") {
+                            console.log("-----------------");
+                            alert("Password is required");
+
+                        } else if (email == "") {
+                            alert("Email is required");
+                        } else if (phone_no == "") {
+                            alert("phone number is required");
+                        } else if (college_id == "") {
+                            alert("college_id is required");
+                        } else {
+                            console.log("---else-----");
+                            $.ajax({
+                                type: "get",
+                                url: "/users_student/update_profile/",
+                                enctype: 'multipart/form-data',
+                                data: {
+                                    email: email,
+                                    phone_no: phone_no,
+                                    college_id: college_id,
+                                    password: password
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    if (data.is_updated == "True") {
+
+                                        $(".describe").show("slow");
+                                        $('.card.edit').hide("slow").fadeOut(function() {
+                                            $("#edit_profile").submit();
+                                        });
+                                        alert("Data updated");
+                                    } else {
+
+                                        alert("incorrect password");
+                                    }
+                                }
+
+                            })
+
+                        }
+
+
+
+                        // $(".describe").show("slow");
+                        // $('.card.edit').hide("slow");
+
+                        // e.preventDefault();
+
+                    })
+
+                });
+
+                $(function() {
+                    $('#cancel_data').on('click', function(e) {
+                        console.log("faskdjfhasldfk;j");
+                        $(".describe").show("slow");
+                        $('.card.edit').hide("slow");
+                    });
+                })
+
+
+
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+
+                            $('#blah1').attr('src', e.target.result);
+
+                            $('#blah2').attr('src', e.target.result);
+
+                            $('#blah3').attr('src', e.target.result);
+
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+
+                    }
+                }
+
+                $("#updated_profile_pic").change(function() {
+                    readURL(this);
+                });
+                </script>
+                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                <!-- //integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" -->
 </body>
 
 </html>

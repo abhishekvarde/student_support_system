@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+	{% load static %}
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<title>Registration Form</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<style type="text/css">
+	body,
+	html {
+		width: 100%;
+		/*background-image: linear-gradient(to bottom, #ffec6f, #ffd552, #ffbd36, #ffa41d, #ff8903);*/
+		/*background-image: url(AU-26.jpg);
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;*/
+		background-color: #7EBCFF;
+	}
+
+
+	#sidebar {
+		width: 250px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		z-index: 999;
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	a[data-toggle="collapse"] {
+		position: relative;
+	}
+
+	.dropdown-toggle::after {
+		display: block;
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		transform: translateY(-50%);
+	}
+
+	.wrapper {
+		display: flex;
+		align-items: stretch;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;*/
+	}
+
+	#sidebar.active {
+		margin-left: -250px;
+	}
+
+	#sidebar {
+		/*
+		min-width: 250px;
+		max-width: 250px;
+		min-height: 100vh;*/
+		width: 15%;
+	}
+
+	p {
+		font-family: 'Poppins', sans-serif;
+		font-size: 1.1em;
+		font-weight: 300;
+		line-height: 1.7em;
+		color: #999;
+	}
+
+	a,
+	a:hover,
+	a:focus {
+		color: inherit;
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+
+	#sidebar {
+		background: #7EBCFF;
+		color: #fff;
+		transition: all 0.3s;
+	}
+
+	#sidebar .sidebar-header {
+		padding: 20px;
+		background: #7EBCFF;
+	}
+
+	#sidebar ul.components {
+		padding: 20px 0;
+		border-bottom: 1px solid #278EFE;
+	}
+
+	#sidebar ul p {
+		color: #fff;
+		padding: 10px;
+	}
+
+	#sidebar ul li a {
+		padding: 10px;
+		font-size: 1.1em;
+		display: block;
+	}
+
+	#sidebar ul li a:hover {
+		color: #7386D5;
+		background: #fff;
+	}
+
+	#sidebar ul li.active>a,
+	a[aria-expanded="true"] {
+		color: #fff;
+		background: #278EFE;
+	}
+
+	ul ul a {
+		font-size: 0.9em !important;
+		padding-left: 30px !important;
+		background: #278EFE;
+	}
+
+	.alert.alert-info {
+
+		margin-top: 10%;
+		text-align: center;
+		margin-left: 15%;
+	}
+
+	.img_section img {
+
+		margin-left: 15%;
+	}
+
+	.card.register {
+		position: relative;
+		height: 95%;
+		border-radius: 35px;
+		margin-left: 15%;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: 1%;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: rgba(100, 100, 100, 0.5);
+		background-image: url(AU-26.jpg);
+
+
+	}
+
+	.glass {
+
+		height: 80%;
+		border-radius: 25px;
+		justify-content: center;
+		margin: 1% 5% 2% 40%;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+		overflow: hidden;
+		background-color: rgba(100, 100, 100, 0.3);
+		filter:
+			/*opacity: 0.2;*/
+	}
+
+	#appln_form {
+		position: relative;
+		z-index: 999;
+
+	}
+
+	.transparency {
+		position: relative;
+		height: 100%;
+		border-radius: 35px;
+		background-color: rgba(100, 100, 100, 0.3);
+	}
+
+	.scrollbar {
+		margin-top: 10px;
+		float: left;
+		height: 700px;
+		width: 100%;
+		/*background-color: #000;*/
+		overflow-y: scroll;
+		margin-bottom: 25px;
+	}
+
+	.force-overflow {
+		min-height: 450px;
+	}
+
+	#scroller {
+		text-align: left;
+		width: 90%;
+		margin: auto;
+	}
+
+	#style-7::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+		background-color: #F5F5F5;
+		border-radius: 10px;
+	}
+
+	#style-7::-webkit-scrollbar {
+		width: 10px;
+		background-color: #F5F5F5;
+	}
+
+	#style-7::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-image: -webkit-gradient(linear,
+			left bottom,
+			left top,
+			color-stop(0.44, rgb(122, 153, 217)),
+			color-stop(0.72, rgb(73, 125, 189)),
+			color-stop(0.86, rgb(28, 58, 148)));
+	}
+
+	.details {
+
+		position: relative;
+		color: #fff;
+		text-align: center;
+
+	}
+
+	#change {
+
+		display: none;
+	}
+
+	.container.choose {
+
+		max-width: 52% !important;
+		margin-left: 41.5%;
+
+	}
+
+	.choose {
+
+		margin-top: 1%;
+	}
+
+	/*#con {
+
+		display: none;
+	}
+
+	#con1 {
+
+		display: none;
+	}*/
+	</style>
+</head>
+
+<body>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<nav id="sidebar">
+				<div class="sidebar-header">
+					<h3>Student Suppport</h3>
+				</div>
+				<ul class="list-unstyled components">
+					<p>We are here for you!</p>
+					<li class="active">
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">How to Apply?</a>
+					</li>
+					<li>
+						<a href="#">Features</a>
+					</li>
+					<li>
+						<a href="#">How it Works?</a>
+					</li>
+					<li>
+						<a href="#">Register</a>
+					</li>
+					<li>
+						<a href="#">Login</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="card register" style="overflow: hidden;">
+			<div class="transparency" style="overflow: hidden;">
+							<div class="container choose">
+								<button class="btn btn-primary" id="adm" style="width: 200px; height: 50px;" type="submit">Administrator</button>
+								<button class="btn btn-primary" id="stu" style="float: right; width: 200px; height: 50px;" type="submit">Student</button>
+							</div>
+							<h1 style="position: absolute; font-size: 6vh; margin-left: 2%;">Register Here!</h1>
+							<section class="glass">
+								<div id="scroller">
+									<div class="scrollbar" id="style-7">
+										<div class="force-overflow">
+											<div class="details">
+												<h2><b>Enter Details</b></h2>
+											</div>
+											<hr style="background-color:#fff;">
+											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px;" id="change1" method="post" action="/users_student/register/">
+												{%csrf_token%}
+												<div class="form-group ">
+													<label for="txtFullname" class="control-label col-lg-4">First Name of Applicant<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="txtFirstname_student" name="txtFirstname_student" class="text-uppercase" minlength="3" type="text" required />
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+
+												<div class="form-group ">
+													<label for="txtFullname" class="control-label col-lg-4">Last Name of Applicant<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="txtLastname_student" name="txtLastname_student" class="text-uppercase" minlength="3" type="text" required />
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtCollegeID" class="control-label col-lg-4">Univ.Regn.ID/College ID<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control" id="txtCollegeID_student" name="txtCollegeID_student" minlength="4" type="text" required />
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="lstGender" class="control-label col-lg-4">Gender</label>
+													<div class="col-lg-4">
+														<select class="form-control " name="lstGender_student" id="lstGender_student" type="select">
+														<option value="F">Male</option>
+														<option value="M">Female</option>
+														<option value="T">Other</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtDob" class="control-label col-lg-4">Date of Birth<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control" id="txtDob_student" name="txtDob_student" type="date" required />
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtBranch" class="control-label col-lg-4">Branch<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="txtBranch_student" name="txtBranch_student" minlength="5" type="text" required />
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtCollege" class="control-label col-lg-4">College<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<select class="form-control " name="collage_student" id="collage_student" type="select">
+														<option value="">SCOE</option>
+														<option value="">SKNCOE</option>
+														<option value="">NBN</option>
+														<option value="">MIT</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- <div class="form-group ">
+													<label for="txtYear" class="control-label col-lg-4">Year of Admission<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-2">
+														<input class="form-control" id="txtYear" name="txtYear" minlength="4" type="text" required />
+													</div>
+												</div> -->
+												<div class="form-group ">
+													<label for="txtEmail" class="control-label col-lg-4">E-Mail <span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control " id="txtEmail_student" type="email" name="txtEmail_student" required />
+													</div>
+													<div class="col-lg-5">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtStudphone" class="control-label col-lg-4">Mobile Number</label>
+													<div class="col-lg-4">
+														<input class="form-control" id="txtStudphone_student" type="text" name="txtStudphone_student" />
+													</div>
+													<div class="col-lg-5">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtResaddress" class="control-label col-lg-4">Residential Address <span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-12">
+														<input class="form-control" id="txtResaddress_student" type="text" name="txtResaddress_student" />
+													</div>
+													<div class="col-lg-2">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- <div class="form-group ">
+                                    <label for="txtLoginID" class="control-label col-lg-4">Login ID</label>
+                                          <div class="col-lg-4"> <span style="color:#06F">Your email address will be your login ID</span>
+                                          </div>
+                                      </div> -->
+												<div class="form-group ">
+													<label for="txtPasswd1" class="control-label col-lg-4">Password<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-4">
+														<input class="form-control " id="txtPasswd1_student" type="password" name="txtPasswd1_student" />
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtPasswd2" class="control-label col-lg-4">Confirm Password<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-4">
+														<input class="form-control " id="txtPasswd2_student" type="password" name="txtPasswd2_student" />
+													</div>
+												</div>
+												
+												<div class="col-lg-8">
+								<button class="btn btn-primary" style="margin-left: 97%; width: 200px; height: 50px; border-radius: 25px; margin-top: 4%;" type="submit" id="submit">Register</button>
+							</div>
+											</form>
+
+
+
+											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px;" id="change" method="post" action="/users_admin/register_admin/">
+												{% csrf_token %}
+												<div class="form-group ">
+													<label for="txtFullname" class="control-label col-lg-6">First Name of Administrator<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="txtFirstname_admin" name="txtFirstname_admin" class="text-uppercase" minlength="3" type="text" required />
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtFullname" class="control-label col-lg-6">Last Name of Administrator<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="txtLastname_admin" name="txtLastname_admin" class="text-uppercase" minlength="3" type="text" required />
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtFullname" class="control-label col-lg-6">UserName of Administrator<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<input class="form-control" id="username_admin" name="username_admin" class="text-uppercase" minlength="3" type="text" required />
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+
+												<div class="form-group ">
+													<label for="txtCollegeID" class="control-label col-lg-4">Teacher ID<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control" id="txtCollegeID_admin" name="txtCollegeID_admin" minlength="4" type="text" required />
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="lstGender" class="control-label col-lg-4">Gender</label>
+													<div class="col-lg-4">
+														<select class="form-control " name="lstGender_admin" id="lstGender_admin" type="select" >
+														<option value="F">Male</option>
+														<option value="M">Female</option>
+														<option value="T">Other</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtDob" class="control-label col-lg-4">Date of Birth<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control" id="txtDob_admin" name="txtDob_admin" type="date" required />
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- <div class="form-group ">
+													<label for="txtBranch" class="control-label col-lg-4">Level<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<select class="form-control " name="lstGender" id="level" type="select" />
+														<option id="univ" value="">University Level</option>
+														<option id="coll" value="">College Level</option>
+														<option id="dept" value="">Department Level</option>
+														</select>
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div> -->
+												<div class="form-group ">
+													<label for="txtBranch" class="control-label col-lg-4">Level<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<select class="form-control " name="level_admin" id="level_admin" type="select">
+														<option id="univ" value="">University Level</option>
+														<option id="coll" value="">College Level</option>
+														<option id="dept" value="">Department Level</option>
+														</select>
+													</div>
+													<div class="col-lg-3">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- college -->
+												<div class="form-group" id="con">
+													<label for="txtCollege" class="control-label col-lg-4">College<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<select class="form-control " name="college_admin" id="college_admin" type="select">
+														<option value="">None</option>
+														<option value="">SCOE</option>
+														<option value="">SKNCOE</option>
+														<option value="">NBN</option>
+														<option value="">MIT</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- department -->
+												<div class="form-group" id="con1">
+													<label for="txtCollege" class="control-label col-lg-4">Branch<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-8">
+														<select class="form-control " name="branch_admin" id="branch_admin" type="select" />
+														<option value="">None</option>
+														<option value="">comp</option>
+														<option value="">IT</option>
+														<option value="">Mech</option>
+														<option value="">E&tc</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- <div class="form-group ">
+													<label for="txtYear" class="control-label col-lg-4">Year of Admission<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-2">
+														<input class="form-control" id="txtYear" name="txtYear" minlength="4" type="text" required />
+													</div>
+												</div> -->
+												<div class="form-group ">
+													<label for="txtEmail" class="control-label col-lg-4">E-Mail <span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-6">
+														<input class="form-control " id="txtEmail_admin" type="email_admin" name="txtEmail" required />
+													</div>
+													<div class="col-lg-5">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtStudphone" class="control-label col-lg-4">Phone Number</label>
+													<div class="col-lg-4">
+														<input class="form-control" id="txtStudphone_admin" type="text" name="txtStudphone_admin" />
+													</div>
+													<div class="col-lg-5">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtResaddress" class="control-label col-lg-4">Residential Address <span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-12">
+														<input class="form-control" id="txtResaddress_admin" type="text" name="txtResaddress_admin" />
+													</div>
+													<div class="col-lg-2">
+														<span style="font-size:10px; color:#C30"></span>
+													</div>
+												</div>
+												<!-- <div class="form-group ">
+                                    <label for="txtLoginID" class="control-label col-lg-4">Login ID</label>
+                                          <div class="col-lg-4"> <span style="color:#06F">Your email address will be your login ID</span>
+                                          </div>
+                                      </div> -->
+												<div class="form-group ">
+													<label for="txtPasswd1" class="control-label col-lg-4">Password<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-4">
+														<input class="form-control " id="txtPasswd1_admin" type="password" name="txtPasswd1_admin" />
+													</div>
+												</div>
+												<div class="form-group ">
+													<label for="txtPasswd2" class="control-label col-lg-4">Confirm Password<span class="required" style="color:#F30">*</span></label>
+													<div class="col-lg-4">
+														<input class="form-control " id="txtPasswd2_admin" type="password" name="txtPasswd2_admin" />
+													</div>
+												</div>
+												
+												<div class="col-lg-8">
+								<button class="btn btn-primary" style="margin-left: 97%; width: 200px; height: 50px; border-radius: 25px; margin-top: 4%;" type="submit">Register</button>
+							</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</section>
+						
+			</div>
+		</div>
+		<script type="text/javascript">
+		$("#adm").click(function() {
+			$("#change").show();
+			$("#change1").hide();
+		});
+		$("#stu").click(function() {
+			$("#change1").show();
+			$("#change").hide();
+		});
+		// $("#coll").click(function() {
+		// 	$("#con").show();
+		// 	$("#con1").hide();
+		// });
+		// $("#dept").click(function() {
+		// 	$("#con1").show();
+		// 	$("#con").hide();
+		// });
+		// $("#univ").click(function() {
+		// 	$("#con").hide();
+		// 	$("#con1").hide();
+		// });
+
+		</script>
+		<script type="text/javascript" src="{% static 'users_student/js/registration.js' %}"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+
+</html>

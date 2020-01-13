@@ -3,36 +3,39 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import CommitteeMember, Otp
+from complaint.models import Complaint
 
 
 def register_admin(request):
     if request.POST:
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        phone_no = request.POST.get('phone_no')
-        username = request.POST.get('username')
-        committee = request.POST.get('committee')
-        college = request.POST.get('college')
-        teacher_id = request.POST.get('teacher_id')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        # cnf_password = request.POST.get['cnf_password']
+        first_name = request.POST.get('txtFirstname_admin')
+        last_name = request.POST.get('txtLastname_admin')
+        gender = request.POST.get('lstGender_admin')
+        dob = request.POST.get('txtDob_admin')
+        branch = request.POST.get('branch_admin')
+        phone_no = request.POST.get('txtStudphone_admin')
+        username = request.POST.get('username_admin')
+        committee = request.POST.get('level_admin')
+        college = request.POST.get('college_admin')
+        teacher_id = request.POST.get('txtCollegeID_admin')
+        email = request.POST.get('txtEmail_admin')
+        password = request.POST.get('txtPasswd1_admin')
+        cnf_password = request.POST.get('txtPasswd2_admin')
 
         if not User.objects.filter(username=username).exists():
             user_obj = User.objects.create_user(username=username, password=password, email=email)
             user_obj.first_name = first_name
             user_obj.last_name = last_name
-            print("object is user is going to save here with username" + str(username) + " " + str(password))
             user_obj.save()
 
+        print("I am here ")
         user = authenticate(request, username=username, password=password)
         committee_obj = CommitteeMember(user=user, committee=committee, phone_no=phone_no,
-                                        college=college, teacher_id=teacher_id)
+                                        college=college,
+                                        teacher_id=teacher_id)  # , gender=gender, dob=dob, branch=branch)
         committee_obj.save()
 
-        return redirect("/users_admin/login_admin")
-
-    return render(request, "users_admin/register_admin.html")
+    return redirect("/login")
 
 
 def send_request(committee_obj):
@@ -42,33 +45,57 @@ def send_request(committee_obj):
 def login_admin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')
-        print(str(username) + " " + str(password))
+        password = request.POST.get('txtPasswd1')
 
         user = authenticate(request, username=username, password=password)
-        print("i am in loogin")
         if user is not None:
             print("i am in loogin")
             login(request, user)
-            print(user)
-            print('user is printed above')
             return redirect("/users_admin/profile_admin")
-
-    return render(request, "users_admin/login_admin.html")
 
 
 def profile_admin(request):
     print("i am here")
-    username = None
+    requesteddata = request.GET.get("requesteddata")
     if request.user.is_authenticated:
         username = request.user.username
         print(username)
+        complaints = []
         if CommitteeMember.objects.filter(user=request.user).exists():
-            user = CommitteeMember.objects.get(user=request.user)
-            print("user")
-            print(user)
-            return render(request, "users_admin/profile_admin.html", {'user': user})
+            userdata = CommitteeMember.objects.get(user=request.user)
 
+            if requesteddata == "pending" or requesteddata is None:
+                complaints = Complaint.objects.filter(level="department", status="pending")
+            if requesteddata == "ongoing":
+                userobj = CommitteeMember.objects.get(user=request.user)
+                ongoint_list = userobj.ongoing_complaints
+                ongoint_list = ongoint_list.split(",")
+                while '' in ongoint_list:
+                    ongoint_list.remove('')
+                print("##################")
+                print(ongoint_list)
+                for i in ongoint_list:
+                    if Complaint.objects.filter(id=int(i), status="ongoing").exists():
+                        complaints.append(Complaint.objects.get(id=int(i), status="ongoing"))
+                for i in complaints:
+                    print(i.id)
+            if requesteddata == "solved":
+                userobj = CommitteeMember.objects.get(user=request.user)
+                solved_list = userobj.solved_complaints
+                solved_list = solved_list.split(",")
+                print("##################")
+                print(solved_list)
+                if '' in solved_list:
+                    solved_list.remove('')
+                for i in solved_list:
+                    if Complaint.objects.filter(id=int(i), status="solved").exists():
+                        complaints.append(Complaint.objects.get(id=int(i), status="solved"))
+                for i in complaints:
+                    print(i.id)
+
+            return render(request, "users_admin/profile_admin.html", {'userdata': userdata, 'posts': complaints})
+        else:
+            return render(request, "users_admin/login_admin.html")
 
 def phone_no_available(request):
     phone_no = request.GET.get('phone_no', None)
@@ -139,8 +166,8 @@ def generate_otp(request):
     otp_phone_no = "123456"
     otp_email = "123456"
 
-    otp_details = Otp(phone_no = phone_no,otp_phone_no = otp_phone_no,
-                      email = email,otp_email = otp_email)
+    otp_details = Otp(phone_no=phone_no, otp_phone_no=otp_phone_no,
+                      email=email, otp_email=otp_email)
     otp_details.save()
 
     data = {
@@ -183,4 +210,60 @@ def check_otp(request):
         return JsonResponse(data)
 
 
+def markaccepted(request):
+    print("+++++++++++++++++++++++++++++++++")
+    if request.user.is_authenticated:
+        post_id = request.GET.get('post_id')
 
+        print("-----------------------------------------")
+        print(post_id)
+        if Complaint.objects.filter(id=int(post_id)).exists():
+            user_obj = CommitteeMember.objects.get(user=request.user)
+            accepted_post = user_obj.ongoing_complaints
+            accepted_list = accepted_post.split(",")
+
+            if "" in accepted_list:
+                accepted_list.remove("")
+            if post_id not in accepted_list:
+                compile_obj = Complaint.objects.get(id=post_id)
+                compile_obj.status = "ongoing"
+                compile_obj.save()
+                accepted_list.append(post_id)
+                accepted_post = ",".join(accepted_list)
+                user_obj.ongoing_complaints = accepted_post
+                user_obj.save()
+                return profile_admin(request)
+
+
+def mark_solved(request):
+    if request.user.is_authenticated:
+        post_id = request.POST.get('post_id')
+        response = request.POST.get('response')
+        print(response)
+        print("-----------------------------------------")
+        print(post_id)
+        if Complaint.objects.filter(id=int(post_id)).exists():
+            user_obj = CommitteeMember.objects.get(user=request.user)
+            solved_post = user_obj.solved_complaints
+            solved_list = solved_post.split(",")
+            accepted_post = user_obj.ongoing_complaints
+            accepted_list = accepted_post.split(",")
+            if post_id in accepted_list:
+                accepted_list.remove(post_id)
+                accepted_post = ",".join(accepted_list)
+                user_obj.ongoing_complaints = accepted_post
+                user_obj.save()
+            if "" in solved_list:
+                solved_list.remove("")
+            if post_id not in solved_list:
+                compile_obj = Complaint.objects.get(id=post_id)
+                compile_obj.status = "solved"
+                compile_obj.solution = response
+                compile_obj.save()
+                solved_list.append(post_id)
+                solved_post = ",".join(solved_list)
+                user_obj.solved_complaints = solved_post
+                user_obj.save()
+                return profile_admin(request)
+            else:
+                return profile_admin(request)
