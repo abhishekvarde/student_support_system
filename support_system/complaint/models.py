@@ -6,14 +6,21 @@ from users_student.models import student
 # from complaint.models import cat
 
 
+class cat(models.Model):
+    name = models.CharField(max_length=20)
+    total = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
 class Complaint(models.Model):
-    student = models.OneToOneField(student, on_delete=models.CASCADE, default=None)
+    student = models.ForeignKey(student, on_delete=models.CASCADE)
     url = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     liked = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now_add=True)
-    # solved = models.BooleanField(default=False)
     level = models.CharField(max_length=20, default="department")
     satisfied = models.BooleanField(default=False)
     sub_cat = models.CharField(max_length=30, default="other")
@@ -25,11 +32,3 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class cat(models.Model):
-    name = models.CharField(max_length=20)
-    total = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name

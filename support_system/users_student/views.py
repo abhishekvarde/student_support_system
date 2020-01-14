@@ -26,7 +26,6 @@ def username_avaliable(request):
 
 
 def register_student(request):
-
     if request.method == 'POST':
         first_name = request.POST.get('txtFirstname_student')
         last_name = request.POST.get('txtLastname_student')
@@ -51,22 +50,30 @@ def register_student(request):
 
             user = authenticate(request, username=email, password=password)
 
-            student_details = student(user=user, college_id=college_id,dob=dob,gender=gender, college_name=college_name,
-                                      phone_no=phone_no,address=address)
+            student_details = student(user=user, college_id=college_id, dob=dob, gender=gender,
+                                      college_name=college_name,
+                                      phone_no=phone_no, address=address)
             student_details.save()
 
         return redirect('/login')
 
 
-
 def login_student(request):
     if request.method == 'POST':
-        username = request.POST.get('txtEmail_student')
-        password = request.POST.get('txtPasswd1_student')
+        username = request.POST.get('username_student')
+        password = request.POST.get('password_student')
+
+        print("--------------------")
+        print(username)
+        print(password)
+        print("--------------------")
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('/')
+        return redirect('/login')
+    return redirect('/login')
 
 
 def student_profile(request):
@@ -83,21 +90,23 @@ def student_profile(request):
         if request.user.is_authenticated and user_name == request.user.username:
             print("---------------------------utkarsh---------------------------------------")
             posts = []
+            if not student.objects.filter(user=request.user):
+                return redirect("/login")
             userdata = student.objects.get(user=request.user)
 
             if requested_data is None:
                 requested_data = "all"
 
             if requested_data == "all":
-                postsobj = Complaint.objects.filter(user=request.user)
+                postsobj = Complaint.objects.filter(student=userdata)
                 for post in postsobj:
                     posts.append(post)
             elif requested_data == "pending":
-                posts = Complaint.objects.filter(user=request.user).filter(status="pending")
+                posts = Complaint.objects.filter(student=userdata).filter(status="pending")
             elif requested_data == "ongoing":
-                posts = Complaint.objects.filter(user=request.user).filter(status="ongoing")
+                posts = Complaint.objects.filter(student=userdata).filter(status="ongoing")
             elif requested_data == "solved":
-                posts = Complaint.objects.filter(user=request.user).filter(status="solved")
+                posts = Complaint.objects.filter(student=userdata).filter(status="solved")
             elif requested_data == "approved_tags":
                 appoved_ids = userdata.requested_approved_tag
                 appoved_ids = appoved_ids.split(",")
@@ -132,7 +141,7 @@ def student_profile(request):
                     else:
                         likedpostids.remove(likedpostid)
             elif requested_data == "rejected":
-                posts = Complaint.objects.filter(user=request.user).filter(status="rejected")
+                posts = Complaint.objects.filter(student=userdata).filter(status="rejected")
             print(posts)
             posts = append_likes(request, posts)
             return render(request, 'users_student/student_profile2.html',
@@ -142,7 +151,7 @@ def student_profile(request):
             if User.objects.filter(username=user_name).exists():
                 user = User.objects.get(username=user_name)
                 userdata = student.objects.get(user=user)
-                posts = Complaint.objects.filter(user=User.objects.get(username=user_name))
+                posts = Complaint.objects.filter(student=userdata)
                 return render(request, 'users_student/student_profile_another.html',
                               {"usernmae": request.user.username, "userdata": userdata, "posts": posts})
             print("user doesn't exists")
@@ -213,7 +222,7 @@ def update_profile(request):
             print(userobj.profile_picture.name)
             print(project_path)
             if request.FILES.get('updated_image'):
-                os.remove(project_path+"/media/" + userobj.profile_picture.name)
+                os.remove(project_path + "/media/" + userobj.profile_picture.name)
                 userobj.profile_picture = request.FILES.get('updated_image')
 
             user.email = email

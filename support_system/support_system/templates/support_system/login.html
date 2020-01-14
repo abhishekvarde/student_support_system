@@ -302,10 +302,10 @@
 						<a href="#">How it Works?</a>
 					</li>
 					<li>
-						<a href="#">Register</a>
+						<a href="/registration">Register</a>
 					</li>
 					<li>
-						<a href="#">Login</a>
+						<a href="/login">Login</a>
 					</li>
 					<!-- <li>
 						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
@@ -340,12 +340,12 @@
 												<h2><b>Login</b></h2>
 											</div>
 											<hr style="background-color:#fff;">
-											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px; " id="change1" method="post" action="/users_student/login/">
+											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px; " id="change1" method="POST" action="/users_student/login/">
 												{% csrf_token %}
 												<div class="form-group ">
 													<label for="txtEmail" class="control-label col" style="margin-top: 3%;">Student E-Mail <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-10">
-														<input class="form-control " id="txtEmail_student" type="email" name="txtEmail_student" required />
+														<input class="form-control " id="username_student" name="username_student" required />
 													</div>
 													<div class="col">
 														<span style="font-size:10px; color:#C30"></span>
@@ -355,17 +355,17 @@
 												<div class="form-group ">
 													<label for="txtPasswd1" class="control-label col">Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-10">
-														<input class="form-control " id="txtPasswd1_student" type="password" name="txtPasswd1_student" />
+														<input class="form-control " id="password_student" type="password" name="password_student" />
 													</div>
 												</div>
 												<button class="btn btn-primary" style="margin-left: 50%; width: 200px; height: 50px; border-radius: 25px; margin-top: 5%;" type="submit">Login</button>
 											</form>
-											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px;" id="change" method="post" action="/users_admin/login_admin/">
+											<form class="form-validate form-horizontal" style="margin-left: 15%; color: #fff; font-size: 20px;" id="change" method="POST" action="/users_admin/login_admin/">
 												{% csrf_token %}
 												<div class="form-group ">
 													<label for="txtEmail" class="control-label col" style="margin-top: 3%;">Administrator Username <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-10">
-														<input class="form-control " id="username" type="text" name="username" required />
+														<input class="form-control " id="username_admin" type="text" name="username_admin" required />
 													</div>
 													<div class="col">
 														<span style="font-size:10px; color:#C30"></span>
@@ -375,7 +375,7 @@
 												<div class="form-group ">
 													<label for="txtPasswd1" class="control-label col">Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-10">
-														<input class="form-control " id="txtPasswd1" type="password" name="txtPasswd1" />
+														<input class="form-control " id="password_admin" type="password" name="password_admin" />
 													</div>
 												</div>
 												<button class="btn btn-primary" style="margin-left: 50%; width: 200px; height: 50px; border-radius: 25px; margin-top: 5%;" type="submit">Login</button>

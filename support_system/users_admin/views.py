@@ -21,6 +21,9 @@ def register_admin(request):
         email = request.POST.get('txtEmail_admin')
         password = request.POST.get('txtPasswd1_admin')
         cnf_password = request.POST.get('txtPasswd2_admin')
+        print('--------------------------------')
+        print(committee)
+        print('--------------------------------')
 
         if not User.objects.filter(username=username).exists():
             user_obj = User.objects.create_user(username=username, password=password, email=email)
@@ -30,8 +33,7 @@ def register_admin(request):
 
         print("I am here ")
         user = authenticate(request, username=username, password=password)
-        committee_obj = CommitteeMember(user=user, committee=committee, phone_no=phone_no,
-                                        college=college,
+        committee_obj = CommitteeMember(user=user, committee=committee, phone_no=phone_no, college=college,
                                         teacher_id=teacher_id)  # , gender=gender, dob=dob, branch=branch)
         committee_obj.save()
 
@@ -44,14 +46,20 @@ def send_request(committee_obj):
 
 def login_admin(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('txtPasswd1')
+        username = request.POST.get('username_admin')
+        password = request.POST.get('password_admin')
+
+        print("--------------------")
+        print(username)
+        print(password)
+        print("--------------------")
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             print("i am in loogin")
             login(request, user)
             return redirect("/users_admin/profile_admin")
+        return redirect("/login")
 
 
 def profile_admin(request):
@@ -65,7 +73,7 @@ def profile_admin(request):
             userdata = CommitteeMember.objects.get(user=request.user)
 
             if requesteddata == "pending" or requesteddata is None:
-                complaints = Complaint.objects.filter(level="department", status="pending")
+                complaints = Complaint.objects.filter(level=userdata.committee, status="pending")
             if requesteddata == "ongoing":
                 userobj = CommitteeMember.objects.get(user=request.user)
                 ongoint_list = userobj.ongoing_complaints

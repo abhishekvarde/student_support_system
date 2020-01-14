@@ -6,10 +6,10 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.http import JsonResponse
-
-
-def post(request):
-    return render(request, 'complaint/post.html')
+#
+#
+# def post(request):
+#     return render(request, 'complaint/post.html')
 
 
 # dont call this function.
@@ -90,23 +90,22 @@ def post(request):
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)
         # print(user.username)
+        level = request.POST.get('level')
+        cats = request.POST.get('category')
+        print("-----------imp--------------------")
+        print(level)
+        print(cats)
+        print("-----------imp--------------------")
         title = request.POST.get('title')
         des = request.POST.get('description')
         tags = request.POST.get('all_emails')
         print(tags)
         list_tags = tags.split(",")
-        # for tag in list_tags:
-        #     if User.objects.filter(email=tag).exists():
-        #         temp_obj
-        # image = request.FILES['image']
-        # fs = FileSystemStorage()
-        # filename = fs.save(image.name, image)
-        # url = fs.url(filename)
-        # print(user.username)
-        # print(url)
-        student_img = student.objects.filter(user=request.user)
-        complain = Complaint(user=user, title=title, description=des, tags=tags,  # image=url,
-                             url=student_img[0].profile_picture)
+        if not student.objects.filter(user=request.user):
+            return redirect('/login')
+        student_img = student.objects.get(user=request.user)
+        complain = Complaint(student=student_img, title=title, description=des, tags=tags,  # image=url,
+                             url=student_img.profile_picture, level=level, sub_cat=cats)
         complain.save()
         list_tags = tags.split(",")
         if "" in list_tags:
@@ -116,9 +115,6 @@ def post(request):
                 temp_user =  User.objects.get(email=tag)
                 if student.objects.filter(user=temp_user).exists():
                     temp_obj = student.objects.get(user=temp_user)
-                    print('===start===')
-                    print(temp_obj)
-                    print('===end===')
                     all_user_tags =  temp_obj.requested_tag
                     all_user_tags = all_user_tags.split(",")
                     all_user_tags.append(str(complain.id))
@@ -138,14 +134,17 @@ def post(request):
         student_img = student.objects.filter(user=request.user)
         # print(student_img)
         print("---------------------------------------------------------------------")
-        print(student_img[0].profile_picture)
+        # print(student_img.profile_picture)
         for i in student_img:
             print(i.profile_picture)
         if level is None or level == "":
             level = "department"
+        category = cat.objects.all()
+        if not student.objects.filter(user=request.user):
+            return redirect('/login')
         userdata = student.objects.get(user=request.user)
         print(userdata)
-        return render(request, 'complaint/add_complaint.html', {'level': level, 'userdata': userdata})
+        return render(request, 'complaint/add_complaint.html', {'level': level, 'userdata': userdata, 'cats': category})
 
 
 # def display(request):

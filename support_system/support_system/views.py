@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 from complaint.models import Complaint, cat
 from users_student.models import student
 
@@ -15,6 +16,10 @@ def wall(request):
     if request.user.is_authenticated:
         if student.objects.filter(user=request.user).exists():
             userdata = student.objects.get(user=request.user)
+        else:
+            return redirect('/login')
+    else:
+        return redirect('/login')
     if category is not None:
         complaints = Complaint.objects.all().filter(sub_cat=category)
         return render(request, 'support_system/home_single.html', {'complaints': complaints})
@@ -26,11 +31,6 @@ def wall(request):
     for c in cats:
         if Complaint.objects.filter(sub_cat=c.name).exists():
             complaint_objs = Complaint.objects.filter(sub_cat=c.name)
-            # for i in complaint_objs:
-            #     if str(i.id) in liked_post:
-            #         qset.append([i, '1'])  # for every liked post
-            #     else:
-            #         qset.append([i, '0'])
             qset = append_likes(request, complaint_objs)
             complaint.append([c.name, qset[:10]])
             print(complaint)
@@ -57,8 +57,10 @@ def append_likes(request, complaint_objs):
 
 
 def registeration(request):
-    return render(request,'support_system/registration_form.html')
+    logout(request)
+    return render(request, 'support_system/registration_form.html')
 
 
 def login(request):
-    return render(request,'support_system/login.html')
+    logout(request)
+    return render(request, 'support_system/login.html')
