@@ -58,7 +58,7 @@ def login_admin(request):
         if user is not None:
             print("i am in loogin")
             login(request, user)
-            return redirect("/users_admin/profile_admin")
+            return redirect("/login")
         return redirect("/login")
 
 
