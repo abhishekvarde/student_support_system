@@ -313,7 +313,7 @@
 												<div class="form-group ">
 													<label for="txtFullname" class="control-label col-lg-4">First Name of Applicant<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<input class="form-control" id="txtFirstname_student" name="txtFirstname_student" class="text-uppercase" minlength="3" type="text" required />
+														<input class="form-control" id="txtFirstname_student" name="first_name_student" class="text-uppercase" minlength="3" type="text" required />
 													</div>
 													<div class="col-lg-4">
 														<span style="font-size:10px; color:#C30"></span>
@@ -324,7 +324,7 @@
 												<div class="form-group ">
 													<label for="txtFullname" class="control-label col-lg-4">Last Name of Applicant<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<input class="form-control" id="txtLastname_student" name="txtLastname_student" class="text-uppercase" minlength="3" type="text" required />
+														<input class="form-control" id="txtLastname_student" name="last_name_student" class="text-uppercase" minlength="3" type="text" required />
 													</div>
 													<div class="col-lg-4">
 														<span style="font-size:10px; color:#C30"></span>
@@ -334,7 +334,7 @@
 												<div class="form-group ">
 													<label for="txtCollegeID" class="control-label col-lg-6">Univ.Regn.ID/College ID<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control" id="txtCollegeID_student" name="txtCollegeID_student" minlength="4" type="text" required />
+														<input class="form-control" id="txtCollegeID_student" name="college_id_student" minlength="4" type="text" required />
 													</div>
 													<div class="col-lg-3">
 														<span style="font-size:10px; color:#C30"></span>
@@ -344,7 +344,7 @@
 												<div class="form-group ">
 													<label for="lstGender" class="control-label col-lg-4">Gender</label>
 													<div class="col-lg-4">
-														<select class="form-control " name="lstGender_student" id="lstGender_student" type="select">
+														<select class="form-control " name="lstGender_student" id="gender_student" type="select">
 														<option value="F">Male</option>
 														<option value="M">Female</option>
 														<option value="T">Other</option>
@@ -355,7 +355,7 @@
 												<div class="form-group ">
 													<label for="txtDob" class="control-label col-lg-4">Date of Birth<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control" id="txtDob_student" name="txtDob_student" type="date" required />
+														<input class="form-control" id="txtDob_student" name="dob_student" type="date" required />
 													</div>
 													<div class="col-lg-3">
 														<span style="font-size:10px; color:#C30"></span>
@@ -365,7 +365,7 @@
 												<div class="form-group ">
 													<label for="txtBranch" class="control-label col-lg-4">Branch<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<input class="form-control" id="txtBranch_student" name="txtBranch_student" minlength="5" type="text" required />
+														<input class="form-control" id="txtBranch_student" name="branch_student" minlength="5" type="text" required />
 													</div>
 													<div class="col-lg-3">
 														<span style="font-size:10px; color:#C30"></span>
@@ -395,7 +395,7 @@
 												<div class="form-group ">
 													<label for="txtEmail" class="control-label col-lg-4">E-Mail <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control " id="txtEmail_student" type="email" name="txtEmail_student" required />
+														<input class="form-control " id="txtEmail_student" type="email" name="email_student" required />
 													</div>
 													<div class="col-lg-5">
 														<span style="font-size:10px; color:#C30"></span>
@@ -404,7 +404,7 @@
 												<div class="form-group ">
 													<label for="txtStudphone" class="control-label col-lg-4">Mobile Number</label>
 													<div class="col-lg-4">
-														<input class="form-control" id="txtStudphone_student" type="text" name="txtStudphone_student" />
+														<input class="form-control" id="txtStudphone_student" type="text" name="phone_no_student" />
 													</div>
 													<div class="col-lg-5">
 														<span style="font-size:10px; color:#C30"></span>
@@ -413,7 +413,7 @@
 												<div class="form-group ">
 													<label for="txtResaddress" class="control-label col-lg-4">Residential Address <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-12">
-														<input class="form-control" id="txtResaddress_student" type="text" name="txtResaddress_student" />
+														<input class="form-control" id="txtResaddress_student" type="text" name="address_student" />
 													</div>
 													<div class="col-lg-2">
 														<span style="font-size:10px; color:#C30"></span>
@@ -427,13 +427,13 @@
 												<div class="form-group ">
 													<label for="txtPasswd1" class="control-label col-lg-4">Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-4">
-														<input class="form-control " id="txtPasswd1_student" type="password" name="txtPasswd1_student" />
+														<input class="form-control " id="txtPasswd1_student" type="password" name="password_student" />
 													</div>
 												</div>
 												<div class="form-group ">
 													<label for="txtPasswd2" class="control-label col-lg-4">Confirm Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-4">
-														<input class="form-control " id="txtPasswd2_student" type="password" name="txtPasswd2_student" />
+														<input class="form-control " id="txtPasswd2_student" type="password" name="re_password_student" />
 													</div>
 												</div>
 												
@@ -449,7 +449,7 @@
 												<div class="form-group ">
 													<label for="txtFullname" class="control-label col-lg-6">First Name of Administrator<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<input class="form-control" id="txtFirstname_admin" name="txtFirstname_admin" class="text-uppercase" minlength="3" type="text" required />
+														<input class="form-control" id="txtFirstname_admin" name="first_name_admin" class="text-uppercase" minlength="3" type="text" required />
 													</div>
 													<div class="col-lg-4">
 														<span style="font-size:10px; color:#C30"></span>
@@ -459,7 +459,7 @@
 												<div class="form-group ">
 													<label for="txtFullname" class="control-label col-lg-6">Last Name of Administrator<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<input class="form-control" id="txtLastname_admin" name="txtLastname_admin" class="text-uppercase" minlength="3" type="text" required />
+														<input class="form-control" id="txtLastname_admin" name="last_name_admin" class="text-uppercase" minlength="3" type="text" required />
 													</div>
 													<div class="col-lg-4">
 														<span style="font-size:10px; color:#C30"></span>
@@ -479,7 +479,7 @@
 												<div class="form-group ">
 													<label for="txtCollegeID" class="control-label col-lg-4">Teacher ID<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control" id="txtCollegeID_admin" name="txtCollegeID_admin" minlength="4" type="text" required />
+														<input class="form-control" id="txtCollegeID_admin" name="college_id_admin" minlength="4" type="text" required />
 													</div>
 													<div class="col-lg-3">
 														<span style="font-size:10px; color:#C30"></span>
@@ -488,7 +488,7 @@
 												<div class="form-group ">
 													<label for="lstGender" class="control-label col-lg-4">Gender</label>
 													<div class="col-lg-4">
-														<select class="form-control " name="lstGender_admin" id="lstGender_admin" type="select" >
+														<select class="form-control " name="lstGender_admin" id="gender_admin" type="select" >
 														<option value="F">Male</option>
 														<option value="M">Female</option>
 														<option value="T">Other</option>
@@ -498,7 +498,7 @@
 												<div class="form-group ">
 													<label for="txtDob" class="control-label col-lg-4">Date of Birth<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control" id="txtDob_admin" name="txtDob_admin" type="date" required />
+														<input class="form-control" id="txtDob_admin" name="dob_admin" type="date" required />
 													</div>
 													<div class="col-lg-3">
 														<span style="font-size:10px; color:#C30"></span>
@@ -550,12 +550,12 @@
 												<div class="form-group" id="con1">
 													<label for="txtCollege" class="control-label col-lg-4">Branch<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-8">
-														<select class="form-control " name="branch_admin" id="branch_admin" type="select" />
-														<option value="">None</option>
-														<option value="">comp</option>
-														<option value="">IT</option>
-														<option value="">Mech</option>
-														<option value="">E&tc</option>
+														<select class="form-control " name="branch_admin" id="branch_admin" type="select" >
+														<option value="none">None</option>
+														<option value="comp">Comp</option>
+														<option value="it">IT</option>
+														<option value="mech">Mech</option>
+														<option value="e_tc">E&tc</option>
 														</select>
 													</div>
 													<div class="col-lg-4">
@@ -571,7 +571,7 @@
 												<div class="form-group ">
 													<label for="txtEmail" class="control-label col-lg-4">E-Mail <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-6">
-														<input class="form-control " id="txtEmail_admin" type="email_admin" name="txtEmail" required />
+														<input class="form-control " id="txtEmail_admin" type="email_admin" name="email_admin" required />
 													</div>
 													<div class="col-lg-5">
 														<span style="font-size:10px; color:#C30"></span>
@@ -580,7 +580,7 @@
 												<div class="form-group ">
 													<label for="txtStudphone" class="control-label col-lg-4">Phone Number</label>
 													<div class="col-lg-4">
-														<input class="form-control" id="txtStudphone_admin" type="text" name="txtStudphone_admin" />
+														<input class="form-control" id="txtStudphone_admin" type="text" name="phone_no_admin" />
 													</div>
 													<div class="col-lg-5">
 														<span style="font-size:10px; color:#C30"></span>
@@ -589,7 +589,7 @@
 												<div class="form-group ">
 													<label for="txtResaddress" class="control-label col-lg-4">Residential Address <span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-12">
-														<input class="form-control" id="txtResaddress_admin" type="text" name="txtResaddress_admin" />
+														<input class="form-control" id="txtResaddress_admin" type="text" name="address_admin" />
 													</div>
 													<div class="col-lg-2">
 														<span style="font-size:10px; color:#C30"></span>
@@ -603,13 +603,13 @@
 												<div class="form-group ">
 													<label for="txtPasswd1" class="control-label col-lg-4">Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-4">
-														<input class="form-control " id="txtPasswd1_admin" type="password" name="txtPasswd1_admin" />
+														<input class="form-control " id="txtPasswd1_admin" type="password" name="password_admin" />
 													</div>
 												</div>
 												<div class="form-group ">
 													<label for="txtPasswd2" class="control-label col-lg-4">Confirm Password<span class="required" style="color:#F30">*</span></label>
 													<div class="col-lg-4">
-														<input class="form-control " id="txtPasswd2_admin" type="password" name="txtPasswd2_admin" />
+														<input class="form-control " id="txtPasswd2_admin" type="password" name="re_password_admin" />
 													</div>
 												</div>
 												

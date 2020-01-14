@@ -8,19 +8,19 @@ from complaint.models import Complaint
 
 def register_admin(request):
     if request.POST:
-        first_name = request.POST.get('txtFirstname_admin')
-        last_name = request.POST.get('txtLastname_admin')
-        gender = request.POST.get('lstGender_admin')
-        dob = request.POST.get('txtDob_admin')
+        first_name = request.POST.get('first_name_admin')
+        last_name = request.POST.get('last_name_admin')
+        gender = request.POST.get('gender_admin')
+        dob = request.POST.get('dob_admin')
         branch = request.POST.get('branch_admin')
-        phone_no = request.POST.get('txtStudphone_admin')
+        phone_no = request.POST.get('phone_no_admin')
         username = request.POST.get('username_admin')
         committee = request.POST.get('level_admin')
         college = request.POST.get('college_admin')
-        teacher_id = request.POST.get('txtCollegeID_admin')
-        email = request.POST.get('txtEmail_admin')
-        password = request.POST.get('txtPasswd1_admin')
-        cnf_password = request.POST.get('txtPasswd2_admin')
+        teacher_id = request.POST.get('college_id_admin')
+        email = request.POST.get('email_admin')
+        password = request.POST.get('password_admin')
+        cnf_password = request.POST.get('re_password_admin')
         print('--------------------------------')
         print(committee)
         print('--------------------------------')
@@ -30,10 +30,11 @@ def register_admin(request):
             user_obj.first_name = first_name
             user_obj.last_name = last_name
             user_obj.save()
+        else:
+            message = "username already taken."
+            return redirect("/login")
 
-        print("I am here ")
-        user = authenticate(request, username=username, password=password)
-        committee_obj = CommitteeMember(user=user, committee=committee, phone_no=phone_no, college=college,
+        committee_obj = CommitteeMember(user=user_obj, committee=committee, phone_no=phone_no, college=college,
                                         teacher_id=teacher_id)  # , gender=gender, dob=dob, branch=branch)
         committee_obj.save()
 
@@ -58,7 +59,7 @@ def login_admin(request):
         if user is not None:
             print("i am in loogin")
             login(request, user)
-            return redirect("/login")
+            return redirect("/users_admin/profile_admin")
         return redirect("/login")
 
 
@@ -70,6 +71,12 @@ def profile_admin(request):
         print(username)
         complaints = []
         if CommitteeMember.objects.filter(user=request.user).exists():
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
             userdata = CommitteeMember.objects.get(user=request.user)
 
             if requesteddata == "pending" or requesteddata is None:
@@ -100,10 +107,16 @@ def profile_admin(request):
                         complaints.append(Complaint.objects.get(id=int(i), status="solved"))
                 for i in complaints:
                     print(i.id)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
+            print(request.user.username)
 
             return render(request, "users_admin/profile_admin.html", {'userdata': userdata, 'posts': complaints})
-        else:
-            return render(request, "users_admin/login_admin.html")
+    return redirect("/login")
+
 
 def phone_no_available(request):
     phone_no = request.GET.get('phone_no', None)

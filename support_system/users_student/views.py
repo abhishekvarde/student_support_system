@@ -27,18 +27,18 @@ def username_avaliable(request):
 
 def register_student(request):
     if request.method == 'POST':
-        first_name = request.POST.get('txtFirstname_student')
-        last_name = request.POST.get('txtLastname_student')
-        college_id = request.POST.get('txtCollegeID_student')
-        gender = request.POST.get('lstGender_student')
-        dob = request.POST.get('txtDob_student')
-        branch = request.POST.get('txtBranch_student')
+        first_name = request.POST.get('first_name_student')
+        last_name = request.POST.get('last_name_student')
+        college_id = request.POST.get('college_id_student')
+        gender = request.POST.get('gender_student')
+        dob = request.POST.get('dob_student')
+        branch = request.POST.get('branch_student')
         college_name = request.POST.get('collage_student')
-        email = request.POST.get('txtEmail_student')
-        phone_no = request.POST.get('txtStudphone_student')
-        address = request.POST.get('txtResaddress_student')
-        password = request.POST.get('txtPasswd1_student')
-        cnf_password = request.POST.get('txtPasswd2_student')
+        email = request.POST.get('email_student')
+        phone_no = request.POST.get('phone_no_student')
+        address = request.POST.get('address_student')
+        password = request.POST.get('password_student')
+        cnf_password = request.POST.get('re_password_student')
 
         # request['email'] = email
 
