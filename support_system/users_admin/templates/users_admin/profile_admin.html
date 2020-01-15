@@ -123,8 +123,8 @@
 
     #sidebar {
         /*
-		min-width: 250px;
-		max-width: 250px;*/
+        min-width: 250px;
+        max-width: 250px;*/
     }
 
     #sidebar.active {
@@ -133,9 +133,9 @@
 
     #sidebar {
         /*
-		min-width: 250px;
-		max-width: 250px;
-		min-height: 100vh;*/
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 100vh;*/
         width: 15%;
         height: 100%;
     }
@@ -168,9 +168,9 @@
     }
 
     /*#sidebar ul.components {
-		padding: 20px 0;
-		border-bottom: 1px solid #278EFE;
-	}*/
+        padding: 20px 0;
+        border-bottom: 1px solid #278EFE;
+    }*/
 
     #sidebar ul p {
         color: #fff;
@@ -290,9 +290,9 @@
         /*flex: 1;*/
         transition: all 0.2s ease;
         /*max-width: 600px;
-		max-height: 450px;
-		min-width: 600px;
-		min-height: 450px;*/
+        max-height: 450px;
+        min-width: 600px;
+        min-height: 450px;*/
     }
 
     .card.complaint:hover {
@@ -308,9 +308,9 @@
     }
 
     /*.describe {
-		position: fi;
-		margin-top: 25%;
-	}
+        position: fi;
+        margin-top: 25%;
+    }
 */
 
 
@@ -452,9 +452,9 @@
 
     /*.nav-link {
 
-		border-radius: 100px;
-	}
-	*/
+        border-radius: 100px;
+    }
+    */
     </style>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -488,7 +488,7 @@
                 <li>
                     <a href="/users_admin/profile_admin?requesteddata=all">Profile</a>
                 </li>
-               <!--  <li>
+                <!--  <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add complaint</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
@@ -518,8 +518,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                	<input type="hidden" id="solution_id" name="solution_id" value="">
-                    <p style="color:black" id="solution" ></p><br><br>
+                    <input type="hidden" id="solution_id" name="solution_id" value="">
+                    <p style="color:black" id="solution"></p><br><br>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -539,22 +539,19 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="/users_admin/mark_solved/">
-                    	{% csrf_token %}
-
-                    	<input type="hidden" id="response_id" name="post_id" value="">
-                    	<p style="color:black" id="response_title" ></p><br><br>
-                    	<p style="color:black" id="response_description"></p><br><br>
-                    	<strong style="font-size: 20px;">Response</strong>
-						<textarea type="text" id="response" name="response" placeholder="Description (in 200 words)" class="form-control" style="height: 200px;" required></textarea>
-
-
+                        {% csrf_token %}
+                        <input type="hidden" id="action_type" name="action_type" value="">
+                        <input type="hidden" id="response_id" name="post_id" value="">
+                        <p style="color:black" id="response_title"></p><br><br>
+                        <p style="color:black" id="response_description"></p><br><br>
+                        <strong style="font-size: 20px;">Response</strong>
+                        <textarea type="text" id="response" name="response" placeholder="Description (in 200 words)" class="form-control" style="height: 200px;" required></textarea>
                 </div>
                 <div class="modal-footer">
-
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <input type="submit" value="Save Response" class="btn btn-primary"></button>
                 </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
@@ -580,7 +577,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -618,12 +614,11 @@
                                 </div>
                                 {% endif %}
                             </div>
-
                             <hr class="hori">
                             <div class="content" style="height: 70px;">
                                 <h5 class="card-title complaint">{{ post.title }}{{post.id}}</h5>
                                 <hr>
-                                <p class="card-text complaint">{{ post.description }}</p>
+                                <p style="color:black;" class="card-text complaint">{{ post.description }}</p>
                             </div>
                             <div class="hor">
                                 <hr>
@@ -631,17 +626,16 @@
                             {% if post.status == 'pending' %}
                             <a href="/users_admin/accept/?post_id={{post.id}}" class="btn btn-success">Accept{{post.id}}</a>
                             {% endif%}
-
                             {% if post.status == 'ongoing' %}
-                            <button onclick="pop_id({{post.id}},'{{post.title}}','{{post.description}}')" class="btn btn-success" data-toggle="modal" data-target="#responsemodal">Mark Solved{{post.id}}</button>
+                            <button onclick="pop_id({{post.id}},'{{post.title}}','{{post.description}}',1)" class="btn btn-success" data-toggle="modal" data-target="#responsemodal">Mark Solved{{post.id}}</button>
+                            <button onclick="pop_id({{post.id}},'{{post.title}}','{{post.description}}',0)" class="btn btn-danger" data-toggle="modal" data-target="#responsemodal">Reject{{post.id}}</button>
                             {% endif %}
-
-                            <div class="more"> <button onclick="showsolution({{post.id}},'{{post.solution}}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</button>
+                            <div class="more"> <button onclick="showsolution({{post.id}})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Read More</button>
                             </div>
+                            <p type="hidden" id="{{post.id}}">{{post.solution}}</p>
                         </div>
                     </div>
                     {% endfor %}
-
                 </div>
                 <div class="card edit">
                     <div class="container">
@@ -711,7 +705,6 @@
                                                         <input class="form-control" id="updated_password" name="updated_password" type="password" placeholder="**********" required>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label"></label>
                                                     <div class="col-md-8">
@@ -731,26 +724,28 @@
                     </div>
                 </div>
                 <script>
+                function pop_id(id, title, description,action) {
 
-                	function pop_id(id,title,description){
+                    console.log(title);
+                    console.log(description);
+                    if (id != document.getElementById('response_id').value) {
+                        document.getElementById('response').value = "";
+                    }
+                    document.getElementById('response_id').value = id;
+                    document.getElementById('action_type').value = action;
+                    document.getElementById('response_title').innerHTML = title;
+                    document.getElementById('response_description').innerHTML = description;
+                    console.log("-----------------------------");
+                }
 
-                		console.log(title);
-                		console.log(description);
-                		if(id != document.getElementById('response_id').value){
-                			document.getElementById('response').value="";
-                		}
-                		document.getElementById('response_id').value=id;
-                		document.getElementById('response_title').innerHTML=title;
-                		document.getElementById('response_description').innerHTML=description;
-                		console.log("-----------------------------");
-                	}
-
-                	function showsolution(id,solution){
-	                	if(document.getElementById('solution_id').value != id){
-	                		document.getElementById('solution').value="";
-	                	}
-	                	document.getElementById('solution').innerHTML = solution;
-                	}
+                function showsolution(id, solution) {
+                    if (document.getElementById('solution_id').value != id) {
+                        document.getElementById('solution').value = "";
+                    }
+                    console.log(solution);
+                    document.getElementById('solution').innerHTML = document.getElementById(id).innerHTML;
+                    console.log(document.getElementById(id).innerHTML);
+                }
 
                 $("button#pending1").click(function() {
                     $("#pending}").toggleClass("answered");
