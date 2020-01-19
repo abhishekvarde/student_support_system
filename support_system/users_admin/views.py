@@ -114,7 +114,18 @@ def profile_admin(request):
             print(request.user.username)
             print(request.user.username)
 
-            return render(request, "users_admin/profile_admin.html", {'userdata': userdata, 'posts': complaints})
+            if requesteddata == "rejected":
+                userobj = CommitteeMember.objects.get(user=request.user)
+                rejected_list = userobj.rejected_complaints
+                rejected_list = rejected_list.split(",")
+                print("##################")
+                print(rejected_list)
+                for i in rejected_list:
+                    if Complaint.objects.filter(id=int(i), status="rejected").exists():
+                        complaints.append(Complaint.objects.get(id=int(i), status="rejected"))
+                for i in complaints:
+                    print(i.id)
+            return render(request, "users_admin/profile_admin.html", {'userdata': userdata, 'posts': complaints,"requesteddata":requesteddata})
     return redirect("/login")
 
 
@@ -260,31 +271,59 @@ def mark_solved(request):
     if request.user.is_authenticated:
         post_id = request.POST.get('post_id')
         response = request.POST.get('response')
+        action_type = request.POST.get('action_type')
         print(response)
         print("-----------------------------------------")
+        print(action_type)
         print(post_id)
         if Complaint.objects.filter(id=int(post_id)).exists():
             user_obj = CommitteeMember.objects.get(user=request.user)
-            solved_post = user_obj.solved_complaints
-            solved_list = solved_post.split(",")
-            accepted_post = user_obj.ongoing_complaints
-            accepted_list = accepted_post.split(",")
-            if post_id in accepted_list:
-                accepted_list.remove(post_id)
-                accepted_post = ",".join(accepted_list)
-                user_obj.ongoing_complaints = accepted_post
-                user_obj.save()
-            if "" in solved_list:
-                solved_list.remove("")
-            if post_id not in solved_list:
-                compile_obj = Complaint.objects.get(id=post_id)
-                compile_obj.status = "solved"
-                compile_obj.solution = response
-                compile_obj.save()
-                solved_list.append(post_id)
-                solved_post = ",".join(solved_list)
-                user_obj.solved_complaints = solved_post
-                user_obj.save()
-                return profile_admin(request)
+            if int(action_type) == 1:
+                solved_post = user_obj.solved_complaints
+                solved_list = solved_post.split(",")
+                accepted_post = user_obj.ongoing_complaints
+                accepted_list = accepted_post.split(",")
+                if post_id in accepted_list:
+                    accepted_list.remove(post_id)
+                    accepted_post = ",".join(accepted_list)
+                    user_obj.ongoing_complaints = accepted_post
+                    user_obj.save()
+                if "" in solved_list:
+                    solved_list.remove("")
+                if post_id not in solved_list:
+                    compile_obj = Complaint.objects.get(id=post_id)
+                    compile_obj.status = "solved"
+                    compile_obj.solution = response
+                    compile_obj.save()
+                    solved_list.append(post_id)
+                    solved_post = ",".join(solved_list)
+                    user_obj.solved_complaints = solved_post
+                    user_obj.save()
+                    return redirect("/users_admin/profile_admin?requesteddata=ongoing")
+                else:
+                    return redirect("/users_admin/profile_admin?requesteddata=ongoing")
+
             else:
-                return profile_admin(request)
+                rejected_post = user_obj.rejected_complaints
+                rejected_list = rejected_post.split(",")
+                accepted_post = user_obj.ongoing_complaints
+                accepted_list = accepted_post.split(",")
+                if post_id in accepted_list:
+                    accepted_list.remove(post_id)
+                    accepted_post = ",".join(accepted_list)
+                    user_obj.ongoing_complaints = accepted_post
+                    user_obj.save()
+                if "" in rejected_list:
+                    rejected_list.remove("")
+                if post_id not in rejected_list:
+                    compile_obj = Complaint.objects.get(id=post_id)
+                    compile_obj.status = "rejected"
+                    compile_obj.solution = response
+                    compile_obj.save()
+                    rejected_list.append(post_id)
+                    rejected_post = ",".join(rejected_list)
+                    user_obj.rejected_complaints = rejected_post
+                    user_obj.save()
+                    return redirect("/users_admin/profile_admin?requesteddata=ongoing")
+                else:
+                    return redirect("/users_admin/profile_admin?requesteddata=ongoing")

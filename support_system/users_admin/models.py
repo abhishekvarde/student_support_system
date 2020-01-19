@@ -12,6 +12,8 @@ class CommitteeMember(models.Model):
     pending_request = models.CharField(max_length=1000, default="")
     ongoing_complaints = models.CharField(max_length=1000, default="")
     solved_complaints = models.CharField(max_length=1000, default="")
+    rejected_complaints = models.CharField(max_length=1000, default="")
+
 
 class Otp(models.Model):
     phone_no = models.CharField(max_length=10, default="")
