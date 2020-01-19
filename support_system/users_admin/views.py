@@ -35,7 +35,7 @@ def register_admin(request):
             return redirect("/login")
 
         committee_obj = CommitteeMember(user=user_obj, committee=committee, phone_no=phone_no, college=college,
-                                        teacher_id=teacher_id)  # , gender=gender, dob=dob, branch=branch)
+                                        teacher_id=teacher_id, gender=gender)  # , dob=dob, branch=branch)
         committee_obj.save()
 
     return redirect("/login")
